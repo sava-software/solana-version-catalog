@@ -1,0 +1,59 @@
+def getAppVersion = { ->
+  try (final var gitTagOut = new ByteArrayOutputStream()) {
+    exec {
+      commandLine 'git', 'tag', '--points-at', 'HEAD'
+      standardOutput = gitTagOut
+    }
+    final var tagName = gitTagOut.toString().strip()
+    if (tagName.isBlank()) {
+      try (final var gitHashOut = new ByteArrayOutputStream()) {
+        exec {
+          commandLine 'git', 'rev-parse', '--short', 'HEAD'
+          standardOutput = gitHashOut
+        }
+        return 'git-' + gitHashOut.toString().strip()
+      }
+    } else {
+      return tagName
+    }
+  }
+}
+
+ext {
+  VERSION = getAppVersion()
+  VCS_URL = 'https://github.com/sava-software/sava'
+}
+
+apply plugin: 'version-catalog'
+apply plugin: 'maven-publish'
+
+project.group = 'software.sava'
+project.version = "$VERSION"
+
+catalog {
+  versionCatalog {
+    library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.78.1')
+    library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
+  }
+}
+
+publishing {
+  publications {
+    maven(MavenPublication) {
+      from components.versionCatalog
+      groupId project.group
+      artifactId project.name
+      version = project.version
+    }
+  }
+  repositories {
+    maven {
+      name = "GitHubPackages"
+      url = "https://maven.pkg.github.com/sava-software/solana-version-catalog"
+      credentials {
+        username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user.write")
+        password = System.getenv("GITHUB_TOKEN") ?: project.findProperty("gpr.token.write")
+      }
+    }
+  }
+}
