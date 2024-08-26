@@ -34,6 +34,8 @@ catalog {
   versionCatalog {
     library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.78.1')
     library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
+    library('sava-core', 'software.sava:sava-core:1.4.6')
+    library('sava-rpc', 'software.sava:sava-rpc:1.4.6')
   }
 }
 
