@@ -40,6 +40,14 @@ catalog {
 
     // https://github.com/comodal/json-iterator/tags
     library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
+
+    library('sava-core', 'software.sava:sava-core:1.4.9')
+    library('sava-rpc', 'software.sava:sava-rpc:1.4.9')
+
+    library('solana-web2', 'software.sava:solana-web2:1.0.6')
+    library('solana-programs', 'software.sava:solana-programs:1.4.5')
+    library('anchor-src-gen', 'software.sava:anchor-src-gen:1.3.4')
+    library('anchor-programs', 'software.sava:anchor-programs:1.2.9')
   }
 }
 
@@ -54,7 +62,7 @@ publishing {
   }
   repositories {
     maven {
-      name = "GitHubPackages"
+      name = "GithubPackages"
       url = "https://maven.pkg.github.com/sava-software/solana-version-catalog"
       credentials {
         username = System.getenv("GITHUB_ACTOR") ?: project.findProperty("gpr.user.write")
