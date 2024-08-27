@@ -22,6 +22,7 @@ def getAppVersion = { ->
 ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
+  sava = '1.4.10'
 }
 
 apply plugin: 'version-catalog'
@@ -41,8 +42,8 @@ catalog {
     // https://github.com/comodal/json-iterator/tags
     library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
 
-    library('sava-core', 'software.sava:sava-core:1.4.9')
-    library('sava-rpc', 'software.sava:sava-rpc:1.4.9')
+    library('sava-core', "software.sava:sava-core:$sava")
+    library('sava-rpc', "software.sava:sava-rpc:$sava")
 
     library('sava-solana-web2', 'software.sava:solana-web2:1.0.6')
     library('sava-solana-programs', 'software.sava:solana-programs:1.4.5')
