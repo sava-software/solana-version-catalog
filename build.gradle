@@ -49,7 +49,7 @@ catalog {
     library('sava-solana-web2', 'software.sava:solana-web2:1.1.5')
     library('sava-solana-programs', 'software.sava:solana-programs:1.5.1')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.5.3')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.3.4')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.3.5')
 
     library('sava-core-services', "software.sava:core-services:$sava_services")
     library('sava-solana-services', "software.sava:solana-services:$sava_services")
