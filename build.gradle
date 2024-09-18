@@ -46,7 +46,7 @@ catalog {
     library('sava-core', "software.sava:sava-core:$sava")
     library('sava-rpc', "software.sava:sava-rpc:$sava")
 
-    library('sava-solana-web2', 'software.sava:solana-web2:1.7.0')
+    library('sava-solana-web2', 'software.sava:solana-web2:1.7.1')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.0')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.3')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.7.1')
