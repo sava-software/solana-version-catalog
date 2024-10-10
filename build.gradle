@@ -22,7 +22,7 @@ def getAppVersion = { ->
 ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
-  sava = '1.9.10'
+  sava = '1.9.11'
   sava_services = '0.3.11'
 }
 
