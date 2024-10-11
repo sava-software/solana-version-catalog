@@ -23,7 +23,7 @@ ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
   sava = '1.10.0'
-  sava_services = '0.3.12'
+  sava_services = '0.3.13'
 }
 
 apply plugin: 'version-catalog'
