@@ -57,16 +57,16 @@ catalog {
     library('sava-solana-services', "software.sava:solana-services:$SAVA_SERVICES")
 
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
-    library('', "org.eclipse.jetty:jetty-server:$JETTY")
+    library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
-    library('', "org.eclipse.jetty.http2:jetty-http2-server:$JETTY")
+    library('jetty-http2-server', "org.eclipse.jetty.http2:jetty-http2-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-server
-    library('', "org.eclipse.jetty:jetty-alpn-server:$JETTY")
-    library('', "org.eclipse.jetty:jetty-alpn-java-server:$JETTY")
+    library('jetty-alpn-server', "org.eclipse.jetty:jetty-alpn-server:$JETTY")
+    library('jetty-alpn-java-server', "org.eclipse.jetty:jetty-alpn-java-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-conscrypt-server
-    // library('', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
+    library('jetty-alpn-conscrypt-server', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
-    library('', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
+    library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
   }
 }
 
