@@ -22,8 +22,9 @@ def getAppVersion = { ->
 ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
-  sava = '1.10.0'
-  sava_services = '0.4.3'
+  SAVA = '1.10.0'
+  SAVA_SERVICES = '0.4.3'
+  JETTY = '12.0.14'
 }
 
 apply plugin: 'version-catalog'
@@ -43,16 +44,29 @@ catalog {
     // https://github.com/comodal/json-iterator/tags
     library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
 
-    library('sava-core', "software.sava:sava-core:$sava")
-    library('sava-rpc', "software.sava:sava-rpc:$sava")
+    library('sava-core', "software.sava:sava-core:$SAVA")
+    library('sava-rpc', "software.sava:sava-rpc:$SAVA")
 
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.2')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.3')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.5')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.7.21')
 
-    library('sava-core-services', "software.sava:core-services:$sava_services")
-    library('sava-solana-services', "software.sava:solana-services:$sava_services")
+    library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
+    library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
+    library('sava-solana-services', "software.sava:solana-services:$SAVA_SERVICES")
+
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+    library('', "org.eclipse.jetty:jetty-server:$JETTY")
+    // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
+    library('', "org.eclipse.jetty.http2:jetty-http2-server:$JETTY")
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-server
+    library('', "org.eclipse.jetty:jetty-alpn-server:$JETTY")
+    library('', "org.eclipse.jetty:jetty-alpn-java-server:$JETTY")
+    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-conscrypt-server
+    // library('', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
+    // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
+    library('', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
   }
 }
 
