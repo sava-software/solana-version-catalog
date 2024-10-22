@@ -22,7 +22,7 @@ def getAppVersion = { ->
 ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
-  SAVA = '1.11.1'
+  SAVA = '1.12.0'
   SAVA_SERVICES = '0.4.5'
   JETTY = '12.0.14'
 }
@@ -36,7 +36,7 @@ project.version = "$VERSION"
 catalog {
   versionCatalog {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
-    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.0')
+    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.2')
 
     // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
     library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.78.1')
