@@ -38,8 +38,9 @@ catalog {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
     library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.2')
 
+    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
     // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-    library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.78.1')
+    library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.79')
 
     // https://github.com/comodal/json-iterator/tags
     library('json-iterator', 'systems.comodal:json-iterator:2.11.0')
@@ -50,7 +51,7 @@ catalog {
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.2')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.3')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.7')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.7.32')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.7.34')
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
