@@ -51,7 +51,7 @@ catalog {
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.6')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.6')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.11')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.8')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.9')
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
