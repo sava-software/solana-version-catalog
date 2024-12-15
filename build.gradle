@@ -23,7 +23,7 @@ ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
   SAVA = '1.15.9'
-  SAVA_SERVICES = '0.5.3'
+  SAVA_SERVICES = '0.5.4'
   JETTY = '12.0.14'
 }
 
@@ -52,13 +52,14 @@ catalog {
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.6')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.12')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.12')
-    library('google-kms', 'software.sava:google_kms:0.0.1')
+    library('kms-core', 'software.sava:kms_core:0.0.2')
+    library('google-kms', 'software.sava:google_kms:0.0.2')
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
     library('sava-solana-services', "software.sava:solana-services:$SAVA_SERVICES")
 
-    
+
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
     library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
