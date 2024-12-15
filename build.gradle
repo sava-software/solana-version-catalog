@@ -36,7 +36,7 @@ project.version = "$VERSION"
 catalog {
   versionCatalog {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
-    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.2')
+    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.3')
 
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
     // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -52,11 +52,13 @@ catalog {
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.6')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.12')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.12')
+    library('google-kms', 'software.sava:google_kms:0.0.1')
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
     library('sava-solana-services', "software.sava:solana-services:$SAVA_SERVICES")
 
+    
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
     library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
@@ -68,6 +70,10 @@ catalog {
     library('jetty-alpn-conscrypt-server', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
     library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
+
+
+    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
+    library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.57.0')
   }
 }
 
