@@ -48,10 +48,11 @@ catalog {
     library('sava-core', "software.sava:sava-core:$SAVA")
     library('sava-rpc', "software.sava:sava-rpc:$SAVA")
 
-    library('sava-solana-web2', 'software.sava:solana-web2:1.7.6')
+    library('sava-solana-web2', 'software.sava:solana-web2:1.7.7')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.6')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.12')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.12')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.13')
+
     library('sava-kms-core', 'software.sava:kms_core:0.0.4')
     library('sava-google-kms', 'software.sava:google_kms:0.0.4')
 
