@@ -53,8 +53,8 @@ catalog {
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.12')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.13')
 
-    library('sava-kms-core', 'software.sava:kms_core:0.0.4')
-    library('sava-google-kms', 'software.sava:google_kms:0.0.4')
+    library('sava-kms-core', 'software.sava:kms_core:0.0.5')
+    library('sava-google-kms', 'software.sava:google_kms:0.0.5')
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
