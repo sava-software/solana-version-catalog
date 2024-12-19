@@ -23,7 +23,7 @@ ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
   SAVA = '1.15.11'
-  SAVA_SERVICES = '0.8.2'
+  SAVA_SERVICES = '0.9.0'
   JETTY = '12.0.14'
 }
 
