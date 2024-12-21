@@ -82,9 +82,9 @@ catalog {
 publishing {
   publications {
     maven(MavenPublication) {
-      from components.versionCatalog
-      groupId project.group
-      artifactId project.name
+      from(components.versionCatalog)
+      groupId = project.group
+      artifactId = project.name as Publication
       version = project.version
     }
   }
