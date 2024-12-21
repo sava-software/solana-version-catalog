@@ -84,7 +84,7 @@ publishing {
     maven(MavenPublication) {
       from(components.versionCatalog)
       groupId = project.group
-      artifactId = project.name as Publication
+      setProperty("artifactId", project.name.toString())
       version = project.version
     }
   }
