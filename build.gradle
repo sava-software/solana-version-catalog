@@ -55,6 +55,7 @@ catalog {
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.18')
 
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
+    library('sava-google-kms', "software.sava:http_kms:$SAVA_KMS")
     library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
 
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
