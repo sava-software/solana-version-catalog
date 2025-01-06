@@ -37,7 +37,7 @@ project.version = "$VERSION"
 catalog {
   versionCatalog {
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
-    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.3')
+    library("junit-jupiter", 'org.junit.jupiter:junit-jupiter:5.11.4')
 
     // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
     // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -51,8 +51,8 @@ catalog {
 
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.9')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.9')
-    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.12')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.18')
+    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.13')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.19')
 
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
