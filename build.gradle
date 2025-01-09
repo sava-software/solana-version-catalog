@@ -23,7 +23,7 @@ ext {
   VERSION = getAppVersion()
   VCS_URL = 'https://github.com/sava-software/sava'
   SAVA = '1.16.1'
-  SAVA_SERVICES = '0.14.1'
+  SAVA_SERVICES = '0.14.2'
   SAVA_KMS = '0.0.10'
   JETTY = '12.0.14'
 }
@@ -61,7 +61,6 @@ catalog {
     library('sava-core-services', "software.sava:core-services:$SAVA_SERVICES")
     library('sava-jetty-services', "software.sava:jetty-services:$SAVA_SERVICES")
     library('sava-solana-services', "software.sava:solana-services:$SAVA_SERVICES")
-
 
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
     library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
