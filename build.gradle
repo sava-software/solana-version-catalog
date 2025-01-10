@@ -52,7 +52,7 @@ catalog {
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.10')
     library('sava-solana-programs', 'software.sava:solana-programs:1.7.10')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.13')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.19')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.9.20')
 
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
