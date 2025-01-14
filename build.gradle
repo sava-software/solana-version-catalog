@@ -24,7 +24,7 @@ ext {
   VCS_URL = 'https://github.com/sava-software/sava'
   SAVA = '1.17.0'
   SAVA_SERVICES = '0.15.4'
-  SAVA_KMS = '0.0.10'
+  SAVA_KMS = '0.0.11'
   JETTY = '12.0.14'
 }
 
