@@ -4,7 +4,7 @@ ext {
     SAVA = '1.17.15'
     SAVA_SERVICES = '0.17.12'
     SAVA_KMS = '0.1.0'
-    JETTY = '12.0.14'
+    JETTY = '12.0.16'
 }
 
 apply plugin: 'version-catalog'
@@ -55,7 +55,7 @@ catalog {
 
 
         // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-        library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.57.0')
+        library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
     }
 }
 
