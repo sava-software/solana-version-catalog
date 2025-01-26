@@ -23,6 +23,6 @@ jobs:
           release: ${{ vars.GRADLE_JAVA_VERSION }}
 
       - name: Github Packages
-        run: ./gradlew --stacktrace publish
+        run: ./gradlew --stacktrace --no-daemon -Pversion=${{ github.ref_name }} publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

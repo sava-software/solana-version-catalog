@@ -1,28 +1,7 @@
-def getAppVersion = { ->
-    try (final var gitTagOut = new ByteArrayOutputStream()) {
-        exec {
-            commandLine 'git', 'tag', '--points-at', 'HEAD'
-            standardOutput = gitTagOut
-        }
-        final var tagName = gitTagOut.toString().strip()
-        if (tagName.isBlank()) {
-            try (final var gitHashOut = new ByteArrayOutputStream()) {
-                exec {
-                    commandLine 'git', 'rev-parse', '--short', 'HEAD'
-                    standardOutput = gitHashOut
-                }
-                return 'git-' + gitHashOut.toString().strip()
-            }
-        } else {
-            return tagName
-        }
-    }
-}
-
 ext {
-    VERSION = getAppVersion()
-    VCS_URL = 'https://github.com/sava-software/sava'
-    SAVA = '1.17.14'
+    VERSION = project.findProperty('version')
+    VCS_URL = 'https://github.com/sava-software/solana-version-catalog'
+    SAVA = '1.17.15'
     SAVA_SERVICES = '0.17.12'
     SAVA_KMS = '0.1.0'
     JETTY = '12.0.14'
@@ -85,7 +64,7 @@ publishing {
         maven(MavenPublication) {
             from(components.versionCatalog)
             groupId = project.group
-            setProperty("artifactId", project.name.toString())
+            artifactId = project.name
             version = project.version
         }
     }
