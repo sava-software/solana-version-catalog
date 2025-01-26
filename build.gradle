@@ -20,18 +20,21 @@ catalog {
 
         // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
         // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-        library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.79')
+        library('bouncycastle', 'org.bouncycastle:bcprov-jdk18on:1.80')
 
         // https://github.com/comodal/json-iterator/tags
         library('json-iterator', 'systems.comodal:json-iterator:2.12.0')
 
-        library('sava-core', "software.sava:sava-core:$SAVA")
-        library('sava-rpc', "software.sava:sava-rpc:$SAVA")
+        // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
+        library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
 
         library('sava-solana-web2', 'software.sava:solana-web2:1.7.13')
         library('sava-solana-programs', 'software.sava:solana-programs:1.7.14')
         library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.17')
         library('sava-anchor-programs', 'software.sava:anchor-programs:1.10.5')
+
+        library('sava-core', "software.sava:sava-core:$SAVA")
+        library('sava-rpc', "software.sava:sava-rpc:$SAVA")
 
         library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
         library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
@@ -52,10 +55,6 @@ catalog {
         library('jetty-alpn-conscrypt-server', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
         // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
         library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
-
-
-        // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-        library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
     }
 }
 
