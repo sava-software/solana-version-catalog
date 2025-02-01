@@ -29,7 +29,7 @@ catalog {
     library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
 
     library('sava-solana-web2', 'software.sava:solana-web2:1.7.13')
-    library('sava-solana-programs', 'software.sava:solana-programs:1.7.14')
+    library('sava-solana-programs', 'software.sava:solana-programs:1.7.15')
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.18')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.11.1')
 
