@@ -2,7 +2,7 @@ ext {
   VERSION = project.findProperty('version')
   VCS_URL = 'https://github.com/sava-software/solana-version-catalog'
   SAVA = '1.17.23'
-  SAVA_RAVINA = '0.19.2'
+  SAVA_RAVINA = '0.19.3'
   SAVA_KMS = '0.1.3'
   JETTY = '12.0.16'
 }
