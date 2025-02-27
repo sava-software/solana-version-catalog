@@ -44,7 +44,7 @@ catalog {
     library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
     library('sava-ravina-solana', "software.sava:ravina-solana:$SAVA_RAVINA")
 
-    library('glam-ix-proxy', 'systems.glam:ix-proxy:0.1.0')
+    library('glam-ix-proxy', 'systems.glam:ix-proxy:0.1.1')
 
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
     library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
