@@ -30,7 +30,7 @@ catalog {
 
     library('sava-solana-web2', 'software.sava:solana-web2:1.8.0')
     library('sava-solana-programs', 'software.sava:solana-programs:1.18.4')
-    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.21')
+    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.22')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.11.40')
 
     library('sava-core', "software.sava:sava-core:$SAVA")
@@ -44,7 +44,7 @@ catalog {
     library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
     library('sava-ravina-solana', "software.sava:ravina-solana:$SAVA_RAVINA")
 
-    library('glam-ix-proxy', 'systems.glam:ix-proxy:0.1.9')
+    library('glam-ix-proxy', 'systems.glam:ix-proxy:0.1.11')
 
     // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
     library('jetty-server', "org.eclipse.jetty:jetty-server:$JETTY")
