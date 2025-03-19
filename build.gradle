@@ -32,7 +32,7 @@ catalog {
 
     library('sava-solana-programs', 'software.sava:solana-programs:1.18.7')
 
-    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.24')
+    library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.25')
     library('sava-anchor-programs', 'software.sava:anchor-programs:1.14.1')
 
     library('sava-core', "software.sava:sava-core:$SAVA")
