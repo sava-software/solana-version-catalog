@@ -19,7 +19,7 @@ jobs:
 
       - uses: oracle-actions/setup-java@v1
         with:
-          website: jdk.java.net
+          website: ${{ vars.JDK_SRC }}
           release: ${{ vars.GRADLE_JAVA_VERSION }}
 
       - name: Github Packages
