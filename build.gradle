@@ -28,7 +28,7 @@ catalog {
     // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
     library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
 
-    library('sava-solana-web2', 'software.sava:solana-web2:1.8.1')
+    library('sava-solana-web2', 'software.sava:solana-web2:1.9.0')
 
     library('sava-solana-programs', 'software.sava:solana-programs:1.18.10')
 
