@@ -28,12 +28,12 @@ catalog {
     // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
     library('google-cloud-kms', 'com.google.cloud:google-cloud-kms:2.59.0')
 
-    library('sava-solana-web2', 'software.sava:solana-web2:1.10.0')
+    library('sava-solana-web2', 'software.sava:solana-web2:1.10.1')
 
     library('sava-solana-programs', 'software.sava:solana-programs:1.18.10')
 
     library('sava-anchor-src-gen', 'software.sava:anchor-src-gen:1.7.27')
-    library('sava-anchor-programs', 'software.sava:anchor-programs:1.14.5')
+    library('sava-anchor-programs', 'software.sava:anchor-programs:1.14.6')
 
     library('sava-core', "software.sava:sava-core:$SAVA")
     library('sava-rpc', "software.sava:sava-rpc:$SAVA")
