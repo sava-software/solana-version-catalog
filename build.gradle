@@ -6,7 +6,7 @@ ext {
   JSON_ITERATOR = '2.12.0'
 
   BOUNCY_CASTLE = '1.80'
-  SAVA = '1.17.42'
+  SAVA = '1.17.43'
   SAVA_WEB2 = '1.10.4'
   SAVA_PROGRAMS = '1.18.11'
   SAVA_SRC_GEN = '1.7.27'
