@@ -4,7 +4,7 @@ Provides a set of library versions that work together in the same build.
 
 ## Usage
 
-This covers how to add the toml file to your build. For information how to reference the dependencies see the
+This covers how to add the version catalog to your build. For information on how to reference the dependencies see the
 official [Gradle version catalog docs](https://docs.gradle.org/current/userguide/version_catalogs.html).
 
 ### Local
@@ -17,7 +17,7 @@ This may be placed in your local gradle directory.
 ./gradlew generateCatalogAsToml
 ```
 
-### Maven Repository
+### Remote Maven Repository
 
 Add to you your `settings.gradle` file and configure the username, password and version.
 

@@ -4,6 +4,9 @@ ext {
   // https://github.com/beryx/badass-jlink-plugin
   JLINK = '3.1.1'
 
+  // https://plugins.gradle.org/plugin/com.google.protobuf
+  GOOGLE_PROTOBUF = '0.9.5'
+
   // Tests
 
   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
@@ -33,6 +36,11 @@ ext {
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   JETTY = '12.0.19'
   SAVA_RAVINA = '0.22.0'
+
+  // https://mvnrepository.com/artifact/io.grpc
+  GRPC = '1.72.0'
+  // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
+  APACHE_TOMCAT = '6.0.53'
 }
 
 apply(plugin: 'version-catalog')
@@ -42,7 +50,9 @@ catalog {
   versionCatalog {
     // Plugins
 
-    plugin('jlink', "org.beryx.jlink").version("$JLINK")
+    plugin('jlink', 'org.beryx.jlink').version("$JLINK")
+
+    plugin('jlink', 'com.google.protobuf').version("$GOOGLE_PROTOBUF")
 
     // Tests
 
@@ -90,6 +100,16 @@ catalog {
     library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
 
     bundle('jetty', List.of('jetty-server', 'jetty-http2-server', 'jetty-alpn-server', 'jetty-alpn-java-server', 'jetty-alpn-conscrypt-server', 'jetty-http3-server'))
+
+    // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
+    library('grpc-netty-shaded', "io.grpc:grpc-netty-shaded:$GRPC")
+    // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf
+    library('grpc-protobuf', "io.grpc:grpc-protobuf:$GRPC")
+    // https://mvnrepository.com/artifact/io.grpc/grpc-stub
+    library('grpc-stub', "io.grpc:grpc-stub:$GRPC")
+    library('apache-tomcat-annotations-api', "org.apache.tomcat:annotations-api:$APACHE_TOMCAT")
+
+    bundle('grpc-protobuf', List.of('grpc-netty-shaded', 'grpc-protobuf', 'grpc-stub', 'apache-tomcat-annotations-api'))
   }
 }
 
