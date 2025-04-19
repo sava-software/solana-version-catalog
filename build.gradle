@@ -7,9 +7,6 @@ ext {
   // https://github.com/beryx/badass-jlink-plugin
   JLINK = '3.1.1'
 
-  // https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver
-  FOOJAY_TOOLCHAIN_RESOLVER = '0.10.0'
-
   // Tests
 
   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
@@ -52,7 +49,6 @@ catalog {
     // Plugins
 
     plugin('jlink', "org.beryx.jlink").version("$JLINK")
-    plugin('foojay-toolchain-resolver', "org.gradle.toolchains.foojay-resolver-convention").version("$FOOJAY_TOOLCHAIN_RESOLVER")
 
     // Tests
 
@@ -73,6 +69,8 @@ catalog {
 
     library('sava-anchor-src-gen', "software.sava:anchor-src-gen:$SAVA_SRC_GEN")
     library('sava-anchor-programs', "software.sava:anchor-programs:$SAVA_ANCHOR_PROGRAMS")
+
+    bundle('sava-solana-programs', List.of('json-iterator', 'bouncycastle', 'sava-core', 'sava-rpc', 'sava-solana-programs', 'sava-anchor-src-gen', 'sava-anchor-programs'))
 
     library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
@@ -96,6 +94,8 @@ catalog {
     library('jetty-alpn-conscrypt-server', "org.eclipse.jetty:jetty-alpn-conscrypt-server:$JETTY")
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
     library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
+
+    bundle('jetty', List.of('jetty-server', 'jetty-http2-server', 'jetty-alpn-server', 'jetty-alpn-java-server', 'jetty-alpn-conscrypt-server', 'jetty-http3-server'))
   }
 }
 
