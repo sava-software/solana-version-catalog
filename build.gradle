@@ -39,6 +39,9 @@ ext {
 
   // https://mvnrepository.com/artifact/io.grpc
   GRPC = '1.72.0'
+// https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
+  // https://mvnrepository.com/artifact/com.google.protobuf/protoc
+  PROTOC = '3.25.5'
   // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
   APACHE_TOMCAT = '6.0.53'
 }
@@ -100,6 +103,9 @@ catalog {
     library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
 
     bundle('jetty', List.of('jetty-server', 'jetty-http2-server', 'jetty-alpn-server', 'jetty-alpn-java-server', 'jetty-alpn-conscrypt-server', 'jetty-http3-server'))
+
+    version('grpc', "$GRPC")
+    version('protoc', "$PROTOC")
 
     // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
     library('grpc-netty-shaded', "io.grpc:grpc-netty-shaded:$GRPC")
