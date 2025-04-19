@@ -2,18 +2,25 @@ ext {
   VERSION = project.findProperty('version')
   VCS_URL = 'https://github.com/sava-software/solana-version-catalog'
 
+  // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
   JUNIT = '5.12.2'
+
+  // https://github.com/comodal/json-iterator/tags
   JSON_ITERATOR = '2.12.0'
 
+  // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
+  // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
   BOUNCY_CASTLE = '1.80'
+
   SAVA = '1.17.43'
-  SAVA_WEB2 = '1.10.4'
+  SAVA_WEB2 = '1.11.0'
   SAVA_PROGRAMS = '1.18.11'
   SAVA_SRC_GEN = '1.8.0'
   SAVA_ANCHOR_PROGRAMS = '1.15.0'
 
   GLAM_IX_PROXY = '0.3.0'
 
+  // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
   GOOGLE_CLOUD_KMS = '2.63.0'
   SAVA_KMS = '0.3.0'
 
@@ -21,25 +28,21 @@ ext {
   SAVA_RAVINA = '0.22.0'
 }
 
-apply plugin: 'version-catalog'
-apply plugin: 'maven-publish'
+apply(plugin: 'version-catalog')
+apply(plugin: 'maven-publish')
 
 project.group = 'software.sava'
 project.version = "$VERSION"
 
 catalog {
   versionCatalog {
-    // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
     library('junit-jupiter', "org.junit.jupiter:junit-jupiter:$JUNIT")
 
-    // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
-    // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
     library('bouncycastle', "org.bouncycastle:bcprov-jdk18on:$BOUNCY_CASTLE")
 
     library('sava-core', "software.sava:sava-core:$SAVA")
     library('sava-rpc', "software.sava:sava-rpc:$SAVA")
 
-    // https://github.com/comodal/json-iterator/tags
     library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
 
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
@@ -49,7 +52,6 @@ catalog {
     library('sava-anchor-src-gen', "software.sava:anchor-src-gen:$SAVA_SRC_GEN")
     library('sava-anchor-programs', "software.sava:anchor-programs:$SAVA_ANCHOR_PROGRAMS")
 
-    // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
     library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
