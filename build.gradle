@@ -1,7 +1,4 @@
 ext {
-  VERSION = project.findProperty('version')
-  VCS_URL = 'https://github.com/sava-software/solana-version-catalog'
-
   // Plugins
 
   // https://github.com/beryx/badass-jlink-plugin
@@ -23,7 +20,7 @@ ext {
 
   SAVA = '1.17.43'
   SAVA_WEB2 = '1.11.0'
-  SAVA_PROGRAMS = '1.18.11'
+  SAVA_PROGRAMS = '1.19.0'
   SAVA_SRC_GEN = '1.8.0'
   SAVA_ANCHOR_PROGRAMS = '1.15.1'
 
@@ -40,9 +37,6 @@ ext {
 
 apply(plugin: 'version-catalog')
 apply(plugin: 'maven-publish')
-
-project.group = 'software.sava'
-project.version = "$VERSION"
 
 catalog {
   versionCatalog {
@@ -63,14 +57,14 @@ catalog {
     library('sava-core', "software.sava:sava-core:$SAVA")
     library('sava-rpc', "software.sava:sava-rpc:$SAVA")
 
-    library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
-
     library('sava-solana-programs', "software.sava:solana-programs:$SAVA_PROGRAMS")
 
     library('sava-anchor-src-gen', "software.sava:anchor-src-gen:$SAVA_SRC_GEN")
     library('sava-anchor-programs', "software.sava:anchor-programs:$SAVA_ANCHOR_PROGRAMS")
 
     bundle('sava-solana-programs', List.of('json-iterator', 'bouncycastle', 'sava-core', 'sava-rpc', 'sava-solana-programs', 'sava-anchor-src-gen', 'sava-anchor-programs'))
+
+    library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
     library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
@@ -99,10 +93,13 @@ catalog {
   }
 }
 
+project.group = 'software.sava'
+project.version = project.findProperty('version')
+
 publishing {
   publications {
     maven(MavenPublication) {
-      from(components.versionCatalog)
+      from components.versionCatalog
       groupId = project.group
       artifactId = project.name
       version = project.version
