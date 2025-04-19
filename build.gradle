@@ -2,8 +2,20 @@ ext {
   VERSION = project.findProperty('version')
   VCS_URL = 'https://github.com/sava-software/solana-version-catalog'
 
+  // Plugins
+
+  // https://github.com/beryx/badass-jlink-plugin
+  JLINK = '3.1.1'
+
+  // https://plugins.gradle.org/plugin/org.gradle.toolchains.foojay-resolver
+  FOOJAY_TOOLCHAIN_RESOLVER = '0.10.0'
+
+  // Tests
+
   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
   JUNIT = '5.12.2'
+
+  // Compile & Implementation
 
   // https://github.com/comodal/json-iterator/tags
   JSON_ITERATOR = '2.12.0'
@@ -24,6 +36,7 @@ ext {
   GOOGLE_CLOUD_KMS = '2.63.0'
   SAVA_KMS = '0.3.0'
 
+  // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   JETTY = '12.0.19'
   SAVA_RAVINA = '0.22.0'
 }
@@ -36,14 +49,23 @@ project.version = "$VERSION"
 
 catalog {
   versionCatalog {
+    // Plugins
+
+    plugin('jlink', "org.beryx.jlink").version("$JLINK")
+    plugin('foojay-toolchain-resolver', "org.gradle.toolchains.foojay-resolver-convention").version("$FOOJAY_TOOLCHAIN_RESOLVER")
+
+    // Tests
+
     library('junit-jupiter', "org.junit.jupiter:junit-jupiter:$JUNIT")
+
+    // Compile & Implementation
+
+    library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
 
     library('bouncycastle', "org.bouncycastle:bcprov-jdk18on:$BOUNCY_CASTLE")
 
     library('sava-core', "software.sava:sava-core:$SAVA")
     library('sava-rpc', "software.sava:sava-rpc:$SAVA")
-
-    library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
 
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
