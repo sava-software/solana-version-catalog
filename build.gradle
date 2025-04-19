@@ -107,9 +107,12 @@ catalog {
     library('grpc-protobuf', "io.grpc:grpc-protobuf:$GRPC")
     // https://mvnrepository.com/artifact/io.grpc/grpc-stub
     library('grpc-stub', "io.grpc:grpc-stub:$GRPC")
+    // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
+    library('protoc-gen-grpc', "io.grpc:protoc-gen-grpc-java:$GRPC")
     library('apache-tomcat-annotations-api', "org.apache.tomcat:annotations-api:$APACHE_TOMCAT")
 
-    bundle('grpc-protobuf', List.of('grpc-netty-shaded', 'grpc-protobuf', 'grpc-stub', 'apache-tomcat-annotations-api'))
+
+    bundle('grpc-protobuf', List.of('grpc-netty-shaded', 'grpc-protobuf', 'grpc-stub', 'protoc-gen-grpc', 'apache-tomcat-annotations-api'))
   }
 }
 
