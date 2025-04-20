@@ -4,14 +4,14 @@ Provides a set of library versions that work together in the same build.
 
 ## Usage
 
-This covers how to add the version catalog to your build. For information on how to reference the dependencies see the
+This covers how to add the version catalog to your build. For information on how to reference the dependencies, see the
 official [Gradle version catalog docs](https://docs.gradle.org/current/userguide/version_catalogs.html).
 
 ### Local
 
 Generate a `libs.versions.toml` file which will be located in build/version-catalog.
 
-This may be placed in your local gradle directory.
+This may be placed in your local Gradle directory.
 
 ```shell
 ./gradlew generateCatalogAsToml
