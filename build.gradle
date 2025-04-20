@@ -15,7 +15,7 @@ ext {
   // Compile & Implementation
 
   // https://github.com/comodal/json-iterator/tags
-  JSON_ITERATOR = '2.12.0'
+  JSON_ITERATOR = '2.13.0'
 
   // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
   // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -39,7 +39,7 @@ ext {
 
   // https://mvnrepository.com/artifact/io.grpc
   GRPC = '1.72.0'
-// https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
+  // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
   // https://mvnrepository.com/artifact/com.google.protobuf/protoc
   PROTOC = '3.25.5'
   // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
@@ -116,7 +116,6 @@ catalog {
     // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
     library('protoc-gen-grpc', "io.grpc:protoc-gen-grpc-java:$GRPC")
     library('apache-tomcat-annotations-api', "org.apache.tomcat:annotations-api:$APACHE_TOMCAT")
-
 
     bundle('grpc-protobuf', List.of('grpc-netty-shaded', 'grpc-protobuf', 'grpc-stub', 'protoc-gen-grpc', 'apache-tomcat-annotations-api'))
   }
