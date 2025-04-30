@@ -24,7 +24,7 @@ ext {
   SAVA = '1.18.1'
   SAVA_WEB2 = '1.11.0'
   SAVA_PROGRAMS = '1.19.0'
-  SAVA_SRC_GEN = '1.8.2'
+  SAVA_SRC_GEN = '1.8.3'
   SAVA_ANCHOR_PROGRAMS = '1.15.13'
 
   GLAM_IX_PROXY = '0.3.0'
@@ -75,7 +75,15 @@ catalog {
     library('sava-anchor-src-gen', "software.sava:anchor-src-gen:$SAVA_SRC_GEN")
     library('sava-anchor-programs', "software.sava:anchor-programs:$SAVA_ANCHOR_PROGRAMS")
 
-    bundle('sava-solana-programs', List.of('json-iterator', 'bouncycastle', 'sava-core', 'sava-rpc', 'sava-solana-programs', 'sava-anchor-src-gen', 'sava-anchor-programs'))
+    bundle('sava-solana-programs', List.of(
+        'json-iterator',
+        'bouncycastle',
+        'sava-core',
+        'sava-rpc',
+        'sava-solana-programs',
+        'sava-anchor-src-gen',
+        'sava-anchor-programs'
+    ))
 
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
@@ -102,7 +110,14 @@ catalog {
     // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
     library('jetty-http3-server', "org.eclipse.jetty.http3:jetty-http3-server:$JETTY")
 
-    bundle('jetty', List.of('jetty-server', 'jetty-http2-server', 'jetty-alpn-server', 'jetty-alpn-java-server', 'jetty-alpn-conscrypt-server', 'jetty-http3-server'))
+    bundle('jetty', List.of(
+        'jetty-server',
+        'jetty-http2-server',
+        'jetty-alpn-server',
+        'jetty-alpn-java-server',
+        'jetty-alpn-conscrypt-server',
+        'jetty-http3-server'
+    ))
 
     version('grpc', "$GRPC")
     version('protoc', "$PROTOC")
@@ -117,7 +132,13 @@ catalog {
     library('protoc-gen-grpc', "io.grpc:protoc-gen-grpc-java:$GRPC")
     library('apache-tomcat-annotations-api', "org.apache.tomcat:annotations-api:$APACHE_TOMCAT")
 
-    bundle('grpc-protobuf', List.of('grpc-netty-shaded', 'grpc-protobuf', 'grpc-stub', 'protoc-gen-grpc', 'apache-tomcat-annotations-api'))
+    bundle('grpc-protobuf', List.of(
+        'grpc-netty-shaded',
+        'grpc-protobuf',
+        'grpc-stub',
+        'protoc-gen-grpc',
+        'apache-tomcat-annotations-api'
+    ))
   }
 }
 
