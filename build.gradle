@@ -24,7 +24,7 @@ ext {
   SAVA = '1.18.2'
   SAVA_WEB2 = '1.11.1'
   SAVA_PROGRAMS = '1.19.1'
-  SAVA_SRC_GEN = '1.8.3'
+  SAVA_SRC_GEN = '1.8.4'
   SAVA_ANCHOR_PROGRAMS = '1.16.1'
 
   GLAM_IX_PROXY = '0.3.0'
