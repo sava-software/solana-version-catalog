@@ -25,7 +25,7 @@ ext {
   SAVA_WEB2 = '1.11.1'
   SAVA_PROGRAMS = '1.19.1'
   SAVA_SRC_GEN = '1.8.4'
-  SAVA_ANCHOR_PROGRAMS = '1.16.2'
+  SAVA_ANCHOR_PROGRAMS = '1.16.3'
 
   GLAM_IX_PROXY = '0.3.0'
 
@@ -34,7 +34,7 @@ ext {
   SAVA_KMS = '0.3.0'
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
-  JETTY = '12.0.20'
+  JETTY = '12.0.21'
   SAVA_RAVINA = '0.22.1'
 
   // https://mvnrepository.com/artifact/io.grpc
