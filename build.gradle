@@ -35,7 +35,7 @@ ext {
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   JETTY = '12.0.21'
-  SAVA_RAVINA = '0.22.1'
+  SAVA_RAVINA = '0.22.2'
 
   // https://mvnrepository.com/artifact/io.grpc
   GRPC = '1.72.0'
