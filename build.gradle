@@ -16,6 +16,8 @@ ext {
 
   // https://github.com/comodal/json-iterator/tags
   JSON_ITERATOR = '2.13.2'
+  // https://github.com/sava-software/json-iterator
+  SAVA_JSON_ITERATOR = '2.14.0'
 
   // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
   // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -64,6 +66,7 @@ catalog {
     // Compile & Implementation
 
     library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
+    library('sava-json-iterator', "software.sava:json-iterator:$SAVA_JSON_ITERATOR")
 
     library('bouncycastle', "org.bouncycastle:bcprov-jdk18on:$BOUNCY_CASTLE")
 
