@@ -23,7 +23,7 @@ ext {
   // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
   BOUNCY_CASTLE = '1.80'
 
-  SAVA = '1.18.5'
+  SAVA = '1.19.0'
   SAVA_WEB2 = '1.11.1'
   SAVA_PROGRAMS = '1.19.2'
   SAVA_SRC_GEN = '1.9.0'
