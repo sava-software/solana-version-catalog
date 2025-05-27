@@ -15,7 +15,7 @@ ext {
   // Compile & Implementation
 
   // https://github.com/comodal/json-iterator/tags
-  JSON_ITERATOR = '2.13.1'
+  JSON_ITERATOR = '2.13.2'
 
   // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
   // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
