@@ -31,13 +31,13 @@ ext {
 
   GLAM_IX_PROXY = '0.3.2'
 
-  // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-  GOOGLE_CLOUD_KMS = '2.63.0'
-  SAVA_KMS = '0.3.1'
-
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   JETTY = '12.0.21'
-  SAVA_RAVINA = '0.23.0'
+  // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
+  GOOGLE_CLOUD_KMS = '2.66.0'
+  SAVA_RAVINA = '0.23.1'
+
+  SAVA_KMS = '0.3.1'
 
   // https://mvnrepository.com/artifact/io.grpc
   GRPC = '1.72.0'
@@ -91,9 +91,15 @@ catalog {
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
     library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
+
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
     library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
+
+    library('sava-kms-core', "software.sava:kms-ore:$SAVA_RAVINA")
+    library('sava-kms-http', "software.sava:kms-http:$SAVA_RAVINA")
+    library('sava-kms-google', "software.sava:kms-google:$SAVA_RAVINA")
+
 
     library('sava-ravina-core', "software.sava:ravina-core:$SAVA_RAVINA")
     library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
