@@ -10,7 +10,7 @@ ext {
   // Tests
 
   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
-  JUNIT = '5.12.2'
+  JUNIT = '5.13.+'
 
   // Compile & Implementation
 
@@ -95,13 +95,14 @@ catalog {
 
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
-    library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
     library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
     library('sava-ravina-core', "software.sava:ravina-core:$SAVA_RAVINA")
     library('sava-ravina-kms-core', "software.sava:ravina-kms-core:$SAVA_RAVINA")
     library('sava-ravina-kms-http', "software.sava:ravina-kms-http:$SAVA_RAVINA")
-    library('sava-ravina-kms-google', "software.sava:ravina-kms-google:$SAVA_RAVINA")
     library('sava-ravina-solana', "software.sava:ravina-solana:$SAVA_RAVINA")
+
+    library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
+    library('sava-ravina-kms-google', "software.sava:ravina-kms-google:$SAVA_RAVINA")
 
     // Deprecated
     library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
