@@ -96,10 +96,9 @@ catalog {
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
     library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
 
-    library('sava-kms-core', "software.sava:kms-core:$SAVA_RAVINA")
-    library('sava-kms-http', "software.sava:kms-http:$SAVA_RAVINA")
-    library('sava-kms-google', "software.sava:kms-google:$SAVA_RAVINA")
-
+    library('sava-ravina-kms-core', "software.sava:ravina-kms-core:$SAVA_RAVINA")
+    library('sava-ravina-kms-http', "software.sava:ravina-kms-http:$SAVA_RAVINA")
+    library('sava-ravina-kms-google', "software.sava:ravina-kms-google:$SAVA_RAVINA")
 
     library('sava-ravina-core', "software.sava:ravina-core:$SAVA_RAVINA")
     library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
