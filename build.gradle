@@ -14,8 +14,10 @@ ext {
 
   // Compile & Implementation
 
+  // Deprecated
   // https://github.com/comodal/json-iterator/tags
   JSON_ITERATOR = '2.13.2'
+
   // https://github.com/sava-software/json-iterator
   SAVA_JSON_ITERATOR = '2.14.0'
 
@@ -37,6 +39,7 @@ ext {
   GOOGLE_CLOUD_KMS = '2.66.0'
   SAVA_RAVINA = '0.23.1'
 
+  // Deprecated
   SAVA_KMS = '0.3.1'
 
   // https://mvnrepository.com/artifact/io.grpc
@@ -65,7 +68,9 @@ catalog {
 
     // Compile & Implementation
 
+    // Deprecated
     library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
+
     library('sava-json-iterator', "software.sava:json-iterator:$SAVA_JSON_ITERATOR")
 
     library('bouncycastle', "org.bouncycastle:bcprov-jdk18on:$BOUNCY_CASTLE")
@@ -91,18 +96,17 @@ catalog {
     library('sava-solana-web2', "software.sava:solana-web2:$SAVA_WEB2")
 
     library('google-cloud-kms', "com.google.cloud:google-cloud-kms:$GOOGLE_CLOUD_KMS")
-
-    library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
-    library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
-    library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
-
+    library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
+    library('sava-ravina-core', "software.sava:ravina-core:$SAVA_RAVINA")
     library('sava-ravina-kms-core', "software.sava:ravina-kms-core:$SAVA_RAVINA")
     library('sava-ravina-kms-http', "software.sava:ravina-kms-http:$SAVA_RAVINA")
     library('sava-ravina-kms-google', "software.sava:ravina-kms-google:$SAVA_RAVINA")
-
-    library('sava-ravina-core', "software.sava:ravina-core:$SAVA_RAVINA")
-    library('sava-ravina-jetty', "software.sava:ravina-jetty:$SAVA_RAVINA")
     library('sava-ravina-solana', "software.sava:ravina-solana:$SAVA_RAVINA")
+
+    // Deprecated
+    library('sava-kms-core', "software.sava:kms_core:$SAVA_KMS")
+    library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
+    library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
 
     library('glam-ix-proxy', "systems.glam:ix-proxy:$GLAM_IX_PROXY")
 
