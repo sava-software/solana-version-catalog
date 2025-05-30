@@ -96,7 +96,7 @@ catalog {
     library('sava-http-kms', "software.sava:http_kms:$SAVA_KMS")
     library('sava-google-kms', "software.sava:google_kms:$SAVA_KMS")
 
-    library('sava-kms-core', "software.sava:kms-ore:$SAVA_RAVINA")
+    library('sava-kms-core', "software.sava:kms-core:$SAVA_RAVINA")
     library('sava-kms-http', "software.sava:kms-http:$SAVA_RAVINA")
     library('sava-kms-google', "software.sava:kms-google:$SAVA_RAVINA")
 
