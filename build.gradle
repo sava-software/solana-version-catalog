@@ -10,7 +10,8 @@ ext {
   // Tests
 
   // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
-  JUNIT = '5.13.+'
+  // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+  JUNIT = '5.13.1'
 
   // Compile & Implementation
 
@@ -34,19 +35,19 @@ ext {
   GLAM_IX_PROXY = '0.3.2'
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
-  JETTY = '12.0.+'
+  JETTY = '12.0.22'
   // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-  GOOGLE_CLOUD_KMS = '2.66.+'
+  GOOGLE_CLOUD_KMS = '2.67.0'
   SAVA_RAVINA = '0.23.2'
 
   // Deprecated
   SAVA_KMS = '0.3.1'
 
   // https://mvnrepository.com/artifact/io.grpc
-  GRPC = '1.73.+'
+  GRPC = '1.73.0'
   // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
   // https://mvnrepository.com/artifact/com.google.protobuf/protoc
-  PROTOC = '3.25.+'
+  PROTOC = '3.25.5'
   // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
   APACHE_TOMCAT = '6.0.53'
 }
@@ -65,12 +66,13 @@ catalog {
     // Tests
 
     library('junit-jupiter', "org.junit.jupiter:junit-jupiter:$JUNIT")
+    library('junit-jupiter-api', "org.junit.jupiter:junit-jupiter-api:$JUNIT")
 
     // Compile & Implementation
 
     // Deprecated
     library('json-iterator', "systems.comodal:json-iterator:$JSON_ITERATOR")
-
+    // Replaces above.
     library('sava-json-iterator', "software.sava:json-iterator:$SAVA_JSON_ITERATOR")
 
     library('bouncycastle', "org.bouncycastle:bcprov-jdk18on:$BOUNCY_CASTLE")
