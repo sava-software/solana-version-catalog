@@ -1,7 +1,14 @@
+// This setup publishes the defined versions as BOM (platform) and Version Catalog
+// It follows the approach of https://repo1.maven.org/maven2/io/micronaut/platform/micronaut-platform
+
 plugins {
+  id("java-platform")
   id("version-catalog")
   id("maven-publish")
 }
+
+group = "software.sava"
+version = providers.gradleProperty("version").getOrElse("")
 
 // Plugins
 
@@ -55,36 +62,90 @@ val protoc = "3.25.5"
 // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
 val apacheTomcat = "6.0.53"
 
+dependencies.constraints {
+  // Tests
+
+  api("org.junit.jupiter:junit-jupiter:$junit")
+  api("org.junit.jupiter:junit-jupiter-api:$junit")
+
+  // Compile & Implementation
+
+  // Deprecated
+  api("systems.comodal:json-iterator:$jsonIterator")
+  // Replaces above.
+  api("software.sava:json-iterator:$savaJsonIterator")
+
+  api("org.bouncycastle:bcprov-jdk18on:$bouncyCastle")
+
+  api("software.sava:sava-core:$sava")
+  api("software.sava:sava-rpc:$sava")
+
+  api("software.sava:solana-programs:$savaPrograms")
+
+  api("software.sava:anchor-src-gen:$savaSrcGen")
+  api("software.sava:anchor-programs:$savaAnchorPrograms")
+
+  api("software.sava:solana-web2:$savaWeb2")
+
+  api("software.sava:ravina-jetty:$savaRavina")
+  api("software.sava:ravina-core:$savaRavina")
+  api("software.sava:ravina-kms-core:$savaRavina")
+  api("software.sava:ravina-kms-http:$savaRavina")
+  api("software.sava:ravina-solana:$savaRavina")
+
+  api("com.google.cloud:google-cloud-kms:$googleCloudKms")
+  api("software.sava:ravina-kms-google:$savaRavina")
+
+  // Deprecated
+  api("software.sava:kms_core:$savaKms")
+  api("software.sava:http_kms:$savaKms")
+  api("software.sava:google_kms:$savaKms")
+
+  api("systems.glam:ix-proxy:$glamIxProxy")
+
+  // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
+  api("org.eclipse.jetty:jetty-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
+  api("org.eclipse.jetty.http2:jetty-http2-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-server
+  api("org.eclipse.jetty:jetty-alpn-server:$jetty")
+  api("org.eclipse.jetty:jetty-alpn-java-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-conscrypt-server
+  api("org.eclipse.jetty:jetty-alpn-conscrypt-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
+  api("org.eclipse.jetty.http3:jetty-http3-server:$jetty")
+
+  // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
+  api("io.grpc:grpc-netty-shaded:$grpc")
+  // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf
+  api("io.grpc:grpc-protobuf:$grpc")
+  // https://mvnrepository.com/artifact/io.grpc/grpc-stub
+  api("io.grpc:grpc-stub:$grpc")
+  // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
+  api("io.grpc:protoc-gen-grpc-java:$grpc")
+  api("org.apache.tomcat:annotations-api:$apacheTomcat")
+}
+
 catalog {
+  // library entries are derived from the BOM entries. The alias corresponds to the 'name' by default.
+  // The cases where the alias should differ, are defined below.
+  configureExplicitAlias("apache-tomcat-annotations-api", "org.apache.tomcat", "annotations-api")
+  configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
+  configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
+  configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
+  configurations.api.get().dependencyConstraints.forEach { constraint ->
+    if (constraint.group == "software.sava" && !constraint.name.startsWith("sava")) {
+      configureExplicitAlias("sava-${constraint.name}", constraint.group, constraint.name)
+    }
+  }
+
   versionCatalog {
     // Plugins
-
     plugin("jlink", "org.beryx.jlink").version(jlink)
 
     plugin("google-protobuf-plugin", "com.google.protobuf").version(googleProtobufPlugin)
 
-    // Tests
-
-    library("junit-jupiter", "org.junit.jupiter:junit-jupiter:$junit")
-    library("junit-jupiter-api", "org.junit.jupiter:junit-jupiter-api:$junit")
-
-    // Compile & Implementation
-
-    // Deprecated
-    library("json-iterator", "systems.comodal:json-iterator:$jsonIterator")
-    // Replaces above.
-    library("sava-json-iterator", "software.sava:json-iterator:$savaJsonIterator")
-
-    library("bouncycastle", "org.bouncycastle:bcprov-jdk18on:$bouncyCastle")
-
-    library("sava-core", "software.sava:sava-core:$sava")
-    library("sava-rpc", "software.sava:sava-rpc:$sava")
-
-    library("sava-solana-programs", "software.sava:solana-programs:$savaPrograms")
-
-    library("sava-anchor-src-gen", "software.sava:anchor-src-gen:$savaSrcGen")
-    library("sava-anchor-programs", "software.sava:anchor-programs:$savaAnchorPrograms")
-
+    // Bundles
     bundle(
       "sava-solana-programs", listOf(
         "bouncycastle",
@@ -97,36 +158,6 @@ catalog {
       )
     )
 
-    library("sava-solana-web2", "software.sava:solana-web2:$savaWeb2")
-
-    library("sava-ravina-jetty", "software.sava:ravina-jetty:$savaRavina")
-    library("sava-ravina-core", "software.sava:ravina-core:$savaRavina")
-    library("sava-ravina-kms-core", "software.sava:ravina-kms-core:$savaRavina")
-    library("sava-ravina-kms-http", "software.sava:ravina-kms-http:$savaRavina")
-    library("sava-ravina-solana", "software.sava:ravina-solana:$savaRavina")
-
-    library("google-cloud-kms", "com.google.cloud:google-cloud-kms:$googleCloudKms")
-    library("sava-ravina-kms-google", "software.sava:ravina-kms-google:$savaRavina")
-
-    // Deprecated
-    library("sava-kms-core", "software.sava:kms_core:$savaKms")
-    library("sava-http-kms", "software.sava:http_kms:$savaKms")
-    library("sava-google-kms", "software.sava:google_kms:$savaKms")
-
-    library("glam-ix-proxy", "systems.glam:ix-proxy:$glamIxProxy")
-
-    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
-    library("jetty-server", "org.eclipse.jetty:jetty-server:$jetty")
-    // https://mvnrepository.com/artifact/org.eclipse.jetty.http2/jetty-http2-server
-    library("jetty-http2-server", "org.eclipse.jetty.http2:jetty-http2-server:$jetty")
-    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-server
-    library("jetty-alpn-server", "org.eclipse.jetty:jetty-alpn-server:$jetty")
-    library("jetty-alpn-java-server", "org.eclipse.jetty:jetty-alpn-java-server:$jetty")
-    // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-alpn-conscrypt-server
-    library("jetty-alpn-conscrypt-server", "org.eclipse.jetty:jetty-alpn-conscrypt-server:$jetty")
-    // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
-    library("jetty-http3-server", "org.eclipse.jetty.http3:jetty-http3-server:$jetty")
-
     bundle(
       "jetty", listOf(
         "jetty-server",
@@ -138,19 +169,6 @@ catalog {
       )
     )
 
-    version("grpc", grpc)
-    version("protoc", protoc)
-
-    // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
-    library("grpc-netty-shaded", "io.grpc:grpc-netty-shaded:$grpc")
-    // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf
-    library("grpc-protobuf", "io.grpc:grpc-protobuf:$grpc")
-    // https://mvnrepository.com/artifact/io.grpc/grpc-stub
-    library("grpc-stub", "io.grpc:grpc-stub:$grpc")
-    // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
-    library("protoc-gen-grpc", "io.grpc:protoc-gen-grpc-java:$grpc")
-    library("apache-tomcat-annotations-api", "org.apache.tomcat:annotations-api:$apacheTomcat")
-
     bundle(
       "grpc-protobuf", listOf(
         "grpc-netty-shaded",
@@ -160,11 +178,18 @@ catalog {
         "apache-tomcat-annotations-api"
       )
     )
+
+    // Versions
+    version("grpc", grpc)
+    version("protoc", protoc)
   }
 }
 
-group = "software.sava"
-version = project.findProperty("version") as String
+// All libraries defined in the BOM scope (api) are also included in the catalog
+configurations.versionCatalog { extendsFrom(configurations.api.get()) }
+// The catalog is added as additional variant to the 'javaPlatform' component that is published
+val javaPlatform = components["javaPlatform"] as AdhocComponentWithVariants
+javaPlatform.addVariantsFromConfiguration(configurations.versionCatalogElements.get()) { }
 
 val gprUser =
   providers.gradleProperty("gpr.user.write").orElse(providers.environmentVariable("GITHUB_ACTOR")).orElse("")
@@ -173,7 +198,7 @@ val gprToken =
 
 publishing {
   publications.register<MavenPublication>("maven") {
-    from(components["versionCatalog"])
+    from(javaPlatform)
   }
   repositories {
     maven {
