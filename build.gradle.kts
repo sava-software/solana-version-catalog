@@ -22,6 +22,7 @@ val googleProtobufPlugin = "0.9.5"
 
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+// https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
 val junit = "5.13.1"
 
 // Compile & Implementation
@@ -41,7 +42,7 @@ val sava = "1.19.0"
 val savaWeb2 = "1.12.0"
 val savaPrograms = "1.20.0"
 val savaSrcGen = "1.10.0"
-val savaAnchorPrograms = "1.17.7"
+val savaAnchorPrograms = "1.17.8"
 
 val glamIxProxy = "0.3.2"
 
@@ -67,6 +68,7 @@ dependencies.constraints {
 
   api("org.junit.jupiter:junit-jupiter:$junit")
   api("org.junit.jupiter:junit-jupiter-api:$junit")
+  api("org.junit.jupiter:junit-jupiter-params:${junit}")
 
   // Compile & Implementation
 
@@ -127,8 +129,8 @@ dependencies.constraints {
 }
 
 catalog {
-  // library entries are derived from the BOM entries. The alias corresponds to the 'name' by default.
-  // The cases where the alias should differ, are defined below.
+  // Library entries are derived from the BOM entries. The alias corresponds to the 'name' by default.
+  // The cases where the alias should differ are defined below.
   configureExplicitAlias("apache-tomcat-annotations-api", "org.apache.tomcat", "annotations-api")
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
@@ -187,7 +189,7 @@ catalog {
 
 // All libraries defined in the BOM scope (api) are also included in the catalog
 configurations.versionCatalog { extendsFrom(configurations.api.get()) }
-// The catalog is added as additional variant to the 'javaPlatform' component that is published
+// The catalog is added as an additional variant to the 'javaPlatform' component that is published
 val javaPlatform = components["javaPlatform"] as AdhocComponentWithVariants
 javaPlatform.addVariantsFromConfiguration(configurations.versionCatalogElements.get()) { }
 
