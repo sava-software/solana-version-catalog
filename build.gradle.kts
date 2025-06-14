@@ -30,13 +30,12 @@ val junit = "5.13.1"
 // Deprecated
 // https://github.com/comodal/json-iterator/tags
 val jsonIterator = "2.13.2"
-
 // https://github.com/sava-software/json-iterator
 val savaJsonIterator = "21.0.0"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-val bouncyCastle = "1.80"
+val bouncyCastle = "1.81"
 
 val sava = "1.19.0"
 val savaWeb2 = "1.12.0"
