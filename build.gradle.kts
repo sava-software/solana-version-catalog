@@ -37,7 +37,7 @@ val savaJsonIterator = "21.0.0"
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
 val bouncyCastle = "1.81"
 
-val sava = "1.19.0"
+val sava = "24.19.1"
 val savaWeb2 = "1.12.0"
 val savaPrograms = "1.20.0"
 val savaSrcGen = "1.10.0"
