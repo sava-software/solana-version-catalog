@@ -5,6 +5,7 @@ plugins {
   id("java-platform")
   id("version-catalog")
   id("maven-publish")
+  id("com.gradleup.nmcp")
 }
 
 group = "software.sava"
