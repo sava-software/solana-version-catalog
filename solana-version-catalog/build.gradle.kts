@@ -23,7 +23,7 @@ val googleProtobufPlugin = "0.9.5"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.1"
+val junit = "5.13.2"
 
 // Compile & Implementation
 
@@ -31,7 +31,7 @@ val junit = "5.13.1"
 // https://github.com/comodal/json-iterator/tags
 val jsonIterator = "2.13.2"
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "21.0.0"
+val savaJsonIterator = "21.0.8"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
