@@ -4,8 +4,7 @@
 plugins {
   id("java-platform")
   id("version-catalog")
-  id("maven-publish")
-  id("com.gradleup.nmcp")
+  id("software.sava.build.feature.publish")
 }
 
 group = "software.sava"
@@ -185,32 +184,5 @@ catalog {
     // Versions
     version("grpc", grpc)
     version("protoc", protoc)
-  }
-}
-
-// All libraries defined in the BOM scope (api) are also included in the catalog
-configurations.versionCatalog { extendsFrom(configurations.api.get()) }
-// The catalog is added as an additional variant to the 'javaPlatform' component that is published
-val javaPlatform = components["javaPlatform"] as AdhocComponentWithVariants
-javaPlatform.addVariantsFromConfiguration(configurations.versionCatalogElements.get()) { }
-
-val gprUser =
-  providers.gradleProperty("gpr.user.write").orElse(providers.environmentVariable("GITHUB_ACTOR")).orElse("")
-val gprToken =
-  providers.gradleProperty("gpr.token.write").orElse(providers.environmentVariable("GITHUB_TOKEN")).orElse("")
-
-publishing {
-  publications.register<MavenPublication>("maven") {
-    from(javaPlatform)
-  }
-  repositories {
-    maven {
-      name = "GithubPackages"
-      url = uri("https://maven.pkg.github.com/sava-software/solana-version-catalog")
-      credentials {
-        username = gprUser.get()
-        password = gprToken.get()
-      }
-    }
   }
 }
