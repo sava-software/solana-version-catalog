@@ -50,7 +50,7 @@ val glamIxProxy = "0.3.2"
 val jetty = "12.0.22"
 // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.67.0"
-val savaRavina = "0.23.2"
+val savaRavina = "0.23.3"
 
 // Deprecated
 val savaKms = "0.3.1"
