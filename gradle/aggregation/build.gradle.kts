@@ -8,5 +8,5 @@ dependencies {
 
 tasks.register("publishToGitHubPackages") {
   group = "publishing"
-  dependsOn(":solana-version-catalog:publish")
+  dependsOn(":solana-version-catalog:publishMavenJavaPublicationToSavaGithubPackagesRepository")
 }

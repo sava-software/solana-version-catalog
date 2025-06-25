@@ -31,7 +31,7 @@ val junit = "5.13.2"
 // https://github.com/comodal/json-iterator/tags
 val jsonIterator = "2.13.2"
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "21.0.8"
+val savaJsonIterator = "21.0.10"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
