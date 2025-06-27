@@ -44,7 +44,7 @@ val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.1"
 val savaAnchorPrograms = "24.0.1"
 
-val glamIxProxy = "0.3.2"
+val glamIxProxy = "24.0.0"
 
 // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.0.22"
