@@ -4,10 +4,6 @@ Provides
 a [Gradle Version Catalog](https://docs.gradle.org/current/userguide/version_catalogs.html#sec:importing-published-catalog)
 and [Platform (BOM)](https://docs.gradle.org/current/userguide/platforms.html) for using Sava libraries.
 
-```shell
-./gradlew generateCatalogAsToml
-```
-
 ### Gradle Configuration
 
 #### settings.gradle.kts
