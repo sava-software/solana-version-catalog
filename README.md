@@ -1,42 +1,52 @@
-# Sava Version Catalog
+# Sava Version Catalog [![Publish Release](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish.yml/badge.svg)](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish.yml)
 
-Provides a set of library versions that work together in the same build.
-
-## Usage
-
-This covers how to add the version catalog to your build. For information on how to reference the dependencies, see the
-official [Gradle version catalog docs](https://docs.gradle.org/current/userguide/version_catalogs.html).
-
-### Local
-
-Generate a `libs.versions.toml` file which will be located in build/version-catalog.
-
-This may be placed in your local Gradle directory.
+Provides
+a [Gradle Version Catalog](https://docs.gradle.org/current/userguide/version_catalogs.html#sec:importing-published-catalog)
+and [Platform (BOM)](https://docs.gradle.org/current/userguide/platforms.html) for using Sava libraries.
 
 ```shell
 ./gradlew generateCatalogAsToml
 ```
 
-### Remote Maven Repository
+### Gradle Configuration
 
-Add to you your `settings.gradle` file and configure the username, password and version.
+#### settings.gradle.kts
 
-```groovy
-dependencyResolutionManagement {
+```kotlin
+pluginManagement {
   repositories {
+    gradlePluginPortal()
     maven {
-      name = "GithubPackages"
-      url = "https://maven.pkg.github.com/sava-software/solana-version-catalog"
-      credentials {
-        username = GITHUB_ACTOR
-        password = GITHUB_TOKEN
-      }
+      name = "savaGithubPackages"
+      url = uri("https://maven.pkg.github.com/sava-software/sava-build")
+      credentials(PasswordCredentials::class)
     }
   }
-  versionCatalogs {
-    libs {
-      from("software.sava:solana-version-catalog:<VERSION>")
-    }
+}
+```
+
+#### gradle.properties
+
+[Generate a classic token](https://github.com/settings/tokens) with the `read:packages` scope needed to access
+dependencies hosted on GitHub Package Repository.
+
+Add the following properties to `$HOME/.gradle/gradle.properties`.
+
+```properties
+savaGithubPackagesUsername=GITHUB_USERNAME
+savaGithubPackagesPassword=GITHUB_TOKEN
+```
+
+### build.gradle.kts
+
+```kotlin
+plugins {
+  id("org.gradlex.jvm-dependency-conflict-resolution")
+}
+
+jvmDependencyConflicts {
+  consistentResolution {
+    platform("software.sava:solana-version-catalog:${solanaBOMVersion}")
   }
 }
 ```
