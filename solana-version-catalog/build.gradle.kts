@@ -60,8 +60,6 @@ val grpc = "1.73.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 val protoc = "4.31.1"
-// https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
-val apacheTomcat = "6.0.53"
 
 dependencies.constraints {
   // Tests
@@ -125,13 +123,13 @@ dependencies.constraints {
   api("io.grpc:grpc-stub:$grpc")
   // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
   api("io.grpc:protoc-gen-grpc-java:$grpc")
-  api("org.apache.tomcat:annotations-api:$apacheTomcat")
+
+  api("com.google.protobuf:protobuf-java:$protoc")
 }
 
 catalog {
   // Library entries are derived from the BOM entries. The alias corresponds to the 'name' by default.
   // The cases where the alias should differ are defined below.
-  configureExplicitAlias("apache-tomcat-annotations-api", "org.apache.tomcat", "annotations-api")
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
@@ -176,8 +174,8 @@ catalog {
         "grpc-netty-shaded",
         "grpc-protobuf",
         "grpc-stub",
-        "protoc-gen-grpc",
-        "apache-tomcat-annotations-api"
+        "protobuf-java",
+        "protoc-gen-grpc"
       )
     )
 
