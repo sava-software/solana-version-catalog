@@ -31,7 +31,7 @@ val junit = "5.13.2"
 // https://github.com/comodal/json-iterator/tags
 val jsonIterator = "2.13.2"
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "21.0.10"
+val savaJsonIterator = "21.0.11"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -59,7 +59,7 @@ val savaKms = "0.3.1"
 val grpc = "1.73.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
-val protoc = "3.25.5"
+val protoc = "4.31.1"
 // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
 val apacheTomcat = "6.0.53"
 
