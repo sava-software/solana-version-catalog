@@ -42,7 +42,7 @@ val sava = "24.19.7"
 val savaWeb2 = "24.0.0"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.1"
-val savaAnchorPrograms = "24.0.1"
+val savaAnchorPrograms = "24.0.3"
 
 val glamIxProxy = "24.0.0"
 
@@ -59,7 +59,8 @@ val savaKms = "0.3.1"
 val grpc = "1.73.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
-val protoc = "4.31.1"
+// https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
+val googleProtobuf = "4.31.1"
 
 dependencies.constraints {
   // Tests
@@ -124,7 +125,7 @@ dependencies.constraints {
   // https://mvnrepository.com/artifact/io.grpc/protoc-gen-grpc-java
   api("io.grpc:protoc-gen-grpc-java:$grpc")
 
-  api("com.google.protobuf:protobuf-java:$protoc")
+  api("com.google.protobuf:protobuf-java:$googleProtobuf")
 }
 
 catalog {
@@ -181,6 +182,6 @@ catalog {
 
     // Versions
     version("grpc", grpc)
-    version("protoc", protoc)
+    version("protoc", googleProtobuf)
   }
 }
