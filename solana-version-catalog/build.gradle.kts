@@ -23,13 +23,10 @@ val googleProtobufPlugin = "0.9.5"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.2"
+val junit = "5.13.3"
 
 // Compile & Implementation
 
-// Deprecated
-// https://github.com/comodal/json-iterator/tags
-val jsonIterator = "2.13.2"
 // https://github.com/sava-software/json-iterator
 val savaJsonIterator = "21.0.11"
 
@@ -50,10 +47,7 @@ val glamIxProxy = "24.0.0"
 val jetty = "12.0.23"
 // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.69.0"
-val savaRavina = "24.0.0"
-
-// Deprecated
-val savaKms = "0.3.1"
+val savaRavina = "24.0.1"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.73.0"
@@ -71,9 +65,6 @@ dependencies.constraints {
 
   // Compile & Implementation
 
-  // Deprecated
-  api("systems.comodal:json-iterator:$jsonIterator")
-  // Replaces above.
   api("software.sava:json-iterator:$savaJsonIterator")
 
   api("org.bouncycastle:bcprov-jdk18on:$bouncyCastle")
@@ -96,11 +87,6 @@ dependencies.constraints {
 
   api("com.google.cloud:google-cloud-kms:$googleCloudKms")
   api("software.sava:ravina-kms-google:$savaRavina")
-
-  // Deprecated
-  api("software.sava:kms_core:$savaKms")
-  api("software.sava:http_kms:$savaKms")
-  api("software.sava:google_kms:$savaKms")
 
   api("systems.glam:ix-proxy:$glamIxProxy")
 
