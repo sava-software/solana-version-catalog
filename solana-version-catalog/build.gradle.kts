@@ -38,8 +38,8 @@ val bouncyCastle = "1.81"
 val sava = "24.19.9"
 val savaWeb2 = "24.0.0"
 val savaPrograms = "24.20.3"
-val savaSrcGen = "24.0.2"
-val savaAnchorPrograms = "24.0.13"
+val savaSrcGen = "24.0.4"
+val savaAnchorPrograms = "24.0.14"
 
 val glamIxProxy = "24.0.0"
 
