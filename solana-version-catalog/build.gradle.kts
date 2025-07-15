@@ -39,7 +39,7 @@ val sava = "24.19.9"
 val savaWeb2 = "24.0.1"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.4"
-val savaAnchorPrograms = "24.0.14"
+val savaAnchorPrograms = "24.0.15"
 
 val glamIxProxy = "24.0.0"
 
