@@ -36,7 +36,7 @@ val bouncyCastle = "1.81"
 
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "24.19.9"
-val savaWeb2 = "24.0.0"
+val savaWeb2 = "24.0.1"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.4"
 val savaAnchorPrograms = "24.0.14"
@@ -46,7 +46,7 @@ val glamIxProxy = "24.0.0"
 // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.0.23"
 // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.69.0"
+val googleCloudKms = "2.70.0"
 val savaRavina = "24.0.1"
 
 // https://mvnrepository.com/artifact/io.grpc
