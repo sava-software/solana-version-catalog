@@ -36,7 +36,7 @@ val bouncyCastle = "1.81"
 
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "24.19.9"
-val savaWeb2 = "24.0.1"
+val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.6"
 val savaAnchorPrograms = "24.0.19"
