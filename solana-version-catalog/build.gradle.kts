@@ -23,7 +23,7 @@ val googleProtobufPlugin = "0.9.5"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.3"
+val junit = "5.13.4"
 
 // Compile & Implementation
 
@@ -39,7 +39,7 @@ val sava = "24.19.10"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.6"
-val savaAnchorPrograms = "24.0.20"
+val savaAnchorPrograms = "24.0.21"
 
 val glamIxProxy = "24.0.0"
 
