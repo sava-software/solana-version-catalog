@@ -54,10 +54,10 @@ catalog {
     bundle(
       "sava-solana-programs", listOf(
         "bouncycastle",
-        "sava-json-iterator",
-        "sava-core",
-        "sava-rpc",
-        "sava-solana-programs"
+        "sava-json-iterator"
+//        "sava-core",
+//        "sava-rpc",
+//        "sava-solana-programs"
       )
     )
   }
