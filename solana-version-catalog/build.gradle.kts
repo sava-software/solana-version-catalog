@@ -28,12 +28,12 @@ val savaJsonIterator = "21.0.11"
 
 dependencies.constraints {
   // Tests
-
   api("org.junit.jupiter:junit-jupiter:$junit")
   api("org.junit.jupiter:junit-jupiter-api:$junit")
   api("org.junit.jupiter:junit-jupiter-params:${junit}")
 
   // Compile & Implementation
+
   api("org.bouncycastle:bcprov-jdk18on:${bouncyCastle}")
 
   api("software.sava:json-iterator:$savaJsonIterator")
