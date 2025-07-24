@@ -1,0 +1,27 @@
+name: Gradle Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request_target:
+    types: [ opened, synchronize ]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gradle/actions/setup-gradle@v4
+
+      - uses: oracle-actions/setup-java@v1
+        with:
+          website: ${{ vars.JDK_SRC }}
+          release: ${{ vars.GRADLE_JAVA_VERSION }}
+
+      - name: Gradle Check
+        run: ./gradlew --stacktrace -PjavaVersion=${{ steps.setup.outputs.java-version }} check generateCatalogAsToml
+        env:
+          ORG_GRADLE_PROJECT_savaGithubPackagesUsername: ${{ env.GITHUB_ACTOR }}
+          ORG_GRADLE_PROJECT_savaGithubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
