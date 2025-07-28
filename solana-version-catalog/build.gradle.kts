@@ -25,6 +25,7 @@ val bouncyCastle = "1.81"
 
 // https://github.com/sava-software/json-iterator
 val savaJsonIterator = "21.0.11"
+val sava = "21.0.1"
 
 dependencies.constraints {
   // Tests
@@ -37,6 +38,9 @@ dependencies.constraints {
   api("org.bouncycastle:bcprov-jdk18on:${bouncyCastle}")
 
   api("software.sava:json-iterator:$savaJsonIterator")
+
+  api("software.sava:sava-core:${sava}")
+  api("software.sava:sava-rpc:${sava}")
 }
 
 catalog {
@@ -54,9 +58,9 @@ catalog {
     bundle(
       "sava-solana-programs", listOf(
         "bouncycastle",
-        "sava-json-iterator"
-//        "sava-core",
-//        "sava-rpc",
+        "sava-json-iterator",
+        "sava-core",
+        "sava-rpc",
 //        "sava-solana-programs"
       )
     )
