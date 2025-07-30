@@ -39,14 +39,14 @@ val sava = "24.21.1"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.8"
-val savaAnchorPrograms = "24.1.0"
+val savaAnchorPrograms = "24.1.1"
 
 val glamIxProxy = "24.0.0"
 
 // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.0.23"
 // https://mvnrepository.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.70.0"
+val googleCloudKms = "2.71.0"
 val savaRavina = "24.0.2"
 
 // https://mvnrepository.com/artifact/io.grpc
