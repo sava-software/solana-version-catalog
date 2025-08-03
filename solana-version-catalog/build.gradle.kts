@@ -13,7 +13,7 @@ version = providers.gradleProperty("version").getOrElse("")
 // Plugins
 
 // https://github.com/beryx/badass-jlink-plugin
-val jlink = "3.1.1"
+val jlink = "3.1.2"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
 val googleProtobufPlugin = "0.9.5"
@@ -39,7 +39,7 @@ val sava = "24.21.1"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.8"
-val savaAnchorPrograms = "24.1.3"
+val savaAnchorPrograms = "24.1.4"
 
 val glamIxProxy = "24.0.0"
 
