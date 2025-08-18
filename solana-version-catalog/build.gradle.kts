@@ -38,13 +38,13 @@ val bouncyCastle = "1.81"
 val sava = "24.21.1"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
-val savaSrcGen = "24.0.8"
+val savaSrcGen = "24.0.9"
 val savaAnchorPrograms = "24.1.7"
 
 val glamIxProxy = "24.0.0"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.0.25"
+val jetty = "12.1.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.75.0"
 val savaRavina = "24.0.2"
