@@ -25,7 +25,7 @@ val bouncyCastle = "1.81"
 
 // https://github.com/sava-software/json-iterator
 val savaJsonIterator = "21.0.11"
-val sava = "21.0.1"
+val sava = "21.0.7"
 val savaPrograms = "21.0.1"
 
 dependencies.constraints {
