@@ -39,7 +39,7 @@ val sava = "24.21.3"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.9"
-val savaAnchorPrograms = "24.1.8"
+val savaAnchorPrograms = "24.1.9"
 
 val glamIxProxy = "24.0.0"
 
@@ -50,7 +50,7 @@ val googleCloudKms = "2.75.0"
 val savaRavina = "24.0.2"
 
 // https://mvnrepository.com/artifact/io.grpc
-val grpc = "1.73.0"
+val grpc = "1.75.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
@@ -61,7 +61,7 @@ dependencies.constraints {
 
   api("org.junit.jupiter:junit-jupiter:$junit")
   api("org.junit.jupiter:junit-jupiter-api:$junit")
-  api("org.junit.jupiter:junit-jupiter-params:${junit}")
+  api("org.junit.jupiter:junit-jupiter-params:$junit")
 
   // Compile & Implementation
 
