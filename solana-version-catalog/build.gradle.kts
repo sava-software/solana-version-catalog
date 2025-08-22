@@ -35,7 +35,7 @@ val savaJsonIterator = "21.0.11"
 val bouncyCastle = "1.81"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "24.21.3"
+val sava = "24.21.4"
 val savaWeb2 = "24.0.3"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.0.9"
@@ -54,7 +54,7 @@ val grpc = "1.75.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-val googleProtobuf = "4.31.1"
+val googleProtobuf = "4.32.0"
 
 dependencies.constraints {
   // Tests
