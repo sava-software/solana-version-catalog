@@ -46,7 +46,7 @@ val glamIxProxy = "24.0.0"
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.75.0"
+val googleCloudKms = "2.76.0"
 val savaRavina = "24.0.2"
 
 // https://mvnrepository.com/artifact/io.grpc
