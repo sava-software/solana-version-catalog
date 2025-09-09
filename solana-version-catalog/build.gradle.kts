@@ -7,6 +7,10 @@ plugins {
   id("software.sava.build.feature.publish")
 }
 
+javaPlatform {
+  allowDependencies()
+}
+
 group = "software.sava"
 version = providers.gradleProperty("version").getOrElse("")
 
@@ -39,7 +43,7 @@ val sava = "24.23.3"
 val savaWeb2 = "24.1.0"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.1.0"
-val savaAnchorPrograms = "24.2.4"
+val savaAnchorPrograms = "24.2.5"
 
 val glamIxProxy = "24.0.0"
 
@@ -56,12 +60,12 @@ val grpc = "1.75.0"
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 val googleProtobuf = "4.32.0"
 
+dependencies {
+  api(platform("org.junit:junit-bom:$junit"))
+}
+
 dependencies.constraints {
   // Tests
-
-  api("org.junit.jupiter:junit-jupiter:$junit")
-  api("org.junit.jupiter:junit-jupiter-api:$junit")
-  api("org.junit.jupiter:junit-jupiter-params:$junit")
 
   // Compile & Implementation
 
@@ -101,6 +105,11 @@ dependencies.constraints {
   api("org.eclipse.jetty:jetty-alpn-conscrypt-server:$jetty")
   // https://mvnrepository.com/artifact/org.eclipse.jetty.http3/jetty-http3-server
   api("org.eclipse.jetty.http3:jetty-http3-server:$jetty")
+  // https://mvnrepository.com/artifact/org.eclipse.jetty.compression/jetty-compression-server
+  api("org.eclipse.jetty.compression:jetty-compression-server:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-gzip:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-brotli:${jetty}")
+  api("org.eclipse.jetty.compression:jetty-compression-zstandard:${jetty}")
 
   // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
   api("io.grpc:grpc-netty-shaded:$grpc")
