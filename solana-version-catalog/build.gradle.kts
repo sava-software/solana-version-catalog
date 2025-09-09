@@ -61,11 +61,11 @@ val grpc = "1.75.0"
 val googleProtobuf = "4.32.0"
 
 dependencies {
-  api(platform("org.junit:junit-bom:$junit"))
 }
 
 dependencies.constraints {
   // Tests
+  api(enforcedPlatform("org.junit:junit-bom:$junit"))
 
   // Compile & Implementation
 
