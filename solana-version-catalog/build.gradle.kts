@@ -7,10 +7,6 @@ plugins {
   id("software.sava.build.feature.publish")
 }
 
-javaPlatform {
-  allowDependencies()
-}
-
 group = "software.sava"
 version = providers.gradleProperty("version").getOrElse("")
 
@@ -65,7 +61,10 @@ dependencies {
 
 dependencies.constraints {
   // Tests
-  api(enforcedPlatform("org.junit:junit-bom:$junit"))
+
+  api("org.junit.jupiter:junit-jupiter:${junit}")
+  api("org.junit.jupiter:junit-jupiter-api:${junit}")
+  api("org.junit.jupiter:junit-jupiter-params:${junit}")
 
   // Compile & Implementation
 
