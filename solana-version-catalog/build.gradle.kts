@@ -39,7 +39,7 @@ val sava = "24.23.3"
 val savaWeb2 = "24.1.0"
 val savaPrograms = "24.20.3"
 val savaSrcGen = "24.1.0"
-val savaAnchorPrograms = "24.2.7"
+val savaAnchorPrograms = "24.2.8"
 
 val glamIxProxy = "24.0.0"
 
@@ -162,9 +162,7 @@ catalog {
         "jetty-alpn-conscrypt-server",
         "jetty-http3-server",
         "jetty-compression-server",
-        "jetty-compression-gzip",
-        "jetty-compression-brotli",
-        "jetty-compression-zstandard"
+        "jetty-compression-gzip"
       )
     )
 
