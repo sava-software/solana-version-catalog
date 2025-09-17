@@ -38,8 +38,7 @@ val bouncyCastle = "1.81"
 val sava = "24.23.3"
 val savaWeb2 = "24.1.0"
 val savaPrograms = "24.20.3"
-val savaSrcGen = "24.1.0"
-val savaAnchorPrograms = "24.2.11"
+val savaAnchorPrograms = "25.0.0"
 
 val glamIxProxy = "25.0.0"
 
@@ -77,7 +76,6 @@ dependencies.constraints {
 
   api("software.sava:solana-programs:$savaPrograms")
 
-  api("software.sava:anchor-src-gen:$savaSrcGen")
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
   api("software.sava:solana-web2:$savaWeb2")
