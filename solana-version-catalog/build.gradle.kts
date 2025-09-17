@@ -146,7 +146,6 @@ catalog {
         "sava-core",
         "sava-rpc",
         "sava-solana-programs",
-        "sava-anchor-src-gen",
         "sava-anchor-programs"
       )
     )
