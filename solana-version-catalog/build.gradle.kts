@@ -40,7 +40,7 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.0.5"
 
-val glamIxProxy = "25.0.0"
+val glamIxProxy = "25.0.1"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.1"
