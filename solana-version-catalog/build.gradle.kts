@@ -23,7 +23,7 @@ val googleProtobufPlugin = "0.9.5"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.4"
+val junit = "6.0.1"
 
 // Compile & Implementation
 
@@ -43,13 +43,13 @@ val savaAnchorPrograms = "25.1.1"
 val glamIxProxy = "25.0.2"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.1"
+val jetty = "12.1.3"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.78.0"
 val savaRavina = "25.0.0"
 
 // https://mvnrepository.com/artifact/io.grpc
-val grpc = "1.75.0"
+val grpc = "1.76.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
