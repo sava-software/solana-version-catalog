@@ -84,9 +84,9 @@ dependencies.constraints {
 
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:idl-clients:${savaIDLClientsCore}")
-  api("software.sava:idl-clients:${savaIDLClientsDrift}")
-  api("software.sava:idl-clients:${savaIDLClientsKamino}")
+  api("software.sava:idl-clients:$savaIDLClientsCore")
+  api("software.sava:idl-clients:$savaIDLClientsDrift")
+  api("software.sava:idl-clients:$savaIDLClientsKamino")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
