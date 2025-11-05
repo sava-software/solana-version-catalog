@@ -10,7 +10,7 @@ pluginManagement {
 }
 
 plugins {
-  id("software.sava.build") version "0.2.3"
+  id("software.sava.build") version "0.2.4"
 }
 
 rootProject.name = "solana-version-catalog"
