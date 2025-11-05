@@ -154,10 +154,10 @@ catalog {
         "sava-core",
         "sava-rpc",
         "sava-solana-programs",
-        "sava-anchor-programs",
-        "sava-idl-clients-core",
-        "sava-idl-clients-drift",
-        "sava-idl-clients-kamino"
+        "sava-anchor-programs"
+//        "sava-idl-clients-core",
+//        "sava-idl-clients-drift",
+//        "sava-idl-clients-kamino"
       )
     )
 
