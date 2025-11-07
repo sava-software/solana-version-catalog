@@ -40,9 +40,7 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.1"
 
-val savaIDLClientsCore = "25.0.5"
-val savaIDLClientsDrift = "25.0.6"
-val savaIDLClientsKamino = "25.0.5"
+val savaIDLClients = "25.1.2"
 
 val glamIxProxy = "25.0.2"
 
@@ -84,9 +82,13 @@ dependencies.constraints {
 
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:idl-clients-core:$savaIDLClientsCore")
-  api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
-  api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
+  api("software.sava:idl-clients-cctp:${savaIDLClients}")
+  api("software.sava:idl-clients-core:$savaIDLClients")
+  api("software.sava:idl-clients-drift:$savaIDLClients")
+  api("software.sava:idl-clients-jupiter:$savaIDLClients")
+  api("software.sava:idl-clients-kamino:${savaIDLClients}")
+  api("software.sava:idl-clients-oracles:${savaIDLClients}")
+  api("software.sava:idl-clients-spl:${savaIDLClients}")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
@@ -157,7 +159,9 @@ catalog {
         "sava-anchor-programs",
         "sava-idl-clients-core",
         "sava-idl-clients-drift",
-        "sava-idl-clients-kamino"
+        "sava-idl-clients-jupiter",
+        "sava-idl-clients-kamino",
+        "sava-idl-clients-oracles"
       )
     )
 
