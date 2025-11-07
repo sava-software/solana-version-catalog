@@ -41,7 +41,7 @@ val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.1"
 
 val savaIDLClientsCore = "25.0.5"
-val savaIDLClientsDrift = "25.0.5"
+val savaIDLClientsDrift = "25.0.6"
 val savaIDLClientsKamino = "25.0.5"
 
 val glamIxProxy = "25.0.2"
