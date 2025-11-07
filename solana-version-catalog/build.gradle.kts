@@ -40,9 +40,9 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.1"
 
-val savaIDLClientsCore = "25.0.2"
-val savaIDLClientsDrift = "25.0.1"
-val savaIDLClientsKamino = "25.0.1"
+val savaIDLClientsCore = "25.0.5"
+val savaIDLClientsDrift = "25.0.5"
+val savaIDLClientsKamino = "25.0.5"
 
 val glamIxProxy = "25.0.2"
 
@@ -154,10 +154,10 @@ catalog {
         "sava-core",
         "sava-rpc",
         "sava-solana-programs",
-        "sava-anchor-programs"
-//        "sava-idl-clients-core",
-//        "sava-idl-clients-drift",
-//        "sava-idl-clients-kamino"
+        "sava-anchor-programs",
+        "sava-idl-clients-core",
+        "sava-idl-clients-drift",
+        "sava-idl-clients-kamino"
       )
     )
 
