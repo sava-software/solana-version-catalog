@@ -40,7 +40,13 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.3"
 
-val savaIDLClients = "25.1.2"
+val savaIDLClientsCore = "25.1.4"
+val savaIDLClientsCCTP = "25.1.2"
+val savaIDLClientsDrift = "25.1.4"
+val savaIDLClientsJupiter = "25.1.2"
+val savaIDLClientsKamino = "25.1.2"
+val savaIDLClientsOracles = "25.1.2"
+val savaIDLClientsSPL = "25.1.2"
 
 val glamIxProxy = "25.0.2"
 
@@ -62,13 +68,11 @@ dependencies {
 
 dependencies.constraints {
   // Tests
-
   api("org.junit.jupiter:junit-jupiter:${junit}")
   api("org.junit.jupiter:junit-jupiter-api:${junit}")
   api("org.junit.jupiter:junit-jupiter-params:${junit}")
 
   // Compile & Implementation
-
   api("software.sava:json-iterator:$savaJsonIterator")
 
   api("org.bouncycastle:bcprov-jdk18on:$bouncyCastle")
@@ -82,13 +86,13 @@ dependencies.constraints {
 
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:idl-clients-cctp:${savaIDLClients}")
-  api("software.sava:idl-clients-core:$savaIDLClients")
-  api("software.sava:idl-clients-drift:$savaIDLClients")
-  api("software.sava:idl-clients-jupiter:$savaIDLClients")
-  api("software.sava:idl-clients-kamino:${savaIDLClients}")
-  api("software.sava:idl-clients-oracles:${savaIDLClients}")
-  api("software.sava:idl-clients-spl:${savaIDLClients}")
+  api("software.sava:idl-clients-core:${savaIDLClientsCore}")
+  api("software.sava:idl-clients-cctp:$savaIDLClientsCCTP")
+  api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
+  api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
+  api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
+  api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
+  api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
