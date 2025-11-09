@@ -49,6 +49,7 @@ val savaIDLClientsOracles = "25.1.2"
 val savaIDLClientsSPL = "25.1.2"
 
 val glamIxProxy = "25.0.2"
+val glamSDK = "25.0.2"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.3"
@@ -104,6 +105,7 @@ dependencies.constraints {
   api("software.sava:ravina-kms-google:$savaRavina")
 
   api("systems.glam:ix-proxy:$glamIxProxy")
+  api("systems.glam:sdk:${glamSDK}")
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   api("org.eclipse.jetty:jetty-server:$jetty")
@@ -139,6 +141,7 @@ catalog {
   // The cases where the alias should differ are defined below.
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
+  configureExplicitAlias("glam-sdk", "systems.glam", "sdk")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
   configurations.api.get().dependencyConstraints.forEach { constraint ->
     if (constraint.group == "software.sava" && !constraint.name.startsWith("sava")) {
@@ -168,6 +171,8 @@ catalog {
         "sava-idl-clients-oracles"
       )
     )
+
+    bundle("glam", listOf("glam-ix-proxy", "glam-sdk"))
 
     bundle(
       "jetty", listOf(
