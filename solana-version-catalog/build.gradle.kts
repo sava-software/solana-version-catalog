@@ -40,13 +40,14 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.3"
 
-val savaIDLClientsCore = "25.1.6"
-val savaIDLClientsCCTP = "25.1.5"
-val savaIDLClientsDrift = "25.1.6"
-val savaIDLClientsJupiter = "25.1.5"
-val savaIDLClientsKamino = "25.1.5"
-val savaIDLClientsOracles = "25.1.5"
-val savaIDLClientsSPL = "25.1.5"
+val savaIDLClients = "25.1.8"
+val savaIDLClientsCore = savaIDLClients
+val savaIDLClientsCCTP = savaIDLClients
+val savaIDLClientsDrift = savaIDLClients
+val savaIDLClientsJupiter = savaIDLClients
+val savaIDLClientsKamino = savaIDLClients
+val savaIDLClientsOracles = savaIDLClients
+val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
 val glamSDK = "25.0.3"
