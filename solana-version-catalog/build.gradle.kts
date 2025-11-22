@@ -40,7 +40,7 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.3"
 
-val savaIDLClients = "25.3.0"
+val savaIDLClients = "25.3.1"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
