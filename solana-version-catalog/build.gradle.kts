@@ -56,7 +56,7 @@ val glamSDK = "25.2.0"
 val jetty = "12.1.4"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.82.0"
-val savaRavina = "25.0.0"
+val savaRavina = "25.1.0"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.76.0"
