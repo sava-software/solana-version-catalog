@@ -38,7 +38,7 @@ val bouncyCastle = "1.81"
 val sava = "25.0.2"
 val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
-val savaAnchorPrograms = "25.1.3"
+val savaAnchorPrograms = "25.1.4"
 
 val savaIDLClients = "25.5.3"
 val savaIDLClientsCore = savaIDLClients
@@ -50,12 +50,12 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.2.0"
+val glamSDK = "25.2.1"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.4"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.82.0"
+val googleCloudKms = "2.83.0"
 val savaRavina = "25.1.0"
 
 // https://mvnrepository.com/artifact/io.grpc
