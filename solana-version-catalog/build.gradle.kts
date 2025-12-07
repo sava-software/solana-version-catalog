@@ -175,9 +175,9 @@ catalog {
         "sava-idl-clients-drift",
         "sava-idl-clients-jupiter",
         "sava-idl-clients-kamino",
-        "sava-idl-clients-marinade",
-        "sava-idl-clients-metaplex",
-        "sava-idl-clients-meteora",
+//        "sava-idl-clients-marinade",
+//        "sava-idl-clients-metaplex",
+//        "sava-idl-clients-meteora",
         "sava-idl-clients-oracles"
       )
     )
