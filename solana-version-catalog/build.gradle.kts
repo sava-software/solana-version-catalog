@@ -40,12 +40,15 @@ val savaWeb2 = "25.0.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.5.3"
+val savaIDLClients = "25.5.4"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
 val savaIDLClientsJupiter = savaIDLClients
 val savaIDLClientsKamino = savaIDLClients
+val savaIDLClientsMarinade = savaIDLClients
+val savaIDLClientsMetaplex = savaIDLClients
+val savaIDLClientsMeteora = savaIDLClients
 val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
@@ -93,6 +96,9 @@ dependencies.constraints {
   api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
   api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
   api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
+  api("software.sava:idl-clients-kamino:${savaIDLClientsMarinade}")
+  api("software.sava:idl-clients-kamino:${savaIDLClientsMetaplex}")
+  api("software.sava:idl-clients-kamino:${savaIDLClientsMeteora}")
   api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
   api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
@@ -169,6 +175,9 @@ catalog {
         "sava-idl-clients-drift",
         "sava-idl-clients-jupiter",
         "sava-idl-clients-kamino",
+        "sava-idl-clients-marinade",
+        "sava-idl-clients-metaplex",
+        "sava-idl-clients-meteora",
         "sava-idl-clients-oracles"
       )
     )
