@@ -96,9 +96,9 @@ dependencies.constraints {
   api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
   api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
   api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
-  api("software.sava:idl-clients-kamino:${savaIDLClientsMarinade}")
-  api("software.sava:idl-clients-kamino:${savaIDLClientsMetaplex}")
-  api("software.sava:idl-clients-kamino:${savaIDLClientsMeteora}")
+  api("software.sava:idl-clients-marinade:${savaIDLClientsMarinade}")
+  api("software.sava:idl-clients-metaplex:${savaIDLClientsMetaplex}")
+  api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
   api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
   api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
