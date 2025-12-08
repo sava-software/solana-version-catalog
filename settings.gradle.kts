@@ -7,10 +7,11 @@ pluginManagement {
       credentials(PasswordCredentials::class)
     }
   }
+//  includeBuild("../sava-build")
 }
 
 plugins {
-  id("software.sava.build") version "0.2.5"
+  id("software.sava.build") version "0.3.0"
 }
 
 rootProject.name = "solana-version-catalog"
