@@ -57,6 +57,9 @@ val glamSDK = "25.2.3"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.5"
+// https://mvnrepository.com/artifact/io.fusionauth/java-http
+val fusionauthHttp = "1.4.0"
+
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.83.0"
 val savaRavina = "25.1.0"
@@ -130,6 +133,8 @@ dependencies.constraints {
   api("org.eclipse.jetty.compression:jetty-compression-gzip:${jetty}")
   api("org.eclipse.jetty.compression:jetty-compression-brotli:${jetty}")
   api("org.eclipse.jetty.compression:jetty-compression-zstandard:${jetty}")
+
+  api("io.fusionauth:java-http:$fusionauthHttp")
 
   // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
   api("io.grpc:grpc-netty-shaded:$grpc")
