@@ -71,6 +71,9 @@ val grpc = "1.76.0"
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 val googleProtobuf = "4.32.0"
 
+// https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
+val slf4j = "2.0.17"
+
 dependencies {
 }
 
@@ -146,6 +149,8 @@ dependencies.constraints {
   api("io.grpc:protoc-gen-grpc-java:$grpc")
 
   api("com.google.protobuf:protobuf-java:$googleProtobuf")
+
+  api("org.slf4j:slf4j-jdk14:$slf4j")
 }
 
 catalog {
@@ -175,14 +180,13 @@ catalog {
         "sava-core",
         "sava-rpc",
         "sava-solana-programs",
-        "sava-anchor-programs",
         "sava-idl-clients-core",
         "sava-idl-clients-drift",
         "sava-idl-clients-jupiter",
         "sava-idl-clients-kamino",
-//        "sava-idl-clients-marinade",
-//        "sava-idl-clients-metaplex",
-//        "sava-idl-clients-meteora",
+        "sava-idl-clients-marinade",
+        "sava-idl-clients-metaplex",
+        "sava-idl-clients-meteora",
         "sava-idl-clients-oracles"
       )
     )
