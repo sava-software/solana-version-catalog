@@ -53,7 +53,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.3.3"
+val glamSDK = "25.3.4"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.5"
