@@ -13,7 +13,7 @@ version = providers.gradleProperty("version").getOrElse("")
 // Plugins
 
 // https://github.com/beryx/badass-jlink-plugin
-val jlink = "3.2.0"
+val jlink = "3.2.1"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
 val googleProtobufPlugin = "0.9.6"
@@ -32,7 +32,7 @@ val savaJsonIterator = "21.0.11"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-val bouncyCastle = "1.81"
+val bouncyCastle = "1.83"
 
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "25.3.0"
@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.10.2"
+val savaIDLClients = "25.10.3"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -56,12 +56,12 @@ val glamIxProxy = "25.0.2"
 val glamSDK = "25.4.0"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.5"
+val jetty = "12.1.6"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.83.0"
+val googleCloudKms = "2.85.0"
 val savaRavina = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
