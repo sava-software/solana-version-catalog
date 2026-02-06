@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.10.5"
+val savaIDLClients = "25.10.6"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -61,7 +61,7 @@ val jetty = "12.1.6"
 val fusionauthHttp = "1.4.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.85.0"
+val googleCloudKms = "2.86.0"
 val savaRavina = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
