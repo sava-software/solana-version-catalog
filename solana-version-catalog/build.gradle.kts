@@ -167,6 +167,7 @@ catalog {
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
   configureExplicitAlias("glam-sdk", "systems.glam", "sdk")
+  configureExplicitAlias("hikari-cp", "com.zaxxer", "HikariCP")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
   configurations.api.get().dependencyConstraints.forEach { constraint ->
     if (constraint.group == "software.sava" && !constraint.name.startsWith("sava")) {
