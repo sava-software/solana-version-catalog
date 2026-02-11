@@ -55,6 +55,11 @@ val savaIDLClientsSPL = savaIDLClients
 val glamIxProxy = "25.0.2"
 val glamSDK = "25.4.0"
 
+// https://central.sonatype.com/artifact/org.postgresql/postgresql
+val postgresql = "42.7.9"
+// https://central.sonatype.com/artifact/com.zaxxer/HikariCP
+val hikariCP = "7.0.2"
+
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 val jetty = "12.1.6"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
@@ -119,6 +124,9 @@ dependencies.constraints {
 
   api("systems.glam:ix-proxy:$glamIxProxy")
   api("systems.glam:sdk:${glamSDK}")
+
+  api("org.postgresql:postgresql:${postgresql}")
+  api("com.zaxxer:HikariCP:${hikariCP}")
 
   // https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server
   api("org.eclipse.jetty:jetty-server:$jetty")
@@ -187,7 +195,8 @@ catalog {
         "sava-idl-clients-marinade",
         "sava-idl-clients-metaplex",
         "sava-idl-clients-meteora",
-        "sava-idl-clients-oracles"
+        "sava-idl-clients-oracles",
+        "sava-idl-clients-spl"
       )
     )
 
