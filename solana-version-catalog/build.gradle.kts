@@ -124,6 +124,7 @@ dependencies.constraints {
 
   api("systems.glam:ix-proxy:$glamIxProxy")
   api("systems.glam:sdk:${glamSDK}")
+  api("systems.glam:services:${glamSDK}")
 
   api("org.postgresql:postgresql:${postgresql}")
   api("com.zaxxer:HikariCP:${hikariCP}")
@@ -167,6 +168,7 @@ catalog {
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
   configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
   configureExplicitAlias("glam-sdk", "systems.glam", "sdk")
+  configureExplicitAlias("glam-services", "systems.glam", "services")
   configureExplicitAlias("hikari-cp", "com.zaxxer", "HikariCP")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
   configurations.api.get().dependencyConstraints.forEach { constraint ->
@@ -201,7 +203,13 @@ catalog {
       )
     )
 
-    bundle("glam", listOf("glam-ix-proxy", "glam-sdk"))
+    bundle(
+      "glam", listOf(
+        "glam-ix-proxy",
+        "glam-sdk",
+        "glam-services"
+      )
+    )
 
     bundle(
       "jetty", listOf(
