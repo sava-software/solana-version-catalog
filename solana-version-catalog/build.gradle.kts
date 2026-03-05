@@ -53,7 +53,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.4.1"
+val glamSDK = "25.4.2"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10"
@@ -61,12 +61,12 @@ val postgresql = "42.7.10"
 val hikariCP = "7.0.2"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.6"
+val jetty = "12.1.7"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.86.0"
+val googleCloudKms = "2.89.0"
 val savaRavina = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
