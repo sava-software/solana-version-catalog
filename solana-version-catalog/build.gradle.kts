@@ -15,16 +15,16 @@ version = providers.gradleProperty("version").getOrElse("")
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "5.13.4"
+val junit = "6.0.3"
 
 // Compile & Implementation
 
-// https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
-// https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-val bouncyCastle = "1.81"
-
 // https://github.com/sava-software/json-iterator
 val savaJsonIterator = "21.0.11"
+
+// https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
+// https://www.bouncycastle.org/download/bouncy-castle-java/#latest
+val bouncyCastle = "1.83"
 val sava = "21.1.0"
 val savaPrograms = "21.0.1"
 

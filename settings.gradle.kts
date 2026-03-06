@@ -1,3 +1,5 @@
+rootProject.name = "solana-version-catalog"
+
 pluginManagement {
   repositories {
     gradlePluginPortal()
@@ -10,9 +12,7 @@ pluginManagement {
 }
 
 plugins {
-  id("software.sava.build") version "0.1.36"
+  id("software.sava.build") version "21.3.5"
 }
-
-rootProject.name = "solana-version-catalog"
 
 include("solana-version-catalog")
