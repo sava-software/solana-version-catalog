@@ -25,7 +25,7 @@ val savaJsonIterator = "21.0.11"
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
 val bouncyCastle = "1.83"
-val sava = "21.1.0"
+val sava = "21.2.0"
 val savaPrograms = "21.0.1"
 
 dependencies.constraints {
