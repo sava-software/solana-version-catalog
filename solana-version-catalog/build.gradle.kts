@@ -53,7 +53,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.6.1"
+val glamSDK = "25.6.2"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10"
