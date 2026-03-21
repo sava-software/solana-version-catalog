@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.0"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.10.11"
+val savaIDLClients = "25.10.12"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -53,7 +53,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.6.2"
+val glamSDK = "25.7.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10"
