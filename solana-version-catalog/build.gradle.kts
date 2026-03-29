@@ -13,7 +13,7 @@ version = providers.gradleProperty("version").getOrElse("")
 // Plugins
 
 // https://github.com/beryx/badass-jlink-plugin
-val jlink = "3.2.1"
+val jlink = "4.0.0"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
 val googleProtobufPlugin = "0.9.6"
@@ -66,8 +66,8 @@ val jetty = "12.1.7"
 val fusionauthHttp = "1.4.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.89.0"
-val savaRavina = "25.1.1"
+val googleCloudKms = "2.91.0"
+val savaRavina = "25.2.0"
 val savaIncidentClients = "25.1.1"
 
 // https://mvnrepository.com/artifact/io.grpc
