@@ -68,7 +68,7 @@ val fusionauthHttp = "1.4.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.91.0"
 val savaRavina = "25.2.0"
-val savaIncidentClients = "25.1.1"
+val savaIncidentClients = "25.1.2"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.76.0"
