@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: gradle/actions/setup-gradle@v4
+      - uses: actions/checkout@v6.0.2
+      - uses: gradle/actions/setup-gradle@v6.1.0
 
-      - uses: oracle-actions/setup-java@v1
+      - uses: oracle-actions/setup-java@v1.5.0
         with:
           website: ${{ vars.JDK_SRC }}
           release: ${{ vars.GRADLE_JAVA_VERSION }}
