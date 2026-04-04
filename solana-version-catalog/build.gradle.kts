@@ -35,7 +35,7 @@ val savaJsonIterator = "21.0.12"
 val bouncyCastle = "1.83"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "25.3.1"
+val sava = "25.3.2"
 val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
@@ -61,7 +61,7 @@ val postgresql = "42.7.10"
 val hikariCP = "7.0.2"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.7"
+val jetty = "12.1.8"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
@@ -71,11 +71,11 @@ val savaRavina = "25.2.1"
 val savaIncidentClients = "25.1.2"
 
 // https://mvnrepository.com/artifact/io.grpc
-val grpc = "1.76.0"
+val grpc = "1.80.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-val googleProtobuf = "4.32.0"
+val googleProtobuf = "4.34.1"
 
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
 val slf4j = "2.0.17"
