@@ -21,7 +21,7 @@ jobs:
           release: ${{ vars.GRADLE_JAVA_VERSION }}
 
       - name: Gradle Check
-        run: ./gradlew --stacktrace -PjavaVersion=${{ steps.setup.outputs.java-version }} -PsavaGithubPackagesUsername=${{ env.GITHUB_ACTOR }} -PsavaGithubPackagesPassword=${{ secrets.GITHUB_TOKEN }} check generateCatalogAsToml
+        run: ./gradlew --stacktrace -PjavaVersion=${{ steps.setup.outputs.java-version }} -PsavaGithubPackagesUsername=${{ github.actor }} -PsavaGithubPackagesPassword=${{ secrets.GITHUB_TOKEN }} check generateCatalogAsToml
         env:
-          ORG_GRADLE_PROJECT_savaGithubPackagesUsername: ${{ env.GITHUB_ACTOR }}
+          ORG_GRADLE_PROJECT_savaGithubPackagesUsername: ${{ github.actor }}
           ORG_GRADLE_PROJECT_savaGithubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
