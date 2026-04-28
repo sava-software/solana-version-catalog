@@ -46,6 +46,7 @@ val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
 val savaIDLClientsJupiter = savaIDLClients
 val savaIDLClientsKamino = savaIDLClients
+val savaIDLClientsLoopscale = savaIDLClients
 val savaIDLClientsMarinade = savaIDLClients
 val savaIDLClientsMetaplex = savaIDLClients
 val savaIDLClientsMeteora = savaIDLClients
@@ -108,6 +109,7 @@ dependencies.constraints {
   api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
   api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
   api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
+  api("software.sava:idl-clients-loopscale:${savaIDLClientsLoopscale}")
   api("software.sava:idl-clients-marinade:${savaIDLClientsMarinade}")
   api("software.sava:idl-clients-metaplex:${savaIDLClientsMetaplex}")
   api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
@@ -200,6 +202,7 @@ catalog {
         "sava-idl-clients-drift",
         "sava-idl-clients-jupiter",
         "sava-idl-clients-kamino",
+        "sava-idl-clients-loopscale",
         "sava-idl-clients-marinade",
         "sava-idl-clients-metaplex",
         "sava-idl-clients-meteora",
