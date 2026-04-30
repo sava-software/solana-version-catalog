@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.12.4"
+val savaIDLClients = "25.12.5"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -57,7 +57,7 @@ val glamIxProxy = "25.0.2"
 val glamSDK = "25.10.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
-val postgresql = "42.7.10"
+val postgresql = "42.7.10" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
 // https://central.sonatype.com/artifact/com.zaxxer/HikariCP
 val hikariCP = "7.0.2"
 
