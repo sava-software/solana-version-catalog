@@ -210,9 +210,7 @@ catalog {
         "sava-idl-clients-marinade",
         "sava-idl-clients-metaplex",
         "sava-idl-clients-meteora",
-        "sava-idl-clients-neutral_trade",
         "sava-idl-clients-oracles",
-        "sava-idl-clients-phoenix",
         "sava-idl-clients-spl"
       )
     )
