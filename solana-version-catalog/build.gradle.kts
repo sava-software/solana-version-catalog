@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.12.5"
+val savaIDLClients = "25.12.6"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -54,7 +54,7 @@ val savaIDLClientsOracles = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.10.0"
+val glamSDK = "25.10.1"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
@@ -62,7 +62,7 @@ val postgresql = "42.7.10" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL4
 val hikariCP = "7.0.2"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.8"
+val jetty = "12.1.9"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
