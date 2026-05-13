@@ -50,7 +50,9 @@ val savaIDLClientsLoopscale = savaIDLClients
 val savaIDLClientsMarinade = savaIDLClients
 val savaIDLClientsMetaplex = savaIDLClients
 val savaIDLClientsMeteora = savaIDLClients
+val savaIDLClientsNeutralTrade = savaIDLClients
 val savaIDLClientsOracles = savaIDLClients
+val savaIDLClientsPhoenix = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
@@ -113,7 +115,9 @@ dependencies.constraints {
   api("software.sava:idl-clients-marinade:${savaIDLClientsMarinade}")
   api("software.sava:idl-clients-metaplex:${savaIDLClientsMetaplex}")
   api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
+  api("software.sava:idl-clients-meteora:${savaIDLClientsNeutralTrade}")
   api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
+  api("software.sava:idl-clients-meteora:${savaIDLClientsPhoenix}")
   api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
   api("software.sava:ravina-jetty:$savaRavina")
@@ -206,7 +210,9 @@ catalog {
         "sava-idl-clients-marinade",
         "sava-idl-clients-metaplex",
         "sava-idl-clients-meteora",
+        "sava-idl-clients-neutral_trade",
         "sava-idl-clients-oracles",
+        "sava-idl-clients-phoenix",
         "sava-idl-clients-spl"
       )
     )
