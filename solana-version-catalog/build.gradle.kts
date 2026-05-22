@@ -23,7 +23,7 @@ val googleProtobufPlugin = "0.9.6"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "6.0.3"
+val junit = "6.1.0"
 
 // Compile & Implementation
 
@@ -40,7 +40,7 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.12.7"
+val savaIDLClients = "25.12.8"
 val savaIDLClientsCore = savaIDLClients
 val savaIDLClientsCCTP = savaIDLClients
 val savaIDLClientsDrift = savaIDLClients
@@ -52,11 +52,12 @@ val savaIDLClientsMetaplex = savaIDLClients
 val savaIDLClientsMeteora = savaIDLClients
 val savaIDLClientsNeutralTrade = savaIDLClients
 val savaIDLClientsOracles = savaIDLClients
+val savaIDLClientsOrca = savaIDLClients
 val savaIDLClientsPhoenix = savaIDLClients
 val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
-val glamSDK = "25.10.1"
+val glamSDK = "25.11.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.10" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
@@ -117,6 +118,7 @@ dependencies.constraints {
   api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
   api("software.sava:idl-clients-neutral_trade:${savaIDLClientsNeutralTrade}")
   api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
+  api("software.sava:idl-clients-orca:${savaIDLClientsOrca}")
   api("software.sava:idl-clients-phoenix:${savaIDLClientsPhoenix}")
   api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
 
@@ -212,6 +214,7 @@ catalog {
         "sava-idl-clients-meteora",
         "sava-idl-clients-neutral_trade",
         "sava-idl-clients-oracles",
+//        "sava-idl-clients-orca",
         "sava-idl-clients-phoenix",
         "sava-idl-clients-spl"
       )
