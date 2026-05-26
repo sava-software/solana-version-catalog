@@ -13,7 +13,6 @@ updates:
   - package-ecosystem: "gradle"
     directories:
       - "/"
-      - "/solana-version-catalog"
     schedule:
       interval: "weekly"
     commit-message:
