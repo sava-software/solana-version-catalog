@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://json.schemastore.org/dependabot-2.0.json
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels: [ "dependencies", "ci" ]
+
+  - package-ecosystem: "gradle"
+    directories:
+      - "/"
+      - "/solana-version-catalog"
+    schedule:
+      interval: "weekly"
+    labels: [ "dependencies", "gradle" ]
