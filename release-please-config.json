@@ -6,7 +6,13 @@
   "versioning": "always-bump-patch",
   "packages": {
     ".": {
-      "package-name": "sava-version-catalog"
+      "package-name": "sava-version-catalog",
+      "changelog-sections": [
+        { "type": "feat",  "section": "Features" },
+        { "type": "fix",   "section": "Bug Fixes" },
+        { "type": "deps",  "section": "Dependencies" },
+        { "type": "chore", "section": "Miscellaneous", "hidden": false }
+      ]
     }
   }
 }
