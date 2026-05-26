@@ -82,7 +82,7 @@ val grpc = "1.81.0"
 val googleProtobuf = "4.35.0"
 
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
-val slf4j = "2.0.17"
+val slf4j = "2.0.18"
 
 dependencies {
 }
