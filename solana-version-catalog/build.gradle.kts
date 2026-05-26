@@ -60,7 +60,7 @@ val glamIxProxy = "25.0.2"
 val glamSDK = "25.11.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
-val postgresql = "42.7.10" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
+val postgresql = "42.7.11" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
 // https://central.sonatype.com/artifact/com.zaxxer/HikariCP
 val hikariCP = "7.0.2"
 
