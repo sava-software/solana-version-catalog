@@ -70,7 +70,7 @@ val jetty = "12.1.9"
 val fusionauthHttp = "1.4.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.91.0"
+val googleCloudKms = "2.95.0"
 val savaRavina = "25.2.1"
 val savaIncidentClients = "25.1.2"
 
