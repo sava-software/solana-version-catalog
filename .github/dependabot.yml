@@ -5,6 +5,9 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
     labels: [ "dependencies", "ci" ]
 
   - package-ecosystem: "gradle"
@@ -13,4 +16,7 @@ updates:
       - "/solana-version-catalog"
     schedule:
       interval: "weekly"
+    commit-message:
+      prefix: "chore(deps)"
+      include: "scope"
     labels: [ "dependencies", "gradle" ]
