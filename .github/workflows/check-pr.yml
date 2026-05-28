@@ -1,9 +1,8 @@
 name: Gradle Check
 
 on:
-  push:
-    branches:
-      - main
+  pull_request_target:
+    types: [ opened, synchronize ]
 
 jobs:
   check:
