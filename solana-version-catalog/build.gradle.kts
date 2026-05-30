@@ -124,11 +124,11 @@ dependencies.constraints {
   api("software.sava:idl-clients-phoenix:${savaIDLClients}")
   api("software.sava:idl-clients-spl:$savaIDLClients")
 
-  api("software.sava.http-servers-core:${httpClients}")
-  api("software.sava.http-servers-fusionauth:$httpClients")
-  api("software.sava.http-servers-jdk:$httpClients")
-  api("software.sava.http-servers-jetty:$httpClients")
-  api("software.sava.http-servers-sava:$httpClients")
+  api("software.sava:http-servers-core:${httpClients}")
+  api("software.sava:http-servers-fusionauth:$httpClients")
+  api("software.sava:http-servers-jdk:$httpClients")
+  api("software.sava:http-servers-jetty:$httpClients")
+  api("software.sava:http-servers-sava:$httpClients")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
