@@ -13,10 +13,10 @@ version = providers.gradleProperty("version").getOrElse("")
 // Plugins
 
 // https://github.com/beryx/badass-jlink-plugin
-val jlink = "4.0.0"
+val jlink = "4.0.2"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
-val googleProtobufPlugin = "0.9.6"
+val googleProtobufPlugin = "0.10.0"
 
 // Tests
 
@@ -41,20 +41,20 @@ val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
 val savaIDLClients = "25.12.11"
-val savaIDLClientsCore = savaIDLClients
-val savaIDLClientsCCTP = savaIDLClients
-val savaIDLClientsDrift = savaIDLClients
-val savaIDLClientsJupiter = savaIDLClients
-val savaIDLClientsKamino = savaIDLClients
-val savaIDLClientsLoopscale = savaIDLClients
-val savaIDLClientsMarinade = savaIDLClients
-val savaIDLClientsMetaplex = savaIDLClients
-val savaIDLClientsMeteora = savaIDLClients
-val savaIDLClientsNeutralTrade = savaIDLClients
-val savaIDLClientsOracles = savaIDLClients
-val savaIDLClientsOrca = savaIDLClients
-val savaIDLClientsPhoenix = savaIDLClients
-val savaIDLClientsSPL = savaIDLClients
+//val savaIDLClientsCore = savaIDLClients
+//val savaIDLClientsCCTP = savaIDLClients
+//val savaIDLClientsDrift = savaIDLClients
+//val savaIDLClientsJupiter = savaIDLClients
+//val savaIDLClientsKamino = savaIDLClients
+//val savaIDLClientsLoopscale = savaIDLClients
+//val savaIDLClientsMarinade = savaIDLClients
+//val savaIDLClientsMetaplex = savaIDLClients
+//val savaIDLClientsMeteora = savaIDLClients
+//val savaIDLClientsNeutralTrade = savaIDLClients
+//val savaIDLClientsOracles = savaIDLClients
+//val savaIDLClientsOrca = savaIDLClients
+//val savaIDLClientsPhoenix = savaIDLClients
+//val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.2"
 val glamSDK = "25.11.0"
@@ -68,6 +68,8 @@ val hikariCP = "7.0.2"
 val jetty = "12.1.9"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
+
+val httpClients = "25.0.1"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.95.0"
@@ -107,20 +109,26 @@ dependencies.constraints {
 
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:idl-clients-core:${savaIDLClientsCore}")
-  api("software.sava:idl-clients-cctp:$savaIDLClientsCCTP")
-  api("software.sava:idl-clients-drift:$savaIDLClientsDrift")
-  api("software.sava:idl-clients-jupiter:$savaIDLClientsJupiter")
-  api("software.sava:idl-clients-kamino:$savaIDLClientsKamino")
-  api("software.sava:idl-clients-loopscale:${savaIDLClientsLoopscale}")
-  api("software.sava:idl-clients-marinade:${savaIDLClientsMarinade}")
-  api("software.sava:idl-clients-metaplex:${savaIDLClientsMetaplex}")
-  api("software.sava:idl-clients-meteora:${savaIDLClientsMeteora}")
-  api("software.sava:idl-clients-neutral_trade:${savaIDLClientsNeutralTrade}")
-  api("software.sava:idl-clients-oracles:$savaIDLClientsOracles")
-  api("software.sava:idl-clients-orca:${savaIDLClientsOrca}")
-  api("software.sava:idl-clients-phoenix:${savaIDLClientsPhoenix}")
-  api("software.sava:idl-clients-spl:$savaIDLClientsSPL")
+  api("software.sava:idl-clients-core:${savaIDLClients}")
+  api("software.sava:idl-clients-cctp:$savaIDLClients")
+  api("software.sava:idl-clients-drift:$savaIDLClients")
+  api("software.sava:idl-clients-jupiter:$savaIDLClients")
+  api("software.sava:idl-clients-kamino:$savaIDLClients")
+  api("software.sava:idl-clients-loopscale:${savaIDLClients}")
+  api("software.sava:idl-clients-marinade:${savaIDLClients}")
+  api("software.sava:idl-clients-metaplex:${savaIDLClients}")
+  api("software.sava:idl-clients-meteora:${savaIDLClients}")
+  api("software.sava:idl-clients-neutral_trade:${savaIDLClients}")
+  api("software.sava:idl-clients-oracles:$savaIDLClients")
+  api("software.sava:idl-clients-orca:${savaIDLClients}")
+  api("software.sava:idl-clients-phoenix:${savaIDLClients}")
+  api("software.sava:idl-clients-spl:$savaIDLClients")
+
+  api("software.sava.http-servers-core:${httpClients}")
+  api("software.sava.http-servers-fusionauth:$httpClients")
+  api("software.sava.http-servers-jdk:$httpClients")
+  api("software.sava.http-servers-jetty:$httpClients")
+  api("software.sava.http-servers-sava:$httpClients")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
@@ -214,7 +222,7 @@ catalog {
         "sava-idl-clients-meteora",
         "sava-idl-clients-neutral_trade",
         "sava-idl-clients-oracles",
-//        "sava-idl-clients-orca",
+        "sava-idl-clients-orca",
         "sava-idl-clients-phoenix",
         "sava-idl-clients-spl"
       )
