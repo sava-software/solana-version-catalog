@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.21.5](https://github.com/sava-software/solana-version-catalog/compare/25.21.4...25.21.5) (2026-05-30)
+
+
+### Features
+
+* **deps:** bump jlink to 4.0.2 and googleProtobufPlugin to 0.10.0 ([e95e88f](https://github.com/sava-software/solana-version-catalog/commit/e95e88fe021a786c6e03d081a4c98157e2777d0a))
+
 ## [25.21.4](https://github.com/sava-software/solana-version-catalog/compare/25.21.3...25.21.4) (2026-05-30)
 
 
