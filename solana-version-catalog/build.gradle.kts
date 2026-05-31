@@ -69,7 +69,7 @@ val jetty = "12.1.9"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
-val httpClients = "25.0.1"
+val httpClients = "25.0.2"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.95.0"
