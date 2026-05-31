@@ -56,7 +56,7 @@ val savaIDLClients = "25.12.11"
 //val savaIDLClientsPhoenix = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
-val glamIxProxy = "25.0.2"
+val glamIxProxy = "25.0.4"
 val glamSDK = "25.11.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
