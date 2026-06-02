@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.22.2](https://github.com/sava-software/solana-version-catalog/compare/25.22.1...25.22.2) (2026-06-02)
+
+
+### Features
+
+* **dependabot:** adjust schedule to daily and update commit prefix to fix ([3c93618](https://github.com/sava-software/solana-version-catalog/commit/3c93618f17ea06e61246daeeb43bf48f4dd444a5))
+* **deps:** bump software.sava.build to 21.3.15 ([d93ad86](https://github.com/sava-software/solana-version-catalog/commit/d93ad869140915637273388e42f9be15809c3a0d))
+
 ## [25.22.1](https://github.com/sava-software/solana-version-catalog/compare/25.22.0...25.22.1) (2026-06-01)
 
 
