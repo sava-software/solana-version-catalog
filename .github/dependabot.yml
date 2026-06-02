@@ -4,9 +4,9 @@ updates:
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     commit-message:
-      prefix: "chore"
+      prefix: "fix"
       include: "scope"
     labels: [ "dependencies", "ci" ]
 
@@ -14,8 +14,8 @@ updates:
     directories:
       - "/"
     schedule:
-      interval: "weekly"
+      interval: "daily"
     commit-message:
-      prefix: "chore"
+      prefix: "fix"
       include: "scope"
     labels: [ "dependencies", "gradle" ]
