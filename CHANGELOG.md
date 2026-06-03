@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.22.3](https://github.com/sava-software/solana-version-catalog/compare/25.22.2...25.22.3) (2026-06-03)
+
+
+### Bug Fixes
+
+* **deps:** bump httpClients to 25.0.5 ([5202eb8](https://github.com/sava-software/solana-version-catalog/commit/5202eb8315885320095f35502143a4834b336040))
+
 ## [25.22.2](https://github.com/sava-software/solana-version-catalog/compare/25.22.1...25.22.2) (2026-06-02)
 
 
