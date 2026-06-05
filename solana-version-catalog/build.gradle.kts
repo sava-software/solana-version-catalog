@@ -72,7 +72,7 @@ val fusionauthHttp = "1.4.0"
 val httpClients = "25.0.5"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.95.0"
+val googleCloudKms = "2.96.0"
 val savaRavina = "25.3.0"
 val savaIncidentClients = "25.1.2"
 
