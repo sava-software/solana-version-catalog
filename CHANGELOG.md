@@ -1,5 +1,20 @@
 # Changelog
 
+## [25.22.4](https://github.com/sava-software/solana-version-catalog/compare/25.22.3...25.22.4) (2026-06-07)
+
+
+### Bug Fixes
+
+* **deps:** bump actions/checkout from 6.0.2 to 6.0.3 ([#28](https://github.com/sava-software/solana-version-catalog/issues/28)) ([c258974](https://github.com/sava-software/solana-version-catalog/commit/c258974a89ae1a57754686541f07a4a5f4b66167))
+* **deps:** bump com.google.cloud:google-cloud-kms from 2.95.0 to 2.96.0 ([#29](https://github.com/sava-software/solana-version-catalog/issues/29)) ([d717c44](https://github.com/sava-software/solana-version-catalog/commit/d717c44cd9ee3661595222b195df3bdd1969e48d))
+* **deps:** bump jetty from 12.1.9 to 12.1.10 ([#26](https://github.com/sava-software/solana-version-catalog/issues/26)) ([30e130b](https://github.com/sava-software/solana-version-catalog/commit/30e130bff4fd97f0d38cf2831d12c989c8162841))
+* **deps:** bump sava to 25.4.0 ([a8ecbc3](https://github.com/sava-software/solana-version-catalog/commit/a8ecbc38e3547d19efc41fad14ca40665d943244))
+
+
+### Miscellaneous
+
+* **dependabot:** remove unused labels from configuration ([a720b09](https://github.com/sava-software/solana-version-catalog/commit/a720b09e9b840dd976dea0f4197be3517d623a13))
+
 ## [25.22.3](https://github.com/sava-software/solana-version-catalog/compare/25.22.2...25.22.3) (2026-06-03)
 
 
