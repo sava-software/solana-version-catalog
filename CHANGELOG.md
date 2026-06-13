@@ -1,5 +1,14 @@
 # Changelog
 
+## [25.22.7](https://github.com/sava-software/solana-version-catalog/compare/25.22.6...25.22.7) (2026-06-13)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.protobuf:protobuf-java from 4.35.0 to 4.35.1 ([#35](https://github.com/sava-software/solana-version-catalog/issues/35)) ([4aa3613](https://github.com/sava-software/solana-version-catalog/commit/4aa361325166c1035d66d7a2e7453e65f61d57fe))
+* **deps:** bump glamSDK to 25.12.5 ([c442f77](https://github.com/sava-software/solana-version-catalog/commit/c442f77579a9a2c04f92375431a891eb1dc63eca))
+* **deps:** bump grpc from 1.81.0 to 1.82.0 ([#34](https://github.com/sava-software/solana-version-catalog/issues/34)) ([0a9ad27](https://github.com/sava-software/solana-version-catalog/commit/0a9ad278521e4b89857686c325800510feac5ed5))
+
 ## [25.22.6](https://github.com/sava-software/solana-version-catalog/compare/25.22.5...25.22.6) (2026-06-12)
 
 
