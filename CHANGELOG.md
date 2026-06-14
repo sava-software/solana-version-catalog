@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.22.11](https://github.com/sava-software/solana-version-catalog/compare/25.22.10...25.22.11) (2026-06-14)
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.12.13 and glamSDK to 25.12.9 ([bf0ce7d](https://github.com/sava-software/solana-version-catalog/commit/bf0ce7d16f34ebbbe2629cf3d002cde50894b2e2))
+
 ## [25.22.10](https://github.com/sava-software/solana-version-catalog/compare/25.22.9...25.22.10) (2026-06-14)
 
 
