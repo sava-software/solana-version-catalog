@@ -40,20 +40,8 @@ val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.12.14"
-//val savaIDLClientsCore = savaIDLClients
-//val savaIDLClientsCCTP = savaIDLClients
-//val savaIDLClientsDrift = savaIDLClients
-//val savaIDLClientsJupiter = savaIDLClients
-//val savaIDLClientsKamino = savaIDLClients
-//val savaIDLClientsLoopscale = savaIDLClients
-//val savaIDLClientsMarinade = savaIDLClients
-//val savaIDLClientsMetaplex = savaIDLClients
-//val savaIDLClientsMeteora = savaIDLClients
-//val savaIDLClientsNeutralTrade = savaIDLClients
-//val savaIDLClientsOracles = savaIDLClients
-//val savaIDLClientsOrca = savaIDLClients
-//val savaIDLClientsPhoenix = savaIDLClients
+val savaIDLClients = "25.13.0"
+//val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.4"
@@ -109,19 +97,7 @@ dependencies.constraints {
 
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
-  api("software.sava:idl-clients-core:${savaIDLClients}")
-  api("software.sava:idl-clients-cctp:$savaIDLClients")
-  api("software.sava:idl-clients-drift:$savaIDLClients")
-  api("software.sava:idl-clients-jupiter:$savaIDLClients")
-  api("software.sava:idl-clients-kamino:$savaIDLClients")
-  api("software.sava:idl-clients-loopscale:${savaIDLClients}")
-  api("software.sava:idl-clients-marinade:${savaIDLClients}")
-  api("software.sava:idl-clients-metaplex:${savaIDLClients}")
-  api("software.sava:idl-clients-meteora:${savaIDLClients}")
-  api("software.sava:idl-clients-neutral_trade:${savaIDLClients}")
-  api("software.sava:idl-clients-oracles:$savaIDLClients")
-  api("software.sava:idl-clients-orca:${savaIDLClients}")
-  api("software.sava:idl-clients-phoenix:${savaIDLClients}")
+  api("software.sava:idl-clients-bundle:${savaIDLClients}")
   api("software.sava:idl-clients-spl:$savaIDLClients")
 
   api("software.sava:http-servers-core:${httpClients}")
@@ -211,19 +187,7 @@ catalog {
         "sava-json-iterator",
         "sava-core",
         "sava-rpc",
-        "sava-solana-programs",
-        "sava-idl-clients-core",
-        "sava-idl-clients-drift",
-        "sava-idl-clients-jupiter",
-        "sava-idl-clients-kamino",
-        "sava-idl-clients-loopscale",
-        "sava-idl-clients-marinade",
-        "sava-idl-clients-metaplex",
-        "sava-idl-clients-meteora",
-        "sava-idl-clients-neutral_trade",
-        "sava-idl-clients-oracles",
-        "sava-idl-clients-orca",
-        "sava-idl-clients-phoenix",
+        "sava-idl-clients-bundle",
         "sava-idl-clients-spl"
       )
     )
