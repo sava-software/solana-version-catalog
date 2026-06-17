@@ -1,5 +1,19 @@
 # Changelog
 
+## [25.23.0](https://github.com/sava-software/solana-version-catalog/compare/25.22.12...25.23.0) (2026-06-17)
+
+
+### Bug Fixes
+
+* **deps:** bump com.zaxxer:HikariCP from 7.0.2 to 7.1.0 ([#42](https://github.com/sava-software/solana-version-catalog/issues/42)) ([8152661](https://github.com/sava-software/solana-version-catalog/commit/81526612e0a28974974979cdf39d09ab354d8733))
+* **deps:** bump gradle/actions from 6.1.1 to 6.2.0 ([#41](https://github.com/sava-software/solana-version-catalog/issues/41)) ([ad39f7f](https://github.com/sava-software/solana-version-catalog/commit/ad39f7f020324f406fabc2941be880016a376b41))
+* **deps:** bump savaIDLClients to 25.13.0 and update publish workflow ([a15a27c](https://github.com/sava-software/solana-version-catalog/commit/a15a27c55ec2bdd685a851b3113533003d44af33))
+
+
+### Miscellaneous
+
+* release 25.13.0 ([6f6b4c1](https://github.com/sava-software/solana-version-catalog/commit/6f6b4c1498ef1ebec1d795fc7050b2c36f59530c))
+
 ## [25.22.12](https://github.com/sava-software/solana-version-catalog/compare/25.22.11...25.22.12) (2026-06-16)
 
 
