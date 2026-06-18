@@ -1,7 +1,7 @@
 name: Gradle Check PR
 
 on:
-  pull_request_target:
+  pull_request:
     types: [ opened, synchronize, reopened ]
 
 concurrency:
@@ -10,21 +10,5 @@ concurrency:
 
 jobs:
   check:
-    if: >
-      github.event.pull_request.user.login != 'sava-release-please[bot]' &&
-      github.event.pull_request.user.login != 'dependabot[bot]'
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
-      - uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92
-      - uses: oracle-actions/setup-java@fff43251af9936a0e6a4d5d0946e14f1680e9b6b
-        with:
-          website: ${{ vars.JDK_SRC }}
-          release: ${{ vars.GRADLE_JAVA_VERSION }}
-
-      - name: Gradle Check
-        run: ./gradlew --stacktrace -PjavaVersion=${{ vars.GRADLE_JAVA_VERSION }} -PsavaGithubPackagesUsername=${{ github.actor }} -PsavaGithubPackagesPassword=${{ secrets.READ_SAVA_PACKAGES }} check generateCatalogAsToml
-        env:
-          ORG_GRADLE_PROJECT_savaGithubPackagesUsername: ${{ github.actor }}
-          ORG_GRADLE_PROJECT_savaGithubPackagesPassword: ${{ secrets.READ_SAVA_PACKAGES }}
+    uses: sava-software/sava-build/.github/workflows/check-pr.yml@main
+    secrets: inherit
