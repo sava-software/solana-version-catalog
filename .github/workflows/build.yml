@@ -1,28 +1,14 @@
-name: Gradle Check
+name: Gradle Check PR
 
 on:
-  push:
-    branches:
-      - main
+  pull_request:
+    types: [ opened, synchronize, reopened ]
 
 concurrency:
-  group: build-${{ github.ref_name }}
+  group: check-pr-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
   check:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10
-      - uses: gradle/actions/setup-gradle@3f131e8634966bd73d06cc69884922b02e6faf92
-      - uses: oracle-actions/setup-java@fff43251af9936a0e6a4d5d0946e14f1680e9b6b
-        with:
-          website: ${{ vars.JDK_SRC }}
-          release: ${{ vars.GRADLE_JAVA_VERSION }}
-
-      - name: Gradle Check
-        run: ./gradlew --stacktrace -PjavaVersion=${{ steps.setup.outputs.java-version }} -PsavaGithubPackagesUsername=${{ github.actor }} -PsavaGithubPackagesPassword=${{ secrets.GITHUB_TOKEN }} check generateCatalogAsToml
-        env:
-          ORG_GRADLE_PROJECT_savaGithubPackagesUsername: ${{ github.actor }}
-          ORG_GRADLE_PROJECT_savaGithubPackagesPassword: ${{ secrets.GITHUB_TOKEN }}
+    uses: sava-software/sava-build/.github/workflows/check-pr.yml@main
+    secrets: inherit
