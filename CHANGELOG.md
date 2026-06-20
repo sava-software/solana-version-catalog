@@ -1,5 +1,15 @@
 # Changelog
 
+## [25.23.2](https://github.com/sava-software/solana-version-catalog/compare/25.23.1...25.23.2) (2026-06-20)
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.13.1 ([70f5589](https://github.com/sava-software/solana-version-catalog/commit/70f5589ac4ca97f1177bd0e13605cf43ac80dac4))
+* **deps:** bump savaIDLClients to 25.13.2 and update publish workflow ([b698cd1](https://github.com/sava-software/solana-version-catalog/commit/b698cd16198d0f8e0fcf870e4268c150f7569d43))
+* **deps:** bump software.sava.build to 21.4.0 ([b5c3daf](https://github.com/sava-software/solana-version-catalog/commit/b5c3daf0691bb2f00c3ae65f1472aa31c523211c))
+* **workflows:** update build and PR workflow configurations ([bf95035](https://github.com/sava-software/solana-version-catalog/commit/bf95035d7c59e17ae2d0e2375beda161b589d54c))
+
 ## [25.23.1](https://github.com/sava-software/solana-version-catalog/compare/25.23.0...25.23.1) (2026-06-17)
 
 
