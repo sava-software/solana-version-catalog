@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.23.5](https://github.com/sava-software/solana-version-catalog/compare/25.23.4...25.23.5) (2026-06-20)
+
+
+### Bug Fixes
+
+* **deps:** bump glamSDK to 25.14.1 ([bec2437](https://github.com/sava-software/solana-version-catalog/commit/bec2437f1a2516d4b5f5f1d898f15f37aba4e1d0))
+
 ## [25.23.4](https://github.com/sava-software/solana-version-catalog/compare/25.23.3...25.23.4) (2026-06-20)
 
 
