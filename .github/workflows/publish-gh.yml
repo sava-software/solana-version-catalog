@@ -13,6 +13,11 @@ jobs:
   publish:
     uses: sava-software/sava-build/.github/workflows/publish-gh.yml@main
     secrets: inherit
+    with:
+      attest-subject-path: |
+        **/build/version-catalog/*.toml
+        **/build/publications/*/module.json
+        **/build/publications/*/pom-default.xml
     permissions:
       contents: read
       packages: write
