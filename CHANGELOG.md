@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.23.3](https://github.com/sava-software/solana-version-catalog/compare/25.23.2...25.23.3) (2026-06-20)
+
+
+### Bug Fixes
+
+* **workflows:** add attest-subject-path to publish-gh action ([d161f17](https://github.com/sava-software/solana-version-catalog/commit/d161f175f6ed5f327de9e11e077b7b8b81f6695f))
+
 ## [25.23.2](https://github.com/sava-software/solana-version-catalog/compare/25.23.1...25.23.2) (2026-06-20)
 
 
