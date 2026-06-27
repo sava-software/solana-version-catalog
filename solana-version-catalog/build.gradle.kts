@@ -45,7 +45,7 @@ val savaIDLClients = "25.13.3"
 //val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.4"
-val glamSDK = "25.14.2"
+val glamSDK = "25.14.3"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 val postgresql = "42.7.11" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
@@ -57,7 +57,7 @@ val jetty = "12.1.10"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
-val httpClients = "25.0.5"
+val httpServers = "25.1.1"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.96.0"
@@ -100,11 +100,11 @@ dependencies.constraints {
   api("software.sava:idl-clients-bundle:${savaIDLClients}")
   api("software.sava:idl-clients-spl:$savaIDLClients")
 
-  api("software.sava:http-servers-core:${httpClients}")
-  api("software.sava:http-servers-fusionauth:$httpClients")
-  api("software.sava:http-servers-jdk:$httpClients")
-  api("software.sava:http-servers-jetty:$httpClients")
-  api("software.sava:http-servers-sava:$httpClients")
+  api("software.sava:http-servers-core:${httpServers}")
+  api("software.sava:http-servers-fusionauth:$httpServers")
+  api("software.sava:http-servers-jdk:$httpServers")
+  api("software.sava:http-servers-jetty:$httpServers")
+  api("software.sava:http-servers-sava:$httpServers")
 
   api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
