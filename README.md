@@ -1,4 +1,4 @@
-# Sava Version Catalog [![Publish Release](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish.yml/badge.svg)](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish.yml)
+# Sava Version Catalog [![Publish Release GitHub Packages](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish-gh.yml/badge.svg)](https://github.com/sava-software/solana-version-catalog/actions/workflows/publish-gh.yml)
 
 Provides
 a [Gradle Version Catalog](https://docs.gradle.org/current/userguide/version_catalogs.html#sec:importing-published-catalog)
