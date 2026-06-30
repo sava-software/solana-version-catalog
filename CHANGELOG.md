@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.24.2](https://github.com/sava-software/solana-version-catalog/compare/25.24.1...25.24.2) (2026-06-30)
+
+
+### Bug Fixes
+
+* **deps:** bump org.postgresql:postgresql from 42.7.11 to 42.7.12 ([#57](https://github.com/sava-software/solana-version-catalog/issues/57)) ([bdcd907](https://github.com/sava-software/solana-version-catalog/commit/bdcd907c51c70376256e70d4331109fdce5df3aa))
+* **deps:** bump savaIDLClients to 25.14.1 ([6065850](https://github.com/sava-software/solana-version-catalog/commit/606585097ba90aa6b1c017421d20fbfd650e4f17))
+
 ## [25.24.1](https://github.com/sava-software/solana-version-catalog/compare/25.24.0...25.24.1) (2026-06-29)
 
 
