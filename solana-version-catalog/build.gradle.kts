@@ -23,7 +23,7 @@ val googleProtobufPlugin = "0.10.0"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "6.1.0"
+val junit = "6.1.1"
 
 // Compile & Implementation
 
