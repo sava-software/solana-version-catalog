@@ -1,5 +1,16 @@
 # Changelog
 
+## [25.24.4](https://github.com/sava-software/solana-version-catalog/compare/25.24.3...25.24.4) (2026-07-09)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms from 2.96.0 to 2.97.0 ([#62](https://github.com/sava-software/solana-version-catalog/issues/62)) ([586350b](https://github.com/sava-software/solana-version-catalog/commit/586350b9618e93269dddc8ac116e5de8bc3c3316))
+* **deps:** bump jetty from 12.1.10 to 12.1.11 ([#61](https://github.com/sava-software/solana-version-catalog/issues/61)) ([87543cd](https://github.com/sava-software/solana-version-catalog/commit/87543cd0f057adc7906e57f996565f26dec47bf1))
+* **deps:** bump junit from 6.1.0 to 6.1.1 ([#54](https://github.com/sava-software/solana-version-catalog/issues/54)) ([4122510](https://github.com/sava-software/solana-version-catalog/commit/4122510f96ba734ee0bdb3e5737de5c20fd3786c))
+* **deps:** bump org.postgresql:postgresql from 42.7.12 to 42.7.13 ([#60](https://github.com/sava-software/solana-version-catalog/issues/60)) ([ea174bf](https://github.com/sava-software/solana-version-catalog/commit/ea174bff47f9a441a1420fc96152312a24a001b9))
+* **deps:** bump savaIDLClients to 25.14.3 and software.sava.build to 21.4.3 ([58a9813](https://github.com/sava-software/solana-version-catalog/commit/58a98139e4f1b04b83a6123144a1176022f3ebc5))
+
 ## [25.24.3](https://github.com/sava-software/solana-version-catalog/compare/25.24.2...25.24.3) (2026-07-01)
 
 
