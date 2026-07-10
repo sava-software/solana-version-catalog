@@ -8,12 +8,9 @@ plugins {
 }
 
 group = "software.sava"
-version = providers.gradleProperty("version").getOrElse("")
+version = providers.gradleProperty("version").getOrElse("0.0.0-LOCAL")
 
 // Plugins
-
-// https://github.com/beryx/badass-jlink-plugin
-val jlink = "4.0.2"
 
 // https://plugins.gradle.org/plugin/com.google.protobuf
 val googleProtobufPlugin = "0.10.0"
@@ -48,7 +45,8 @@ val glamIxProxy = "25.0.4"
 val glamSDK = "25.15.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
-val postgresql = "42.7.13" // https://github.com/pgjdbc/pgjdbc/releases/tag/REL42.7.11
+// https://github.com/pgjdbc/pgjdbc/releases
+val postgresql = "42.7.13"
 // https://central.sonatype.com/artifact/com.zaxxer/HikariCP
 val hikariCP = "7.1.0"
 
@@ -73,9 +71,6 @@ val googleProtobuf = "4.35.1"
 
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
 val slf4j = "2.0.18"
-
-dependencies {
-}
 
 dependencies.constraints {
   // Tests
@@ -163,21 +158,21 @@ catalog {
   // Library entries are derived from the BOM entries. The alias corresponds to the 'name' by default.
   // The cases where the alias should differ are defined below.
   configureExplicitAlias("bouncycastle", "org.bouncycastle", "bcprov-jdk18on")
-  configureExplicitAlias("glam-ix-proxy", "systems.glam", "ix-proxy")
-  configureExplicitAlias("glam-sdk", "systems.glam", "sdk")
-  configureExplicitAlias("glam-services", "systems.glam", "services")
   configureExplicitAlias("hikari-cp", "com.zaxxer", "HikariCP")
   configureExplicitAlias("protoc-gen-grpc", "io.grpc", "protoc-gen-grpc-java")
   configurations.api.get().dependencyConstraints.forEach { constraint ->
-    if (constraint.group == "software.sava" && !constraint.name.startsWith("sava")) {
-      configureExplicitAlias("sava-${constraint.name}", constraint.group, constraint.name)
+    when (constraint.group) {
+      "systems.glam" -> if (!constraint.name.startsWith("glam")) {
+        configureExplicitAlias("glam-${constraint.name}", constraint.group, constraint.name)
+      }
+
+      "software.sava" -> if (!constraint.name.startsWith("sava")) {
+        configureExplicitAlias("sava-${constraint.name}", constraint.group, constraint.name)
+      }
     }
   }
 
   versionCatalog {
-    // Plugins
-    plugin("jlink", "org.beryx.jlink").version(jlink)
-
     plugin("google-protobuf-plugin", "com.google.protobuf").version(googleProtobufPlugin)
 
     // Bundles
