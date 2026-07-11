@@ -1,5 +1,17 @@
 # Changelog
 
+## [25.26.0](https://github.com/sava-software/solana-version-catalog/compare/25.25.2...25.26.0) (2026-07-11)
+
+
+### Bug Fixes
+
+* **deps:** bump savaJsonIterator to 21.1.0 ([cbf086d](https://github.com/sava-software/solana-version-catalog/commit/cbf086dc2f0816525349f4e8fe347bc29fe0a140))
+
+
+### Miscellaneous
+
+* release 25.26.0 ([804e4e1](https://github.com/sava-software/solana-version-catalog/commit/804e4e1d4f0c73f8b09a9214abe23e66fd76af5f))
+
 ## [25.25.2](https://github.com/sava-software/solana-version-catalog/compare/25.25.1...25.25.2) (2026-07-10)
 
 
