@@ -25,7 +25,7 @@ val junit = "6.1.1"
 // Compile & Implementation
 
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "21.1.0"
+val savaJsonIterator = "25.1.0"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
