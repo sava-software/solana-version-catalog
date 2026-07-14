@@ -1,5 +1,15 @@
 # Changelog
 
+## [25.26.2](https://github.com/sava-software/solana-version-catalog/compare/25.26.1...25.26.2) (2026-07-14)
+
+
+### Bug Fixes
+
+* **deps:** bump junit from 6.1.1 to 6.1.2 ([#70](https://github.com/sava-software/solana-version-catalog/issues/70)) ([53610b3](https://github.com/sava-software/solana-version-catalog/commit/53610b3091890fa629a59a1eb1494eb7ee1d81a3))
+* **deps:** bump org.bouncycastle:bcprov-jdk18on from 1.84 to 1.85 ([#71](https://github.com/sava-software/solana-version-catalog/issues/71)) ([f8fd4ed](https://github.com/sava-software/solana-version-catalog/commit/f8fd4ede23ff6a36e72caf49d7842a083267e624))
+* **deps:** bump sava to 25.6.0 ([56232b4](https://github.com/sava-software/solana-version-catalog/commit/56232b40e6e180253a22a10e0894f61c942d8b4f))
+* **deps:** bump software.sava:json-iterator from 21.1.0 to 25.1.0 ([#72](https://github.com/sava-software/solana-version-catalog/issues/72)) ([fbadec8](https://github.com/sava-software/solana-version-catalog/commit/fbadec85ea9b6077d30a665194a2a3564ef7d51f))
+
 ## [25.26.1](https://github.com/sava-software/solana-version-catalog/compare/25.26.0...25.26.1) (2026-07-11)
 
 
