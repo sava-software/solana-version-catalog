@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.26.4](https://github.com/sava-software/solana-version-catalog/compare/25.26.3...25.26.4) (2026-07-15)
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.16.0 ([411e01e](https://github.com/sava-software/solana-version-catalog/commit/411e01e56fa1ac11535273faf287d54e84b735c2))
+
 ## [25.26.3](https://github.com/sava-software/solana-version-catalog/compare/25.26.2...25.26.3) (2026-07-14)
 
 
