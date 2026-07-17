@@ -32,12 +32,12 @@ val savaJsonIterator = "25.1.3"
 val bouncyCastle = "1.85"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "25.6.1"
+val sava = "25.7.0"
 val savaWeb2 = "25.1.0"
 val savaPrograms = "25.0.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.16.0"
+val savaIDLClients = "25.17.0"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
