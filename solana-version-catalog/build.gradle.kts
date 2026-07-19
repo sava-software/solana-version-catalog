@@ -25,16 +25,14 @@ val junit = "6.1.2"
 // Compile & Implementation
 
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "25.2.0"
+val savaJsonIterator = "25.3.0"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
 val bouncyCastle = "1.85"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "25.7.0"
-val savaWeb2 = "25.1.0"
-val savaPrograms = "25.0.2"
+val sava = "25.8.0"
 val savaAnchorPrograms = "25.1.4"
 
 val savaIDLClients = "25.17.0"
@@ -86,10 +84,6 @@ dependencies.constraints {
   api("software.sava:sava-core:$sava")
   api("software.sava:sava-rpc:$sava")
 
-  api("software.sava:solana-web2:${savaWeb2}")
-
-  api("software.sava:solana-programs:$savaPrograms")
-
   api("software.sava:anchor-programs:$savaAnchorPrograms")
 
   api("software.sava:idl-clients-bundle:${savaIDLClients}")
@@ -101,7 +95,6 @@ dependencies.constraints {
   api("software.sava:http-servers-jetty:$httpServers")
   api("software.sava:http-servers-sava:$httpServers")
 
-  api("software.sava:ravina-jetty:$savaRavina")
   api("software.sava:ravina-core:$savaRavina")
   api("software.sava:ravina-kms-core:$savaRavina")
   api("software.sava:ravina-kms-http:$savaRavina")
