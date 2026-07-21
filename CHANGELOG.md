@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.28.2](https://github.com/sava-software/solana-version-catalog/compare/25.28.1...25.28.2) (2026-07-21)
+
+
+### Bug Fixes
+
+* **deps:** bump sava, idl-clients and ravina ([cb132cf](https://github.com/sava-software/solana-version-catalog/commit/cb132cf977b0a115b4b1334ba49a893b40829d74))
+
 ## [25.28.1](https://github.com/sava-software/solana-version-catalog/compare/25.28.0...25.28.1) (2026-07-21)
 
 
