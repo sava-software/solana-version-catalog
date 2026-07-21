@@ -32,10 +32,10 @@ val savaJsonIterator = "25.3.0"
 val bouncyCastle = "1.85"
 
 // https://central.sonatype.com/search?namespace=software.sava
-val sava = "25.8.1"
+val sava = "25.8.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.18.0"
+val savaIDLClients = "25.18.1"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
@@ -57,7 +57,7 @@ val httpServers = "25.1.1"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.97.0"
-val savaRavina = "25.5.0"
+val savaRavina = "25.5.1"
 val savaIncidentClients = "25.1.2"
 
 // https://mvnrepository.com/artifact/io.grpc
