@@ -1,5 +1,17 @@
 # Changelog
 
+## [25.29.0](https://github.com/sava-software/solana-version-catalog/compare/25.28.3...25.29.0) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** bump multiple dependencies for latest fixes and updates ([c2a3c36](https://github.com/sava-software/solana-version-catalog/commit/c2a3c36642269b7e02a9e8c1ae0ec9e69bd77558))
+
+
+### Miscellaneous
+
+* release 25.29.0 ([da69ae3](https://github.com/sava-software/solana-version-catalog/commit/da69ae3c3892763da538759ff1fdf2ade6245636))
+
 ## [25.28.3](https://github.com/sava-software/solana-version-catalog/compare/25.28.2...25.28.3) (2026-07-24)
 
 
