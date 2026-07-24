@@ -35,12 +35,12 @@ val bouncyCastle = "1.85"
 val sava = "25.8.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.18.1"
+val savaIDLClients = "25.18.2"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.0.4"
-val glamSDK = "25.16.0"
+val glamSDK = "25.17.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 // https://github.com/pgjdbc/pgjdbc/releases
@@ -53,12 +53,12 @@ val jetty = "12.1.11"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
-val httpServers = "25.1.1"
+val httpServers = "25.2.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.97.0"
 val savaRavina = "25.5.2"
-val savaIncidentClients = "25.1.2"
+val savaIncidentClients = "25.2.0"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.83.0"
