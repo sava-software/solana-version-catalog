@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.28.3](https://github.com/sava-software/solana-version-catalog/compare/25.28.2...25.28.3) (2026-07-24)
+
+
+### Bug Fixes
+
+* **deps:** bump grpc from 1.82.2 to 1.83.0 ([#83](https://github.com/sava-software/solana-version-catalog/issues/83)) ([9584bf3](https://github.com/sava-software/solana-version-catalog/commit/9584bf3e9fb247d50af387f4c06bdd5a80e8f62f))
+* **deps:** bump savaRavina to 25.5.2 and sava.build plugin to 21.5.12 ([0272758](https://github.com/sava-software/solana-version-catalog/commit/0272758ae89c45d5b6279acd71d024f6ac0a92e8))
+
 ## [25.28.2](https://github.com/sava-software/solana-version-catalog/compare/25.28.1...25.28.2) (2026-07-21)
 
 
