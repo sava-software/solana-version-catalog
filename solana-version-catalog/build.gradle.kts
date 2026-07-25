@@ -35,7 +35,7 @@ val bouncyCastle = "1.85"
 val sava = "25.8.2"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.18.2"
+val savaIDLClients = "25.18.3"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
