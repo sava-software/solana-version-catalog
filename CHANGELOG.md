@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.1](https://github.com/sava-software/solana-version-catalog/compare/25.30.0...25.30.1) (2026-07-26)
+
+
+### Bug Fixes
+
+* **deps:** bump json-iterator to 25.3.1 and sava.build plugin to 21.5.16 ([730ee2d](https://github.com/sava-software/solana-version-catalog/commit/730ee2db692333a185df9df4438cbb32a5ab76b9))
+
 ## [25.30.0](https://github.com/sava-software/solana-version-catalog/compare/25.29.0...25.30.0) (2026-07-25)
 
 
