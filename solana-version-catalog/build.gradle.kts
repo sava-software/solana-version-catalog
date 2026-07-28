@@ -58,7 +58,7 @@ val httpServers = "25.2.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.97.0"
 val savaRavina = "25.5.2"
-val savaIncidentClients = "25.2.0"
+val savaIncidentClients = "25.4.0"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.83.0"
