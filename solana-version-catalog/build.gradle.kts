@@ -20,7 +20,7 @@ val googleProtobufPlugin = "0.10.0"
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
 // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
-val junit = "6.1.2"
+val junit = "6.1.3"
 
 // Compile & Implementation
 
@@ -58,7 +58,7 @@ val httpServers = "25.2.0"
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.98.0"
 val savaRavina = "25.6.0"
-val savaIncidentClients = "25.4.0"
+val savaIncidentClients = "25.5.0"
 
 // https://mvnrepository.com/artifact/io.grpc
 val grpc = "1.83.1"
