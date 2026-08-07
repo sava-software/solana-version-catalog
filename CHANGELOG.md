@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.4](https://github.com/sava-software/solana-version-catalog/compare/25.30.3...25.30.4) (2026-08-07)
+
+
+### Bug Fixes
+
+* **deps:** bump junit to 6.1.3 and savaIncidentClients to 25.5.0 ([82ba795](https://github.com/sava-software/solana-version-catalog/commit/82ba79535e31dbf0aa40287aca30e79af87e31b7))
+
 ## [25.30.3](https://github.com/sava-software/solana-version-catalog/compare/25.30.2...25.30.3) (2026-08-07)
 
 
