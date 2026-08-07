@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.5](https://github.com/sava-software/solana-version-catalog/compare/25.30.4...25.30.5) (2026-08-07)
+
+
+### Bug Fixes
+
+* **deps:** Add incident-webhook and incident-io dependencies. ([162f73d](https://github.com/sava-software/solana-version-catalog/commit/162f73d6d316ede0e73ca0bfd8cda9f202fbc14a))
+
 ## [25.30.4](https://github.com/sava-software/solana-version-catalog/compare/25.30.3...25.30.4) (2026-08-07)
 
 
