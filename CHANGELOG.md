@@ -1,5 +1,14 @@
 # Changelog
 
+## [25.30.3](https://github.com/sava-software/solana-version-catalog/compare/25.30.2...25.30.3) (2026-08-07)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms from 2.97.0 to 2.98.0 ([#90](https://github.com/sava-software/solana-version-catalog/issues/90)) ([cb14d9b](https://github.com/sava-software/solana-version-catalog/commit/cb14d9bce71f83bc93441dd41dd0e49dc0199752))
+* **deps:** bump grpc from 1.83.0 to 1.83.1 ([#89](https://github.com/sava-software/solana-version-catalog/issues/89)) ([bed874b](https://github.com/sava-software/solana-version-catalog/commit/bed874b6dbc49149b2a0fa9db0e7e933627bb966))
+* **deps:** bump multiple dependencies and Gradle wrapper to 9.7.0 ([ebd9106](https://github.com/sava-software/solana-version-catalog/commit/ebd91068a026fdf0d9708ccbe325c31783533ec3))
+
 ## [25.30.2](https://github.com/sava-software/solana-version-catalog/compare/25.30.1...25.30.2) (2026-07-28)
 
 
