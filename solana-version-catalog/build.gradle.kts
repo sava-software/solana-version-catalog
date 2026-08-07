@@ -104,8 +104,9 @@ dependencies.constraints {
   api("software.sava:ravina-kms-google:$savaRavina")
 
   api("software.sava:incident-core:${savaIncidentClients}")
-  // api("software.sava:incident-io:${savaIncidentClients}")
+   api("software.sava:incident-io:${savaIncidentClients}")
   api("software.sava:incident-pagerduty:${savaIncidentClients}")
+  api("software.sava:incident-webhook:${savaIncidentClients}")
 
   api("systems.glam:ix-proxy:$glamIxProxy")
   api("systems.glam:sdk:${glamSDK}")
