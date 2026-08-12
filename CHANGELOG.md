@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.7](https://github.com/sava-software/solana-version-catalog/compare/25.30.6...25.30.7) (2026-08-12)
+
+
+### Bug Fixes
+
+* **deps:** bump sava to 25.9.0 and bouncyCastle to 1.85.2 ([63353b7](https://github.com/sava-software/solana-version-catalog/commit/63353b7b1820f19eeb01437153ebefc960871025))
+
 ## [25.30.6](https://github.com/sava-software/solana-version-catalog/compare/25.30.5...25.30.6) (2026-08-07)
 
 
