@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.9](https://github.com/sava-software/solana-version-catalog/compare/25.30.8...25.30.9) (2026-08-17)
+
+
+### Bug Fixes
+
+* **deps:** bump json-iterator to 25.3.2, ravina to 25.6.1 and idl-clients to 25.19.0. ([21d6fac](https://github.com/sava-software/solana-version-catalog/commit/21d6faca1870cd5a4ae24a831f05c260b6676ed8))
+
 ## [25.30.8](https://github.com/sava-software/solana-version-catalog/compare/25.30.7...25.30.8) (2026-08-14)
 
 
