@@ -25,7 +25,7 @@ val junit = "6.1.3"
 // Compile & Implementation
 
 // https://github.com/sava-software/json-iterator
-val savaJsonIterator = "25.3.1"
+val savaJsonIterator = "25.3.2"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
@@ -35,7 +35,7 @@ val bouncyCastle = "1.85.2"
 val sava = "25.9.1"
 val savaAnchorPrograms = "25.1.4"
 
-val savaIDLClients = "25.18.5"
+val savaIDLClients = "25.19.0"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
@@ -57,7 +57,7 @@ val httpServers = "25.3.0"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.98.0"
-val savaRavina = "25.6.0"
+val savaRavina = "25.6.1"
 val savaIncidentClients = "25.5.0"
 
 // https://mvnrepository.com/artifact/io.grpc
