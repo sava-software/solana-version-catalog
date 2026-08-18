@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.10](https://github.com/sava-software/solana-version-catalog/compare/25.30.9...25.30.10) (2026-08-18)
+
+
+### Bug Fixes
+
+* **deps:** bump idl-clients to 25.19.1 ([9ef0dff](https://github.com/sava-software/solana-version-catalog/commit/9ef0dffed6eb5a41c764eed957f1a1389f7cb906))
+
 ## [25.30.9](https://github.com/sava-software/solana-version-catalog/compare/25.30.8...25.30.9) (2026-08-17)
 
 
