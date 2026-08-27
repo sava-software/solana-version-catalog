@@ -65,7 +65,7 @@ val grpc = "1.83.1"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-val googleProtobuf = "4.35.1"
+val googleProtobuf = "4.36.0"
 
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
 val slf4j = "2.0.18"
