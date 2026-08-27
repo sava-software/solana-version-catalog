@@ -27,7 +27,7 @@ pluginManagement {
 }
 
 plugins {
-  id("software.sava.build") version "21.5.26"
+  id("software.sava.build") version "21.5.28"
 }
 
 include("solana-version-catalog")
