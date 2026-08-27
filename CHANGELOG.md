@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.14](https://github.com/sava-software/solana-version-catalog/compare/25.30.13...25.30.14) (2026-08-27)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.protobuf:protobuf-java from 4.35.1 to 4.36.0 ([#103](https://github.com/sava-software/solana-version-catalog/issues/103)) ([028f11a](https://github.com/sava-software/solana-version-catalog/commit/028f11a87d132d9c016adaab5322e7336e795d97))
+* **deps:** bump savaIDLClients to 25.19.4 and sava.build plugin to 21.5.28 ([51ae171](https://github.com/sava-software/solana-version-catalog/commit/51ae171725a8685780c3765e63983c410315014a))
+
 ## [25.30.13](https://github.com/sava-software/solana-version-catalog/compare/25.30.12...25.30.13) (2026-08-21)
 
 
