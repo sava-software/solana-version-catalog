@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.15](https://github.com/sava-software/solana-version-catalog/compare/25.30.14...25.30.15) (2026-08-31)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms from 2.98.0 to 2.99.0 ([#105](https://github.com/sava-software/solana-version-catalog/issues/105)) ([6ed7ffe](https://github.com/sava-software/solana-version-catalog/commit/6ed7ffe32eb30a94a3620c0a30d0ffb9a49637e9))
+* **deps:** bump savaIDLClients to 25.19.5 ([3489602](https://github.com/sava-software/solana-version-catalog/commit/34896026948574bc4f72ba9b852f46f0a97a19b6))
+
 ## [25.30.14](https://github.com/sava-software/solana-version-catalog/compare/25.30.13...25.30.14) (2026-08-27)
 
 
