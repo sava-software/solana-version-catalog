@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.17](https://github.com/sava-software/solana-version-catalog/compare/25.30.16...25.30.17) (2026-09-04)
+
+
+### Bug Fixes
+
+* **deps:** bump httpServers to 25.4.0 and sava.build plugin to 21.5.31 ([cdcae2d](https://github.com/sava-software/solana-version-catalog/commit/cdcae2d077e89908a10a468ced4d895017713db7))
+
 ## [25.30.16](https://github.com/sava-software/solana-version-catalog/compare/25.30.15...25.30.16) (2026-09-01)
 
 
