@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.18](https://github.com/sava-software/solana-version-catalog/compare/25.30.17...25.30.18) (2026-09-05)
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.19.6 and sava.build plugin to 21.5.32 ([07faa51](https://github.com/sava-software/solana-version-catalog/commit/07faa51b1eff6e9ca7063295b91fb21ef69a1006))
+
 ## [25.30.17](https://github.com/sava-software/solana-version-catalog/compare/25.30.16...25.30.17) (2026-09-04)
 
 
