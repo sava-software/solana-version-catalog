@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.19](https://github.com/sava-software/solana-version-catalog/compare/25.30.18...25.30.19) (2026-09-06)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.protobuf:protobuf-java from 4.36.0 to 4.36.1 ([#108](https://github.com/sava-software/solana-version-catalog/issues/108)) ([a158c2d](https://github.com/sava-software/solana-version-catalog/commit/a158c2db3ca29df9b9c2c4aa4e137da12899d2dd))
+* **deps:** bump sava to 25.11.0 ([554ce15](https://github.com/sava-software/solana-version-catalog/commit/554ce15f00c1ba8a9d164ba520ff0bf4a8f3d7c5))
+
 ## [25.30.18](https://github.com/sava-software/solana-version-catalog/compare/25.30.17...25.30.18) (2026-09-05)
 
 
