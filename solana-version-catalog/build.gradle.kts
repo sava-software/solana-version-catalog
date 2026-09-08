@@ -66,8 +66,9 @@ val grpc = "1.84.0"
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 val googleProtobuf = "4.36.1"
 
+// https://central.sonatype.com/artifact/org.slf4j/slf4j-api
 // https://central.sonatype.com/artifact/org.slf4j/slf4j-jdk14
-val slf4j = "2.0.18"
+val slf4j = "2.0.19"
 
 dependencies.constraints {
   // Tests
@@ -142,6 +143,11 @@ dependencies.constraints {
 
   api("com.google.protobuf:protobuf-java:$googleProtobuf")
 
+  // Jetty and HikariCP compile against slf4j-api; pin it so a transitive cannot pair a
+  // newer provider with an older API. slf4j-jdk14 is the java.util.logging provider that
+  // routes their SLF4J output into the same JUL sink sava logs to via System.Logger.
+  // Provider only: consumers declare it `runtimeOnly`, hence it is in no bundle.
+  api("org.slf4j:slf4j-api:$slf4j")
   api("org.slf4j:slf4j-jdk14:$slf4j")
 }
 
