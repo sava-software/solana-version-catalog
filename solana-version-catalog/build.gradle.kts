@@ -68,7 +68,7 @@ val grpc = "1.83.1"
 val googleProtobuf = "4.36.1"
 
 // https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
-val slf4j = "2.0.18"
+val slf4j = "2.0.19"
 
 dependencies.constraints {
   // Tests
