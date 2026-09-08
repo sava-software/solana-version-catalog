@@ -33,7 +33,6 @@ val bouncyCastle = "1.85.2"
 
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "25.11.0"
-val savaAnchorPrograms = "25.1.4"
 
 val savaIDLClients = "25.19.6"
 //val savaIDLClientsBundle = savaIDLClients
@@ -67,7 +66,7 @@ val grpc = "1.84.0"
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
 val googleProtobuf = "4.36.1"
 
-// https://mvnrepository.com/artifact/org.slf4j/slf4j-jdk14
+// https://central.sonatype.com/artifact/org.slf4j/slf4j-jdk14
 val slf4j = "2.0.18"
 
 dependencies.constraints {
@@ -83,8 +82,6 @@ dependencies.constraints {
 
   api("software.sava:sava-core:$sava")
   api("software.sava:sava-rpc:$sava")
-
-  api("software.sava:anchor-programs:$savaAnchorPrograms")
 
   api("software.sava:idl-clients-bundle:${savaIDLClients}")
   api("software.sava:idl-clients-spl:$savaIDLClients")
