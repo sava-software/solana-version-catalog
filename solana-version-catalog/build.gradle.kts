@@ -49,7 +49,7 @@ val postgresql = "42.7.13"
 val hikariCP = "7.1.0"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.12"
+val jetty = "12.1.13"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 
