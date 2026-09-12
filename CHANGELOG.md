@@ -1,5 +1,17 @@
 # Changelog
 
+## [25.30.20](https://github.com/sava-software/solana-version-catalog/compare/25.30.19...25.30.20) (2026-09-12)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms from 2.99.0 to 2.100.0 ([#113](https://github.com/sava-software/solana-version-catalog/issues/113)) ([dc497f7](https://github.com/sava-software/solana-version-catalog/commit/dc497f75a0c7db484fa1f533477bae16932113d9))
+* **deps:** bump grpc from 1.83.1 to 1.84.0 ([#112](https://github.com/sava-software/solana-version-catalog/issues/112)) ([1c28058](https://github.com/sava-software/solana-version-catalog/commit/1c28058db9bbcb6422fafacff15e354ed73610e1))
+* **deps:** bump jetty from 12.1.12 to 12.1.13 ([#116](https://github.com/sava-software/solana-version-catalog/issues/116)) ([fa50c03](https://github.com/sava-software/solana-version-catalog/commit/fa50c033207e9c8753a879d614844511a357938f))
+* **deps:** bump sava to 25.11.1 and sava.build plugin to 21.5.35 ([9f0cb10](https://github.com/sava-software/solana-version-catalog/commit/9f0cb10f047fbe8afe6979cf88f0ce47f836bc84))
+* **deps:** bump slf4j to 2.0.19 and manage slf4j-api ([7ada968](https://github.com/sava-software/solana-version-catalog/commit/7ada968dadd347d96ea3d885e34f96b13f88f625))
+* **deps:** remove unused savaAnchorPrograms dependency ([4da60aa](https://github.com/sava-software/solana-version-catalog/commit/4da60aaa4f3559f830ae8ad58349b418a48e7cc6))
+
 ## [25.30.19](https://github.com/sava-software/solana-version-catalog/compare/25.30.18...25.30.19) (2026-09-06)
 
 
