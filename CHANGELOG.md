@@ -1,5 +1,17 @@
 # Changelog
 
+## [25.30.21](https://github.com/sava-software/solana-version-catalog/compare/25.30.20...25.30.21) (2026-09-13)
+
+
+### Features
+
+* **deps:** add Helidon 4.5.4 and Netty 4.2.18 for the http-servers backends ([f33aa2b](https://github.com/sava-software/solana-version-catalog/commit/f33aa2b996d4f795977d44723cfc95ba34794250))
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.19.7 ([ec70721](https://github.com/sava-software/solana-version-catalog/commit/ec70721acf967448e0a7bf5468e4e775d564ea3c))
+
 ## [25.30.20](https://github.com/sava-software/solana-version-catalog/compare/25.30.19...25.30.20) (2026-09-12)
 
 
