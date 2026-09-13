@@ -51,6 +51,10 @@ val hikariCP = "7.1.0"
 val jetty = "12.1.13"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
+// https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
+val helidon = "4.5.4"
+// https://central.sonatype.com/artifact/io.netty/netty-codec-http
+val netty = "4.2.18.Final"
 
 val httpServers = "25.4.0"
 
@@ -89,8 +93,10 @@ dependencies.constraints {
 
   api("software.sava:http-servers-core:${httpServers}")
   api("software.sava:http-servers-fusionauth:$httpServers")
+  api("software.sava:http-servers-helidon:$httpServers")
   api("software.sava:http-servers-jdk:$httpServers")
   api("software.sava:http-servers-jetty:$httpServers")
+  api("software.sava:http-servers-netty:$httpServers")
   api("software.sava:http-servers-sava:$httpServers")
 
   api("software.sava:ravina-core:$savaRavina")
@@ -131,6 +137,20 @@ dependencies.constraints {
   api("org.eclipse.jetty.compression:jetty-compression-zstandard:${jetty}")
 
   api("io.fusionauth:java-http:$fusionauthHttp")
+
+  // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
+  api("io.helidon.webserver:helidon-webserver:$helidon")
+  api("io.helidon.webserver:helidon-webserver-http2:$helidon")
+  api("io.helidon.http:helidon-http:$helidon")
+  api("io.helidon.http.media:helidon-http-media:$helidon")
+  api("io.helidon.common:helidon-common-uri:$helidon")
+
+  // https://central.sonatype.com/artifact/io.netty/netty-codec-http
+  api("io.netty:netty-buffer:$netty")
+  api("io.netty:netty-codec-base:$netty")
+  api("io.netty:netty-codec-http:$netty")
+  api("io.netty:netty-common:$netty")
+  api("io.netty:netty-transport:$netty")
 
   // https://mvnrepository.com/artifact/io.grpc/grpc-netty-shaded
   api("io.grpc:grpc-netty-shaded:$grpc")
