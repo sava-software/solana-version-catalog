@@ -56,7 +56,7 @@ val helidon = "4.5.4"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
 val netty = "4.2.18.Final"
 
-val httpServers = "25.4.0"
+val httpServers = "25.4.1"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.100.0"
