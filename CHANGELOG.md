@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.22](https://github.com/sava-software/solana-version-catalog/compare/25.30.21...25.30.22) (2026-09-16)
+
+
+### Bug Fixes
+
+* **deps:** bump httpServers to 25.4.1 ([f423d95](https://github.com/sava-software/solana-version-catalog/commit/f423d9599779635a6ac1495c6600edab3637eb12))
+
 ## [25.30.21](https://github.com/sava-software/solana-version-catalog/compare/25.30.20...25.30.21) (2026-09-13)
 
 
