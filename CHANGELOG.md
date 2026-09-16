@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.23](https://github.com/sava-software/solana-version-catalog/compare/25.30.22...25.30.23) (2026-09-16)
+
+
+### Miscellaneous
+
+* release 25.30.23 ([52ebc76](https://github.com/sava-software/solana-version-catalog/commit/52ebc765f9aed6252dc01f2358ccb8e0a10b156e))
+
 ## [25.30.22](https://github.com/sava-software/solana-version-catalog/compare/25.30.21...25.30.22) (2026-09-16)
 
 
