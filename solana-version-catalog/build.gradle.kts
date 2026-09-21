@@ -52,7 +52,7 @@ val jetty = "12.1.13"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
-val helidon = "4.5.4"
+val helidon = "4.5.5"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
 val netty = "4.2.18.Final"
 
