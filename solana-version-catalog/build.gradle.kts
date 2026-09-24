@@ -68,7 +68,7 @@ val grpc = "1.84.0"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
-val googleProtobuf = "4.36.1"
+val googleProtobuf = "4.36.2"
 
 // https://central.sonatype.com/artifact/org.slf4j/slf4j-api
 // https://central.sonatype.com/artifact/org.slf4j/slf4j-jdk14
