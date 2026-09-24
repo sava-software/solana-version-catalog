@@ -1,5 +1,22 @@
 # Changelog
 
+## [25.30.25](https://github.com/sava-software/solana-version-catalog/compare/25.30.24...25.30.25) (2026-09-24)
+
+
+### Features
+
+* **deps:** bump Gradle wrapper to 9.8.0 ([735b960](https://github.com/sava-software/solana-version-catalog/commit/735b960e9b1ab979446d93a5e106c566e737985a))
+
+
+### Bug Fixes
+
+* **ci:** restrict workflow token permissions ([93302eb](https://github.com/sava-software/solana-version-catalog/commit/93302ebc33ff2a3e733d14de290252b0109a1179))
+* **deps:** bump com.google.protobuf:protobuf-java from 4.36.1 to 4.36.2 ([#123](https://github.com/sava-software/solana-version-catalog/issues/123)) ([fde93bd](https://github.com/sava-software/solana-version-catalog/commit/fde93bd1822f7afe15bb9f72fc371d7d3447cea9))
+* **deps:** bump helidon from 4.5.4 to 4.5.5 ([#125](https://github.com/sava-software/solana-version-catalog/issues/125)) ([2cdf822](https://github.com/sava-software/solana-version-catalog/commit/2cdf8227cb75eac67b92d7d568c1cd0d232e553b))
+* **deps:** bump org.bouncycastle:bcprov-jdk18on from 1.85.2 to 1.86 ([#118](https://github.com/sava-software/solana-version-catalog/issues/118)) ([0db5dd0](https://github.com/sava-software/solana-version-catalog/commit/0db5dd098284ecd4b1959fb654c8d1ed2bafe955))
+* **deps:** bump software.sava.build plugin to 21.6.0 ([607e3ce](https://github.com/sava-software/solana-version-catalog/commit/607e3ce312cd14cea4383c9469edf22cd1d4fc04))
+* **deps:** ignore Helidon versions &gt;= 27 in dependabot ([60f73f0](https://github.com/sava-software/solana-version-catalog/commit/60f73f07ff25c956ad6ac5aeeb6210efde1451db))
+
 ## [25.30.24](https://github.com/sava-software/solana-version-catalog/compare/25.30.23...25.30.24) (2026-09-16)
 
 
