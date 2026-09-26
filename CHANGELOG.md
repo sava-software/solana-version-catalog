@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.28](https://github.com/sava-software/solana-version-catalog/compare/25.30.27...25.30.28) (2026-09-26)
+
+
+### Bug Fixes
+
+* **deps:** bump glamIxProxy to 25.1.0 and savaRavina to 25.6.4 ([265bdd9](https://github.com/sava-software/solana-version-catalog/commit/265bdd9c4958d00e072e05e9f2464925532344d0))
+
 ## [25.30.27](https://github.com/sava-software/solana-version-catalog/compare/25.30.26...25.30.27) (2026-09-25)
 
 
