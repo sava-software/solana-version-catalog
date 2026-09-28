@@ -72,7 +72,7 @@ val googleProtobuf = "4.36.2"
 
 // https://central.sonatype.com/artifact/org.slf4j/slf4j-api
 // https://central.sonatype.com/artifact/org.slf4j/slf4j-jdk14
-val slf4j = "2.0.19"
+val slf4j = "2.0.20"
 
 dependencies.constraints {
   // Tests
