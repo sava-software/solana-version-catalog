@@ -34,11 +34,11 @@ val bouncyCastle = "1.86"
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "25.11.2"
 
-val savaIDLClients = "25.19.7"
+val savaIDLClients = "25.19.8"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
-val glamIxProxy = "25.1.0"
+val glamIxProxy = "25.1.1"
 val glamSDK = "25.19.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
