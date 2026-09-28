@@ -59,7 +59,7 @@ val netty = "4.2.18.Final"
 val httpServers = "25.4.1"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
-val googleCloudKms = "2.100.0"
+val googleCloudKms = "2.101.0"
 val savaRavina = "25.6.5"
 val savaIncidentClients = "25.5.0"
 
