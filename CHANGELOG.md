@@ -1,5 +1,14 @@
 # Changelog
 
+## [25.30.33](https://github.com/sava-software/solana-version-catalog/compare/25.30.32...25.30.33) (2026-10-08)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms ([#135](https://github.com/sava-software/solana-version-catalog/issues/135)) ([43053d9](https://github.com/sava-software/solana-version-catalog/commit/43053d9a9233ee3c7d6bf9cd6367da4507c3011e))
+* **deps:** bump glamIxProxy to 25.2.0 and software.sava.build to 21.6.4 ([d74cc6b](https://github.com/sava-software/solana-version-catalog/commit/d74cc6b8a2964127201536133d03a0e767ae7f9f))
+* **deps:** bump sava to 25.12.0 and savaIDLClients to 25.19.10 ([aeb95a1](https://github.com/sava-software/solana-version-catalog/commit/aeb95a1510cb523c87e6e593b13e2ae21333efe2))
+
 ## [25.30.32](https://github.com/sava-software/solana-version-catalog/compare/25.30.31...25.30.32) (2026-10-01)
 
 
