@@ -48,13 +48,15 @@ val postgresql = "42.7.13"
 val hikariCP = "7.1.0"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
-val jetty = "12.1.13"
+// https://github.com/jetty/jetty.project/releases
+val jetty = "12.1.14"
 // https://mvnrepository.com/artifact/io.fusionauth/java-http
 val fusionauthHttp = "1.4.0"
 // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
 val helidon = "4.5.5"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
-val netty = "4.2.18.Final"
+// https://github.com/netty/netty/releases
+val netty = "4.2.19.Final"
 
 val httpServers = "25.4.1"
 
