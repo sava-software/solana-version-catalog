@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.35](https://github.com/sava-software/solana-version-catalog/compare/25.30.34...25.30.35) (2026-10-10)
+
+
+### Bug Fixes
+
+* **deps:** bump jetty to 12.1.14 and netty to 4.2.19.Final ([32410c0](https://github.com/sava-software/solana-version-catalog/commit/32410c08a472d4f69f74e03bca4f231c8a95b444))
+
 ## [25.30.34](https://github.com/sava-software/solana-version-catalog/compare/25.30.33...25.30.34) (2026-10-09)
 
 
