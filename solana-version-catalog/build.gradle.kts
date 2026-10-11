@@ -39,7 +39,7 @@ val savaIDLClients = "25.19.10"
 //val savaIDLClientsSPL = savaIDLClients
 
 val glamIxProxy = "25.2.0"
-val glamSDK = "25.20.0"
+val glamSDK = "25.21.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 // https://github.com/pgjdbc/pgjdbc/releases
@@ -58,7 +58,7 @@ val helidon = "4.5.5"
 // https://github.com/netty/netty/releases
 val netty = "4.2.19.Final"
 
-val httpServers = "25.4.1"
+val httpServers = "25.4.2"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.102.0"
