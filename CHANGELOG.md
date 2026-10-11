@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.37](https://github.com/sava-software/solana-version-catalog/compare/25.30.36...25.30.37) (2026-10-11)
+
+
+### Bug Fixes
+
+* **deps:** bump savaIDLClients to 25.19.11 and Gradle to 9.8.1 ([123ad0c](https://github.com/sava-software/solana-version-catalog/commit/123ad0c0a914c34cfab169b136a361397c9589c5))
+
 ## [25.30.36](https://github.com/sava-software/solana-version-catalog/compare/25.30.35...25.30.36) (2026-10-11)
 
 
