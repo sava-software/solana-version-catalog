@@ -43,7 +43,7 @@ val glamSDK = "25.21.0"
 
 // https://central.sonatype.com/artifact/org.postgresql/postgresql
 // https://github.com/pgjdbc/pgjdbc/releases
-val postgresql = "42.7.13"
+val postgresql = "42.7.14"
 // https://central.sonatype.com/artifact/com.zaxxer/HikariCP
 val hikariCP = "7.1.0"
 
