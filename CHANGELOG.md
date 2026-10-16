@@ -1,5 +1,15 @@
 # Changelog
 
+## [25.30.38](https://github.com/sava-software/solana-version-catalog/compare/25.30.37...25.30.38) (2026-10-16)
+
+
+### Bug Fixes
+
+* **deps:** bump glamSDK to 25.22.0 ([86c3a2d](https://github.com/sava-software/solana-version-catalog/commit/86c3a2d4117e9af4d17953f46fe0fe4a57e8d5e6))
+* **deps:** bump grpc from 1.84.0 to 1.84.2 ([#142](https://github.com/sava-software/solana-version-catalog/issues/142)) ([0cb0127](https://github.com/sava-software/solana-version-catalog/commit/0cb01279057196e4de563c4dae502812f796ac9e))
+* **deps:** bump org.postgresql:postgresql from 42.7.13 to 42.7.14 ([#143](https://github.com/sava-software/solana-version-catalog/issues/143)) ([996105e](https://github.com/sava-software/solana-version-catalog/commit/996105e8fc925a3653d5ae81ac247d16adcebb21))
+* **deps:** bump savaIDLClients to 25.19.12 and software.sava.build to 21.6.8 ([1ca227e](https://github.com/sava-software/solana-version-catalog/commit/1ca227e10718d6bd5bfa9933def16b9b005a944c))
+
 ## [25.30.37](https://github.com/sava-software/solana-version-catalog/compare/25.30.36...25.30.37) (2026-10-11)
 
 
