@@ -66,7 +66,7 @@ val savaRavina = "25.6.6"
 val savaIncidentClients = "25.5.0"
 
 // https://mvnrepository.com/artifact/io.grpc
-val grpc = "1.84.0"
+val grpc = "1.84.2"
 // https://github.com/grpc/grpc-java?tab=readme-ov-file#generated-code
 // https://mvnrepository.com/artifact/com.google.protobuf/protoc
 // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-java
