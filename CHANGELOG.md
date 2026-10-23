@@ -1,5 +1,15 @@
 # Changelog
 
+## [25.30.40](https://github.com/sava-software/solana-version-catalog/compare/25.30.39...25.30.40) (2026-10-23)
+
+
+### Bug Fixes
+
+* **deps:** bump Gradle wrapper to 9.8.2 ([2e07ba1](https://github.com/sava-software/solana-version-catalog/commit/2e07ba1a5cff1938bf979a50353980d076458877))
+* **deps:** bump grpc from 1.84.2 to 1.85.1 ([#148](https://github.com/sava-software/solana-version-catalog/issues/148)) ([c5ff98d](https://github.com/sava-software/solana-version-catalog/commit/c5ff98d2a2f8c17a05fd8db52cc79b30cb4ac067))
+* **deps:** bump helidon to 4.5.6 ([6d7dff3](https://github.com/sava-software/solana-version-catalog/commit/6d7dff395d4987cfab6d44e4fb6cbb576ab3426a))
+* **deps:** bump software.sava.build to 21.6.9 ([5a921c8](https://github.com/sava-software/solana-version-catalog/commit/5a921c896c46b33616d38ff283470f23a7607661))
+
 ## [25.30.39](https://github.com/sava-software/solana-version-catalog/compare/25.30.38...25.30.39) (2026-10-17)
 
 
