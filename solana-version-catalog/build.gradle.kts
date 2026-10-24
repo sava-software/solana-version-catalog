@@ -58,7 +58,7 @@ val helidon = "4.5.6"
 // https://github.com/netty/netty/releases
 val netty = "4.2.19.Final"
 
-val httpServers = "25.4.2"
+val httpServers = "25.4.3"
 
 // https://central.sonatype.com/artifact/com.google.cloud/google-cloud-kms
 val googleCloudKms = "2.102.0"
