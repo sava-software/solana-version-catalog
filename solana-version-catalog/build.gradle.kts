@@ -50,8 +50,6 @@ val hikariCP = "7.1.0"
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 // https://github.com/jetty/jetty.project/releases
 val jetty = "12.1.14"
-// https://mvnrepository.com/artifact/io.fusionauth/java-http
-val fusionauthHttp = "1.4.0"
 // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
 val helidon = "4.5.6"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
@@ -94,12 +92,11 @@ dependencies.constraints {
   api("software.sava:idl-clients-spl:$savaIDLClients")
 
   api("software.sava:http-servers-core:${httpServers}")
-  // api("software.sava:http-servers-fusionauth:$httpServers")
   api("software.sava:http-servers-helidon:$httpServers")
   api("software.sava:http-servers-jdk:$httpServers")
   api("software.sava:http-servers-jetty:$httpServers")
   api("software.sava:http-servers-netty:$httpServers")
-  // api("software.sava:http-servers-sava:$httpServers")
+  api("software.sava:http-servers-sava:$httpServers")
 
   api("software.sava:ravina-core:$savaRavina")
   api("software.sava:ravina-kms-core:$savaRavina")
@@ -138,7 +135,6 @@ dependencies.constraints {
   api("org.eclipse.jetty.compression:jetty-compression-brotli:${jetty}")
   api("org.eclipse.jetty.compression:jetty-compression-zstandard:${jetty}")
 
-  api("io.fusionauth:java-http:$fusionauthHttp")
 
   // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
   api("io.helidon.webserver:helidon-webserver:$helidon")
