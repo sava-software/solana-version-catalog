@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.42](https://github.com/sava-software/solana-version-catalog/compare/25.30.41...25.30.42) (2026-10-28)
+
+
+### Features
+
+* **deps:** carry http-servers-sava again, and drop the FusionAuth pins ([38ab881](https://github.com/sava-software/solana-version-catalog/commit/38ab881433c09c28c4058a223c25c0277beae7c3))
+
 ## [25.30.41](https://github.com/sava-software/solana-version-catalog/compare/25.30.40...25.30.41) (2026-10-28)
 
 
