@@ -1,5 +1,14 @@
 # Changelog
 
+## [25.30.41](https://github.com/sava-software/solana-version-catalog/compare/25.30.40...25.30.41) (2026-10-28)
+
+
+### Bug Fixes
+
+* **deps:** bump httpServers to 25.4.3 ([8903c64](https://github.com/sava-software/solana-version-catalog/commit/8903c64fa1edb4b261cb8b262773115fca49eade))
+* **deps:** bump savaIncidentClients to 25.5.2 ([2692d05](https://github.com/sava-software/solana-version-catalog/commit/2692d05bc9bb7aa7b5766fe0748f22aebf794a01))
+* **deps:** bump software.sava.build to 21.7.1 ([038f021](https://github.com/sava-software/solana-version-catalog/commit/038f0210fe75913dca980664e3bb3cec0cc12985))
+
 ## [25.30.40](https://github.com/sava-software/solana-version-catalog/compare/25.30.39...25.30.40) (2026-10-23)
 
 
