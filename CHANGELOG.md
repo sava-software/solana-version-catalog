@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.48](https://github.com/sava-software/solana-version-catalog/compare/25.30.47...25.30.48) (2026-11-01)
+
+
+### Bug Fixes
+
+* **deps:** bump sava to 25.13.2 ([6b37344](https://github.com/sava-software/solana-version-catalog/commit/6b3734437996ab15b4cdd96252010a7ffe974206))
+
 ## [25.30.47](https://github.com/sava-software/solana-version-catalog/compare/25.30.46...25.30.47) (2026-10-31)
 
 
