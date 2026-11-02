@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.52](https://github.com/sava-software/solana-version-catalog/compare/25.30.51...25.30.52) (2026-11-02)
+
+
+### Bug Fixes
+
+* **deps:** trigger release for dependency updates ([59dc03c](https://github.com/sava-software/solana-version-catalog/commit/59dc03c3a444ea5ac4ad53695ffd472a58b23446))
+
 ## [25.30.51](https://github.com/sava-software/solana-version-catalog/compare/25.30.50...25.30.51) (2026-11-02)
 
 
