@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.53](https://github.com/sava-software/solana-version-catalog/compare/25.30.52...25.30.53) (2026-11-04)
+
+
+### Bug Fixes
+
+* **deps:** upgrade Netty to 4.2.20.Final ([b861bb7](https://github.com/sava-software/solana-version-catalog/commit/b861bb75fb8037ac5f163026e4ebe2bbe0e59b58))
+
 ## [25.30.52](https://github.com/sava-software/solana-version-catalog/compare/25.30.51...25.30.52) (2026-11-02)
 
 
