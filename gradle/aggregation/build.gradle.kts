@@ -3,10 +3,5 @@ plugins {
 }
 
 dependencies {
-  nmcpAggregation(project(":solana-version-catalog"))
-}
-
-tasks.register("publishToGitHubPackages") {
-  group = "publishing"
-  dependsOn(":solana-version-catalog:publishMavenJavaPublicationToSavaGithubPackagesPublishRepository")
+  centralPortalAggregation(project(":solana-version-catalog"))
 }
