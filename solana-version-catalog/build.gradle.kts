@@ -34,7 +34,7 @@ val bouncyCastle = "1.86"
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "25.13.4"
 
-val savaIDLClients = "25.19.14"
+val savaIDLClients = "25.20.0"
 //val savaIDLClientsBundle = savaIDLClients
 //val savaIDLClientsSPL = savaIDLClients
 
