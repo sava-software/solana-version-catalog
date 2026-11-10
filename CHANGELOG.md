@@ -1,5 +1,21 @@
 # Changelog
 
+## [25.30.56](https://github.com/sava-software/solana-version-catalog/compare/25.30.55...25.30.56) (2026-11-10)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms ([#159](https://github.com/sava-software/solana-version-catalog/issues/159)) ([a45c83d](https://github.com/sava-software/solana-version-catalog/commit/a45c83dc74cd1ab9177924d3a9c6c21164e9eae1))
+* **deps:** bump google-cloud-kms to 2.104.0 ([4af7519](https://github.com/sava-software/solana-version-catalog/commit/4af75193ccf4772c924feed9ca6b54f1f1e565fa))
+* **deps:** bump Gradle to 9.9.0 and enable dependency verification ([32567c2](https://github.com/sava-software/solana-version-catalog/commit/32567c2f68ef99f459d1f17074bb950a670c1b19))
+* **deps:** bump Jetty to 12.1.15 ([d101046](https://github.com/sava-software/solana-version-catalog/commit/d1010467363a028e371851c0f3417e28e224d416))
+* **deps:** bump software.sava.build to 21.8.4 ([74c6427](https://github.com/sava-software/solana-version-catalog/commit/74c642767812c5db7e54c463931a7446342ac25e))
+
+
+### Miscellaneous
+
+* **build:** drop the deprecated aggregation wiring ([1149268](https://github.com/sava-software/solana-version-catalog/commit/1149268b874cdcac08bd5e3a09c55a32aedd80f2))
+
 ## [25.30.55](https://github.com/sava-software/solana-version-catalog/compare/25.30.54...25.30.55) (2026-11-06)
 
 
