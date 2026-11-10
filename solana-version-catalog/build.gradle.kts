@@ -49,7 +49,7 @@ val hikariCP = "7.1.0"
 
 // https://central.sonatype.com/artifact/org.eclipse.jetty/jetty-server
 // https://github.com/jetty/jetty.project/releases
-val jetty = "12.1.14"
+val jetty = "12.1.15"
 // https://central.sonatype.com/artifact/io.helidon.webserver/helidon-webserver
 val helidon = "4.5.6"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
