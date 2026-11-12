@@ -71,7 +71,7 @@ gradle.projectsEvaluated {
             if (!outputPath || !current || !target) {
                 throw new GradleException('Required properties: catalogPropagationOutput, catalogPropagationCurrent, catalogPropagationTarget')
             }
-            def report = [schema_version: 2, current_pom: null, target_pom: null,
+            def report = [schema_version: 3, current_pom: null, target_pom: null,
                           current_catalog: null, target_catalog: null, modules: [],
                           versions: [:], configurations: [], errors: [],
                           skipped_configurations: [], included_builds: [], artifact_checks: [],
@@ -289,6 +289,8 @@ gradle.projectsEvaluated {
             ['schema_version', 'current_pom', 'target_pom', 'current_catalog', 'target_catalog'].each { key ->
                 properties.setProperty(key, report[key]?.toString() ?: '')
             }
+            // The home this build really ran in, whatever selected it: the helper holds a cold run to its own.
+            properties.setProperty('gradle_user_home', gradle.gradleUserHomeDir.canonicalPath)
             properties.setProperty('catalogs', settingsSnapshot.catalogs ? 'inspected' :
                     settingsSnapshot.repositories == null || settingsSnapshot.repositories.empty ? 'skipped' : 'late')
             ['modules', 'configurations', 'errors', 'skipped_configurations', 'included_builds',

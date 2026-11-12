@@ -114,10 +114,20 @@ unstaged line, the pin moved to the target. Any other local change, and every
 preview, still needs a clean checkout. After a repair that touches other files,
 commit the pin and the repair locally under the consumer's rules and rerun; the
 consumer then reports CURRENT once validation passes. Consumers requiring cold-cache
-checks get a private temporary `GRADLE_USER_HOME`: only `org.gradle.java.*`
-settings are copied, and package credentials are supplied as
-`ORG_GRADLE_PROJECT_savaGithubPackages*` environment variables. No artifact cache
-is copied. Their registered checks also run in that cold home.
+checks get a private temporary Gradle home: only `org.gradle.java.*` settings are
+copied, and package credentials are supplied as
+`ORG_GRADLE_PROJECT_savaGithubPackages*` environment variables, both read from the
+home Gradle reported for the run before it. No artifact cache is copied, and an
+inherited `GRADLE_RO_DEP_CACHE` is dropped. Their registered checks also run in that
+cold home. Every cold command names the home with `--gradle-user-home` as well as in
+`GRADLE_USER_HOME`: a `gradle.user.home` system property, as `GRADLE_OPTS`,
+`JAVA_OPTS` or `JAVA_TOOL_OPTIONS` can set one, outranks the variable and would
+leave the run in the caller's warm cache, while the option outranks the property.
+The probe reports the home Gradle used, and a cold probe that ran anywhere else
+fails the validation. Gradle refuses the option twice, so a registered check or
+`gradleArgs` must not pass it. A Gradle build that a registered check starts by
+itself gets the variable but not the option, so an inherited `gradle.user.home`
+property still decides its home, and nothing checks where it ran.
 
 Sibling source composites, local `sava-build` overrides, mismatched BOM property
 overrides, unavailable artifacts, and strict verification failures in the current

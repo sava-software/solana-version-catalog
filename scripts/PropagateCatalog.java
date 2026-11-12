@@ -90,6 +90,10 @@ public class PropagateCatalog {
   record Pin(String version, String source) {
   }
 
+  /** A cold run: the private Gradle home of its commands, and their environment. */
+  record Cold(Path home, Map<String, String> environment) {
+  }
+
   static class Row {
 
     final String name;
@@ -585,13 +589,19 @@ public class PropagateCatalog {
   static void runCommand(final List<String> command,
                          final Path cwd,
                          final Path log,
-                         final Map<String, String> environment) throws Exception {
+                         final Cold cold) throws Exception {
     System.out.println("  " + cwd.getFileName() + ": running Gradle (" + log.getFileName() + ")");
-    final var builder = new ProcessBuilder(command).directory(cwd.toFile())
+    final var arguments = new ArrayList<String>(command);
+    if (cold != null) {
+      // As an option, since GRADLE_USER_HOME yields to a gradle.user.home system property, which
+      // GRADLE_OPTS, JAVA_OPTS or JAVA_TOOL_OPTIONS may set; the option outranks the property.
+      arguments.addAll(1, List.of("--gradle-user-home", cold.home.toString()));
+    }
+    final var builder = new ProcessBuilder(arguments).directory(cwd.toFile())
         .redirectErrorStream(true).redirectOutput(log.toFile());
-    if (environment != null) {
+    if (cold != null) {
       builder.environment().clear();
-      builder.environment().putAll(environment);
+      builder.environment().putAll(cold.environment);
     }
     stopped("before running " + log.getFileName());
     final var process = builder.start();
@@ -654,7 +664,7 @@ public class PropagateCatalog {
                                 final String target,
                                 final Path output,
                                 final String phase,
-                                final Map<String, String> environment) throws Exception {
+                                final Cold cold) throws Exception {
     final var reports = new ArrayList<Properties>();
     int index = 0;
     for (final var build : consumer.builds) {
@@ -679,7 +689,7 @@ public class PropagateCatalog {
           "-PcatalogPropagationCurrent=" + current, "-PcatalogPropagationTarget=" + target, "catalogPropagationReport"));
       command.addAll(consumer.gradleArgs);
       try {
-        runCommand(command, directory, log, environment);
+        runCommand(command, directory, log, cold);
       } catch (final Blocked failure) {
         // The probe stores its report before it fails the build, so its findings outrank the exit code.
         if (Files.isRegularFile(report)) {
@@ -691,9 +701,14 @@ public class PropagateCatalog {
         throw failure;
       }
       final var p = properties(report);
-      if (!"2".equals(p.getProperty("schema_version")) ||
-          !List.of("inspected", "skipped", "late").contains(p.getProperty("catalogs", ""))) {
+      if (!"3".equals(p.getProperty("schema_version")) ||
+          !List.of("inspected", "skipped", "late").contains(p.getProperty("catalogs", "")) ||
+          p.getProperty("gradle_user_home", "").isBlank()) {
         throw new Blocked("Unsupported Gradle probe report");
+      }
+      // Gradle's own word for the home it used: a cold run anywhere else resolved from a cache it was to do without.
+      if (cold != null && !sameDirectory(Path.of(p.getProperty("gradle_user_home")), cold.home)) {
+        throw new Blocked("The cold probe of build " + build + " ran in another Gradle home: " + p.getProperty("gradle_user_home"));
       }
       if (!p.getProperty("errors", "").isBlank()) {
         throw new Blocked(p.getProperty("errors").replace('\n', ';'));
@@ -710,11 +725,21 @@ public class PropagateCatalog {
     return reports;
   }
 
-  static Map<String, String> coldEnvironment(final Path destination) throws Exception {
+  static boolean sameDirectory(final Path one, final Path other) throws IOException {
+    return Files.isDirectory(one) && Files.isDirectory(other) && Files.isSameFile(one, other);
+  }
+
+  /**
+   * The cold run for a new, empty home. Toolchain settings and package credentials come from the
+   * caller's home, which is the one Gradle reported for a run in the caller's environment.
+   */
+  static Cold cold(final Path destination, final Path home) throws Exception {
     final var environment = new HashMap<String, String>(System.getenv());
+    // The helper's own commands get the option. A build that a registered check starts by itself gets
+    // this variable only, which an inherited gradle.user.home property still outranks there.
     environment.put("GRADLE_USER_HOME", destination.toString());
-    final var home = Path.of(System.getenv().getOrDefault("GRADLE_USER_HOME",
-        Path.of(System.getProperty("user.home"), ".gradle").toString()));
+    // A read-only dependency cache would serve the modules a cold run is there to fetch.
+    environment.remove("GRADLE_RO_DEP_CACHE");
     if (Files.isRegularFile(home.resolve("gradle.properties"))) {
       // Read as Gradle reads it: the last of a repeated key wins, in the properties file encoding.
       final var global = new Properties();
@@ -741,7 +766,7 @@ public class PropagateCatalog {
         }
       }
     }
-    return environment;
+    return new Cold(destination, environment);
   }
 
   static void deleteTree(final Path path) throws IOException {
@@ -756,13 +781,13 @@ public class PropagateCatalog {
                                  final Consumer consumer,
                                  final Path output,
                                  final String prefix,
-                                 final Map<String, String> environment) throws Exception {
+                                 final Cold cold) throws Exception {
     int index = 0;
     for (final var registered : consumer.validation) {
       final var command = new ArrayList<String>(registered);
       command.add("--dependency-verification=strict");
       command.addAll(consumer.gradleArgs);
-      runCommand(command, repo, output.resolve(prefix + "validation-" + index++ + ".log"), environment);
+      runCommand(command, repo, output.resolve(prefix + "validation-" + index++ + ".log"), cold);
     }
   }
 
@@ -770,14 +795,14 @@ public class PropagateCatalog {
                        final Consumer consumer,
                        final String target,
                        final Path output) throws Exception {
-    probe(repo, consumer, target, target, output, "target", null);
+    final var reports = probe(repo, consumer, target, target, output, "target", null);
     validationCommands(repo, consumer, output, "", null);
     if (consumer.coldResolve) {
       final var home = Files.createTempDirectory("catalog-cold-");
       try {
-        final var environment = coldEnvironment(home);
-        probe(repo, consumer, target, target, output, "cold", environment);
-        validationCommands(repo, consumer, output, "cold-", environment);
+        final var cold = cold(home, Path.of(reports.getFirst().getProperty("gradle_user_home")));
+        probe(repo, consumer, target, target, output, "cold", cold);
+        validationCommands(repo, consumer, output, "cold-", cold);
       } finally {
         // A leftover temporary home must neither fail a validated consumer nor hide a real failure.
         try {

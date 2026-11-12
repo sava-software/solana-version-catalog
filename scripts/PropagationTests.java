@@ -204,28 +204,53 @@ class PropagationTests {
       }
     });
     test("cold validation isolates settings and passes credentials in environment", () -> {
+      // The caller's Gradle home is selected by the variable, or by a system property, which outranks the variable.
+      for (final var selectedBy : List.of("variable", "property")) {
+        try (final var f = new Fixture(false)) {
+          final var home = f.root.resolve("gradle-home");
+          Files.createDirectories(home);
+          final var original = new Properties();
+          original.setProperty("org.gradle.java.installations.paths", "/fixture/jdk-\u00e9");
+          original.setProperty("org.gradle.java.installations.auto-download", "false");
+          original.setProperty("savaGithubPackagesUsername", "fixture-user");
+          original.setProperty("savaGithubPackagesPassword", "fixture-secret");
+          original.setProperty("savaBuildLocalRepo", "/fixture/local");
+          original.setProperty("org.gradle.jvmargs", "-Dlocal=true");
+          store(original, home.resolve("gradle.properties"));
+          f.config.setProperty("checkCold", "true");
+          f.saveConfig();
+          f.registry.setProperty("consumer.fixture.coldResolve", "true");
+          f.saveRegistry();
+          // Gradle keeps the last of a repeated key, so the cold step must accept one too.
+          Files.writeString(home.resolve("gradle.properties"), "org.gradle.jvmargs=-Dlocal=true\n", StandardOpenOption.APPEND);
+          if (selectedBy.equals("property")) {
+            f.environment.put("GRADLE_OPTS", "-Dgradle.user.home=" + home);
+            f.environment.put("GRADLE_USER_HOME", f.root.resolve("variable-home").toString());
+          }
+          f.environment.put("GRADLE_RO_DEP_CACHE", f.root.resolve("read-only-cache").toString());
+          f.commit();
+          expect(f.run("cold", true, TARGET), 0, "UPDATED");
+          equal(original, load(home.resolve("gradle.properties")));
+          require(Files.exists(f.root.resolve("cold-probe")), "cold probe did not run: home selected by the " + selectedBy);
+          require(Files.exists(f.root.resolve("cold-validation")), "cold validation did not run: home selected by the " + selectedBy);
+        }
+      }
+    });
+    test("a cold probe that Gradle ran in another home is not a cold validation", () -> {
       try (final var f = new Fixture(false)) {
-        final var home = f.root.resolve("gradle-home");
-        Files.createDirectories(home);
-        final var original = new Properties();
-        original.setProperty("org.gradle.java.installations.paths", "/fixture/jdk-\u00e9");
-        original.setProperty("org.gradle.java.installations.auto-download", "false");
-        original.setProperty("savaGithubPackagesUsername", "fixture-user");
-        original.setProperty("savaGithubPackagesPassword", "fixture-secret");
-        original.setProperty("savaBuildLocalRepo", "/fixture/local");
-        original.setProperty("org.gradle.jvmargs", "-Dlocal=true");
-        store(original, home.resolve("gradle.properties"));
-        f.config.setProperty("checkCold", "true");
+        // A Gradle that keeps the home its system property names, whatever the cold command asks for.
+        f.config.setProperty("ignoreHomeOption", "true");
         f.saveConfig();
+        f.environment.put("GRADLE_OPTS", "-Dgradle.user.home=" + f.root.resolve("gradle-home"));
+        // The other home exists, as a caller's does: the helper has to tell two directories apart.
+        Files.createDirectories(f.root.resolve("gradle-home"));
         f.registry.setProperty("consumer.fixture.coldResolve", "true");
         f.saveRegistry();
-        // Gradle keeps the last of a repeated key, so the cold step must accept one too.
-        Files.writeString(home.resolve("gradle.properties"), "org.gradle.jvmargs=-Dlocal=true\n", StandardOpenOption.APPEND);
         f.commit();
-        expect(f.run("cold", true, TARGET), 0, "UPDATED");
-        equal(original, load(home.resolve("gradle.properties")));
-        require(Files.exists(f.root.resolve("cold-probe")), "cold probe did not run");
-        require(Files.exists(f.root.resolve("cold-validation")), "cold validation did not run");
+        final var result = f.run("elsewhere", true, TARGET);
+        expect(result, 1, "NEEDS REPAIR");
+        contains(result.summary, "The cold probe of build . ran in another Gradle home: " + f.root.resolve("gradle-home"));
+        contains(Files.readString(f.pin), "solanaBOMVersion \t= " + TARGET);
       }
     });
     test("unknown consumer rejected", () -> {
@@ -515,6 +540,43 @@ class PropagationTests {
         contains(Files.readString(f.root.resolve("apply/fixture/validation-0.log")), "BUILD SUCCESSFUL");
       }
     });
+    test("Gradle: cold validation runs in a Gradle home of its own, whatever selects the caller's", () -> {
+      try (final var f = new Fixture(true)) {
+        // A system property outranks GRADLE_USER_HOME, so the variable alone would leave the cold runs in this home.
+        final var ambient = f.root.resolve("property-home");
+        f.environment.put("GRADLE_OPTS", "-Dgradle.user.home=" + ambient);
+        f.environment.put("GRADLE_RO_DEP_CACHE", f.root.resolve("read-only-cache").toString());
+        Files.writeString(f.repo.resolve("build.gradle"), """
+          def home = gradle.gradleUserHomeDir
+          tasks.named('check') {
+              doLast {
+                  def line = [home.canonicalPath, System.getenv('GRADLE_RO_DEP_CACHE') ?: 'none', System.getenv('GRADLE_USER_HOME')].join('|')
+                  new File(System.getenv('CATALOG_TEST_FIXTURE'), 'homes.txt') << line + System.lineSeparator()
+              }
+          }
+          """, StandardOpenOption.APPEND);
+        f.registry.setProperty("consumer.fixture.coldResolve", "true");
+        f.saveRegistry();
+        f.commit();
+        expect(f.run("cold", true, TARGET), 0, "UPDATED");
+        // The registered check, as Gradle itself saw it: once in the caller's home, once in the cold one.
+        final var checks = Files.readAllLines(f.root.resolve("homes.txt"));
+        equal(2, checks.size());
+        equal(ambient + "|" + f.root.resolve("read-only-cache") + "|" + f.root.resolve("gradle-home"), checks.get(0));
+        final var check = List.of(checks.get(1).split("\\|"));
+        final var cold = Path.of(check.get(0));
+        require(cold.getFileName().toString().startsWith("catalog-cold-"), "The cold check ran in " + cold);
+        equal("none", check.get(1));
+        // The variable names the cold home as the helper created it, which Gradle reports in its canonical form.
+        equal(cold.getFileName(), Path.of(check.get(2)).getFileName());
+        // The probes report the home they ran in.
+        equal(ambient.toString(), load(f.root.resolve("cold/fixture/target-0.properties")).getProperty("gradle_user_home"));
+        equal(cold.toString(), load(f.root.resolve("cold/fixture/cold-0.properties")).getProperty("gradle_user_home"));
+        require(Files.isDirectory(ambient.resolve("caches")), "The caller's home was not the one in use");
+        require(!Files.exists(f.root.resolve("gradle-home")), "The variable selected a home although the property outranks it");
+        require(!Files.exists(cold), "The cold home was left behind");
+      }
+    });
     test("Gradle: unused constraint ignored", () -> {
       try (final var f = new Fixture(true)) {
         f.boms("1");
@@ -714,6 +776,8 @@ class PropagationTests {
     final Path pin = repo.resolve("gradle/sava.properties");
     final Properties config = new Properties();
     final Properties registry = new Properties();
+    /** Set for the helper after the defaults, GRADLE_OPTS included. */
+    final Map<String, String> environment = new HashMap<>();
     final boolean real;
 
     Fixture(final boolean real) throws Exception {
@@ -878,6 +942,7 @@ class PropagationTests {
       // The caller's own Gradle overrides must not reach the fixtures.
       builder.environment().keySet().removeIf(key -> key.startsWith("ORG_GRADLE_PROJECT_") || key.equals("GRADLE_OPTS"));
       builder.environment().putAll(Map.of("GRADLE_USER_HOME", root.resolve("gradle-home").toString(), "CATALOG_TEST_FIXTURE", root.toString(), "CATALOG_TEST_KEEP", "fixture-sentinel"));
+      builder.environment().putAll(environment);
       if (Files.isDirectory(root.resolve("bin"))) {
         builder.environment().merge("PATH", root.resolve("bin").toString(), (path, bin) -> bin + File.pathSeparator + path);
       }
@@ -925,9 +990,13 @@ class PropagationTests {
         values.put(arg.substring(2, split), arg.substring(split + 1));
       }
     }
-    final boolean cold = !Path.of(System.getenv("GRADLE_USER_HOME")).equals(root.resolve("gradle-home"));
+    final var home = fakeHome(args, config);
+    final boolean cold = !home.equals(root.resolve("gradle-home"));
     if (cold && Boolean.parseBoolean(config.getProperty("checkCold"))) {
-      final var copied = load(Path.of(System.getenv("GRADLE_USER_HOME"), "gradle.properties"));
+      require(System.getenv("GRADLE_RO_DEP_CACHE") == null, "A cold run inherited the read-only dependency cache");
+      // The variable names the cold home too: the option does not reach a build that a check starts by itself.
+      equal(home.toString(), System.getenv("GRADLE_USER_HOME"));
+      final var copied = load(home.resolve("gradle.properties"));
       equal(Set.of("org.gradle.java.installations.paths", "org.gradle.java.installations.auto-download"), copied.stringPropertyNames());
       // Read as Gradle reads it, so the copy must be written in the properties file encoding.
       equal("/fixture/jdk-\u00e9", copied.getProperty("org.gradle.java.installations.paths"));
@@ -982,7 +1051,8 @@ class PropagationTests {
     final var nested = Path.of("").toRealPath().equals(root.resolve("consumer")) ? "" : config.getProperty("nested", "");
     final boolean inspected = !nested.equals("skipped");
     final var report = new Properties();
-    report.setProperty("schema_version", "2");
+    report.setProperty("schema_version", "3");
+    report.setProperty("gradle_user_home", home.toString());
     report.setProperty("catalogs", inspected ? "inspected" : "skipped");
     report.setProperty("modules", Boolean.parseBoolean(config.getProperty("noModules")) ? ""
         : inspected ? "fixture:used\nfixture:leaf" : "fixture:tool");
@@ -1011,6 +1081,23 @@ class PropagationTests {
     if (config.containsKey("probeErrors")) {
       System.exit(1);
     }
+  }
+
+  /** The home as Gradle chooses it: the option outranks a gradle.user.home property in GRADLE_OPTS, and that the variable. */
+  static Path fakeHome(final String[] args, final Properties config) {
+    if (!Boolean.parseBoolean(config.getProperty("ignoreHomeOption"))) {
+      for (int i = 0; i + 1 < args.length; i++) {
+        if (args[i].equals("--gradle-user-home")) {
+          return Path.of(args[i + 1]);
+        }
+      }
+    }
+    for (final var option : System.getenv().getOrDefault("GRADLE_OPTS", "").split(" ")) {
+      if (option.startsWith("-Dgradle.user.home=")) {
+        return Path.of(option.substring("-Dgradle.user.home=".length()));
+      }
+    }
+    return Path.of(System.getenv("GRADLE_USER_HOME"));
   }
 
   static Properties load(final Path path) throws IOException {
