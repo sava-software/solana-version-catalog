@@ -17,6 +17,8 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -27,6 +29,36 @@ class PropagationTests {
 
   static final String OLD = "25.1.0";
   static final String TARGET = "25.1.1";
+  /**
+   * Text that quotes a secret beside a backslash and a quote, each with what the masking is to make of it.
+   * A backslash before a quote reads two ways, as an escape that keeps the quote inside the value and as
+   * the value's last character, and what either reading hides stays hidden. The word after each value
+   * stays, so that hiding the rest of the line does not pass.
+   */
+  static final List<List<String>> ESCAPES = List.of(
+      // A quote escaped inside a value stays inside it, in a plain value and in one quoted within a string.
+      List.of("password=\"ab\\\"in-quote-tail\" kept", "password=[redacted] kept"),
+      List.of("{\\\"password\\\":\\\"cd\\\\\\\"in-nested-tail\\\"} and", "{\\\"password\\\":[redacted]} and"),
+      // An escaped backslash does not hide the quote that closes the value, nor does an escaped opening one a plain close.
+      List.of("password=\"in-backslash\\\\\" shown", "password=[redacted] shown"),
+      List.of("{\\\"password\\\":\\\"in-plain-close\" kept", "{\\\"password\\\":[redacted] kept"),
+      // Read the other way, the quote closes the value and a secret of its own follows, by name or after a scheme word.
+      List.of("password=\"x\\\" and token=\"in-other-reading\" or", "password=[redacted] or"),
+      List.of("password=\"p\\\" Bearer \"in-scheme-reading\" end", "password=[redacted] end"),
+      // A credential after a scheme word runs on through a masked value: where the readings agree, where only
+      // the other reading takes the value for one, and where only the escape reading takes all of it.
+      List.of("Bearer k=token=\"a b\"in-view-tail last", "Bearer [redacted] last"),
+      List.of("password=\"q\\\" Bearer k=token=\"c d\"in-other-view-tail more", "password=[redacted] more"),
+      List.of("Bearer k=token=\"e\\\" f\"in-escape-view-tail last", "Bearer [redacted] last"),
+      // Masking an address keeps the backslashes that end it, or the quote after them would close the value.
+      List.of("password=\"https://h.example/x?q=in-url-query\\\"in-url-tail\" after", "password=[redacted] after"),
+      List.of("{\\\"token\\\":\\\"https://h.example/a\\\\\\\"in-nested-url\\\"} done", "{\\\"token\\\":[redacted]} done"),
+      List.of("password=\"https://h.example/a\\b\\\"in-mid-tail\" after", "password=[redacted] after"),
+      // A single quote opens a value as a double one does.
+      List.of("password='in-single in-quoted' after", "password=[redacted] after"),
+      // A value without quotes ends at a comma, and a name without a value is no secret.
+      List.of("token=in-unquoted, then", "token=[redacted], then"),
+      List.of("token= , password=in-retry, done", "token= , password=[redacted], done"));
   static final Path SOURCE = Path.of(System.getProperty("jdk.launcher.sourcefile", "scripts/PropagationTests.java")).toAbsolutePath();
   static final Path HELPER = SOURCE.resolveSibling("PropagateCatalog.java");
   static final String JAVA = Path.of(System.getProperty("java.home"), "bin/java").toString();
@@ -114,6 +146,21 @@ class PropagationTests {
         contains(console, "NEEDS REPAIR [main @ ");
         for (final var secret : List.of("in-address", "in-query", "in-header", "in-json", "after-scheme",
             "dXNlckxpbmVhcg", "in-quotes", "in-tail", "in-escaped", "in spaces", "in-apostrophe")) {
+          require(!result.summary.contains(secret) && !console.contains(secret),
+              secret + " reached the summary or the console:\n" + result.summary + console);
+        }
+      }
+    });
+    test("a secret quoted beside a backslash and a quote is masked whole", () -> {
+      try (final var f = new Fixture(false)) {
+        f.config.setProperty("validationFail", "escapes");
+        f.saveConfig();
+        f.commit();
+        final var result = f.run("escapes", true, TARGET);
+        expect(result, 1, "NEEDS REPAIR");
+        contains(result.summary, "Command exited 1: Execution failed for task ':check'. " + join(ESCAPES, List::getLast) + "; inspect ");
+        final var console = Files.readString(f.root.resolve("escapes.log"));
+        for (final var secret : secrets(ESCAPES)) {
           require(!result.summary.contains(secret) && !console.contains(secret),
               secret + " reached the summary or the console:\n" + result.summary + console);
         }
@@ -670,17 +717,24 @@ class PropagationTests {
     });
     test("Gradle: a resolution failure that quotes credentials is masked in the probe report", () -> {
       try (final var f = new Fixture(true)) {
-        Files.writeString(f.repo.resolve("build.gradle"), "configurations.runtimeClasspath.incoming.beforeResolve {\n"
-            + "    throw new GradleException('refused Bearer in-probe_1 with \"token\":\"in-json\" at https://user:in-address@repo.example/x?key=in-query')\n}\n",
+        // Read from a file, so that no Groovy string literal stands between this text and the exception.
+        Files.writeString(f.repo.resolve("message.txt"), "refused Bearer in-probe_1 with \"token\":\"in-json\" "
+            + join(ESCAPES, List::getFirst) + " at https://user:in-address@repo.example/x?key=in-query");
+        Files.writeString(f.repo.resolve("build.gradle"), "def refusal = file('message.txt').text\n"
+            + "configurations.runtimeClasspath.incoming.beforeResolve {\n    throw new GradleException(refusal)\n}\n",
             StandardOpenOption.APPEND);
         f.commit();
         final var result = f.run("masked", true, TARGET);
         expect(result, 1, "BLOCKED");
-        // The probe masks what it quotes from an exception; the helper relays that text as written.
+        // The probe masks what it quotes from an exception, by the helper's rules; the helper relays that text as written.
         final var errors = load(f.root.resolve("masked/fixture/baseline-0.properties")).getProperty("errors");
-        contains(errors, "refused Bearer [redacted] with \"token\":[redacted] at https://repo.example/x?redacted");
-        contains(result.summary, "refused Bearer [redacted] with \"token\":[redacted] at https://repo.example/x?redacted");
-        for (final var secret : List.of("in-probe_1", "in-json", "in-address", "in-query")) {
+        final var masked = "refused Bearer [redacted] with \"token\":[redacted] " + join(ESCAPES, List::getLast)
+            + " at https://repo.example/x?redacted";
+        contains(errors, masked);
+        contains(result.summary, masked);
+        final var secrets = new ArrayList<>(List.of("in-probe_1", "in-json", "in-address", "in-query"));
+        secrets.addAll(secrets(ESCAPES));
+        for (final var secret : secrets) {
           require(!errors.contains(secret) && !result.summary.contains(secret), secret + " was not masked:\n" + errors);
         }
         equal("", f.git("status", "--porcelain"));
@@ -1027,6 +1081,11 @@ class PropagationTests {
         Files.move(written, root.resolve("validation.pid"), StandardCopyOption.ATOMIC_MOVE);
         Thread.sleep(TimeUnit.MINUTES.toMillis(3));
       }
+      if (config.getProperty("validationFail", "false").equals("escapes")) {
+        System.out.print("\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':check'.\n> "
+            + join(ESCAPES, List::getFirst) + "\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n");
+        System.exit(1);
+      }
       if (Boolean.parseBoolean(config.getProperty("validationFail"))) {
         // Shaped like a Gradle failure whose message quotes credentials in the forms the helper must mask.
         System.out.print("""
@@ -1098,6 +1157,21 @@ class PropagationTests {
       }
     }
     return Path.of(System.getenv("GRADLE_USER_HOME"));
+  }
+
+  static String join(final List<List<String>> cases, final Function<List<String>, String> side) {
+    return String.join(" ", cases.stream().map(side).toList());
+  }
+
+  /** The words of the cases that stand for a secret: those that start with "in-". */
+  static List<String> secrets(final List<List<String>> cases) {
+    final var words = Pattern.compile("in-[a-z-]+").matcher(join(cases, List::getFirst));
+    final var found = new ArrayList<String>();
+    while (words.find()) {
+      found.add(words.group());
+    }
+    require(found.size() >= cases.size(), "The cases name too few secrets");
+    return found;
   }
 
   static Properties load(final Path path) throws IOException {

@@ -47,11 +47,12 @@ public class PropagateCatalog {
   static final Pattern PIN = Pattern.compile("(?m)^(solanaBOMVersion[ \\t]*=[ \\t]*)([^\\r\\n]*)(\\r?$)");
   static final Pattern URL = Pattern.compile("(?i)(https?://)(?:[^\\s/'\"<>@]*@)?([^\\s'\"<>?]*)(\\?[^\\s'\"<>]*)?");
   /**
-   * A named secret: a quoted value through its closing quote, any other up to white space, a comma or a
-   * semicolon. Only character-class loops, so that no input can exhaust the stack or the time.
+   * A named secret up to its value: the name, the separator, and a scheme word before the value. Only
+   * character-class loops, so that no input can exhaust the stack or the time; {@link #valueEnd} finds
+   * the end of the value, which a pattern cannot do for a quoted one without a loop over a group.
    */
   static final Pattern SECRET = Pattern.compile(
-      "(?i)(password|token|authorization)((?:\\\\?[\"'])?\\s*[:=]\\s*)(?:(?:bearer|basic|token)\\s+)?(?:\\\\?\"[^\"\\r\\n]*\"?|\\\\?'[^'\\r\\n]*'?|[^\\s,;]+)");
+      "(?i)(password|token|authorization)((?:\\\\?[\"'])?\\s*[:=]\\s*)(?:(?:bearer|basic|token)\\s+)?");
   /** A credential after its scheme word alone; a plain lower-case word after it is prose and stays. */
   static final Pattern SCHEME = Pattern.compile(
       "(?i:\\b(bearer|basic))(\\s+)(?![a-z]+[.)\\]\"'!?:]*(?:[\\s,;]|\\z))[^\\s,;]+");
@@ -632,8 +633,98 @@ public class PropagateCatalog {
 
   static String redact(final String text) {
     final var addresses = URL.matcher(text).replaceAll(match ->
-        Matcher.quoteReplacement(match.group(1) + match.group(2) + (match.group(3) == null ? "" : "?redacted")));
-    return SCHEME.matcher(SECRET.matcher(addresses).replaceAll("$1$2[redacted]")).replaceAll("$1$2[redacted]");
+        Matcher.quoteReplacement(match.group(1) + match.group(2) + (match.group(3) == null ? "" : "?redacted" + backslashesAtEnd(match.group(3)))));
+    return maskCredentials(addresses);
+  }
+
+  /** The backslashes that end a query string, which stay: without them a quote escaped after the address would read as a closing one. */
+  static String backslashesAtEnd(final String text) {
+    int start = text.length();
+    while (start > 0 && text.charAt(start - 1) == '\\') {
+      start--;
+    }
+    return text.substring(start);
+  }
+
+  /**
+   * Replaces the value of each named secret, with a scheme word before it, and each credential after a
+   * scheme word alone; the name, the separator and the lone scheme word stay. A backslash before a quote is
+   * read both ways, as an escape that keeps the quote inside the value and as a character of the value that
+   * the quote then closes: the text does not say which one its writer meant, so each reading is carried
+   * through and what either one hides is hidden.
+   */
+  static String maskCredentials(final String text) {
+    final var spans = new ArrayList<int[]>();
+    for (final boolean escapes : new boolean[]{true, false}) {
+      // What the scheme pattern is to see in place of a value: no word, no white space, no end of a sentence.
+      final var view = new StringBuilder(text);
+      final var secret = SECRET.matcher(text);
+      int search = 0;
+      while (search <= text.length() && secret.find(search)) {
+        int end = valueEnd(text, secret.end(), escapes);
+        if (end == secret.end()) {
+          // Nothing follows the scheme word, so that word is the value.
+          end = valueEnd(text, secret.end(2), escapes);
+        }
+        if (end == secret.end(2)) {
+          // A name and a separator with no value: not a secret, and another name may start inside it.
+          search = secret.start() + 1;
+        } else {
+          spans.add(new int[]{secret.end(2), end});
+          for (int i = secret.end(2); i < end; i++) {
+            view.setCharAt(i, '[');
+          }
+          search = end;
+        }
+      }
+      final var scheme = SCHEME.matcher(view);
+      while (scheme.find()) {
+        spans.add(new int[]{scheme.end(2), scheme.end()});
+      }
+    }
+    spans.sort(Comparator.comparingInt(span -> span[0]));
+    final var masked = new StringBuilder();
+    int done = 0;
+    for (final var span : spans) {
+      if (span[0] >= done) {
+        masked.append(text, done, span[0]).append("[redacted]");
+      }
+      done = Math.max(done, span[1]);
+    }
+    return masked.append(text, done, text.length()).toString();
+  }
+
+  /**
+   * Where the value that starts at {@code start} ends. A quoted value runs through its closing quote, or to
+   * the end of the line without one; any other value runs to white space, a comma or a semicolon. With
+   * {@code escapes}, a backslash escapes: after a plain opening quote the closing one is the first quote
+   * with an even number of backslashes before it, and after an opening quote that is itself escaped once,
+   * as in a document quoted inside a string, it is the first quote escaped the same way, or a plain one.
+   * Without, the first quote of the opening kind closes the value.
+   */
+  static int valueEnd(final String text, final int start, final boolean escapes) {
+    final boolean escaped = text.startsWith("\\", start);
+    final int open = escaped ? start + 1 : start;
+    if (open < text.length() && (text.charAt(open) == '"' || text.charAt(open) == '\'')) {
+      final char quote = text.charAt(open);
+      int backslashes = 0;
+      for (int i = open + 1; i < text.length(); i++) {
+        final char c = text.charAt(i);
+        if (c == '\r' || c == '\n') {
+          return i;
+        }
+        if (c == quote && (!escapes || backslashes % 2 == 0 || escaped && backslashes % 4 == 1)) {
+          return i + 1;
+        }
+        backslashes = c == '\\' ? backslashes + 1 : 0;
+      }
+      return text.length();
+    }
+    int end = start;
+    while (end < text.length() && " \t\n\u000B\f\r,;".indexOf(text.charAt(end)) < 0) {
+      end++;
+    }
+    return end;
   }
 
   /** Gradle's own statement of the failure, so that the summary says why without opening the log. */

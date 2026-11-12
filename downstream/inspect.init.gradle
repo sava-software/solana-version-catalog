@@ -84,24 +84,102 @@ gradle.projectsEvaluated {
                                      included_builds: 'reported only; invoke this probe separately for standalone internal builds',
                                      catalogs: 'read through the version-catalog API where this build declares settings repositories; skipped otherwise, and late where they were added after the settings hook of this probe']]
             def error = { String message -> report.errors.add(message) }
+            // The helper's valueEnd and maskCredentials, rule for rule. A quoted value runs through its closing
+            // quote, or to the end of the line. With escapes, the closing quote after a plain opening one is
+            // the first with an even number of backslashes before it, and after an opening quote escaped once
+            // the first quote escaped the same way, or a plain one; without, the first quote closes the value.
+            def valueEnd = { String text, int start, boolean escapes ->
+                char doubleQuote = '"'
+                char singleQuote = '\''
+                char backslash = '\\'
+                char carriageReturn = '\r'
+                char lineFeed = '\n'
+                boolean escaped = text.startsWith('\\', start)
+                int open = escaped ? start + 1 : start
+                if (open < text.length() && (text.charAt(open) == doubleQuote || text.charAt(open) == singleQuote)) {
+                    char quote = text.charAt(open)
+                    int backslashes = 0
+                    for (int i = open + 1; i < text.length(); i++) {
+                        char c = text.charAt(i)
+                        if (c == carriageReturn || c == lineFeed) {
+                            return i
+                        }
+                        if (c == quote && (!escapes || backslashes % 2 == 0 || (escaped && backslashes % 4 == 1))) {
+                            return i + 1
+                        }
+                        backslashes = c == backslash ? backslashes + 1 : 0
+                    }
+                    return text.length()
+                }
+                int end = start
+                while (end < text.length() && ' \t\n\u000B\f\r,;'.indexOf((int) text.charAt(end)) < 0) {
+                    end++
+                }
+                return end
+            }
+            // A named secret's value, with a scheme word before it, and a credential after a scheme word alone
+            // (a plain lower-case word there is prose). A backslash before a quote is read both ways, as an
+            // escape and as a character of the value, and what either reading hides is hidden.
+            def maskCredentials = { String text ->
+                def spans = []
+                [true, false].each { boolean escapes ->
+                    // What the scheme pattern is to see in place of a value: no word, no white space.
+                    def view = new StringBuilder(text)
+                    def secret = text =~ /(?i)(password|token|authorization)((?:\\?["'])?\s*[:=]\s*)(?:(?:bearer|basic|token)\s+)?/
+                    int search = 0
+                    while (search <= text.length() && secret.find(search)) {
+                        int end = valueEnd(text, secret.end(), escapes)
+                        if (end == secret.end()) {
+                            end = valueEnd(text, secret.end(2), escapes)
+                        }
+                        if (end == secret.end(2)) {
+                            search = secret.start() + 1
+                        } else {
+                            spans.add([secret.end(2), end])
+                            for (int i = secret.end(2); i < end; i++) {
+                                view.setCharAt(i, (char) '[')
+                            }
+                            search = end
+                        }
+                    }
+                    def scheme = view =~ /(?i:\b(bearer|basic))(\s+)(?![a-z]+[.)\]"'!?:]*(?:[\s,;]|\z))[^\s,;]+/
+                    while (scheme.find()) {
+                        spans.add([scheme.end(2), scheme.end()])
+                    }
+                }
+                spans.sort { it[0] }
+                def masked = new StringBuilder()
+                int done = 0
+                spans.each { span ->
+                    if (span[0] >= done) {
+                        masked.append(text, done, (int) span[0]).append('[redacted]')
+                    }
+                    done = Math.max(done, (int) span[1])
+                }
+                masked.append(text, done, text.length()).toString()
+            }
             def failureDetail = { Throwable failure ->
                 def causes = []
                 def seen = new HashSet()
                 while (failure != null && seen.add(failure) && causes.size() < 6) {
                     def message = (failure.message ?: '').replaceAll(/[\r\n]+/, ' ')
-                    message = message.replaceAll(/https?:\/\/[^\s'"<>]+/) { address ->
+                    message = message.replaceAll(/https?:\/\/[^\s'"<>]+/) { String address ->
                         try {
                             def uri = new URI(address)
                             return new URI(uri.scheme, null, uri.host, uri.port, uri.path,
                                     uri.query == null ? null : 'redacted', null).toString()
                         } catch (Exception ignored) {
-                            return '[repository URL]'
+                            // An address with a backslash does not parse. The backslashes that end it stay:
+                            // without them a quote escaped after the address would read as a closing one.
+                            char backslash = '\\'
+                            int end = address.length()
+                            while (end > 0 && address.charAt(end - 1) == backslash) {
+                                end--
+                            }
+                            return '[repository URL]' + address.substring(end)
                         }
                     }
-                    // The same two patterns as the helper's SECRET and SCHEME: a named secret, then a
-                    // credential after its scheme word alone (a plain lower-case word there is prose).
-                    message = message.replaceAll(/(?i)(password|token|authorization)((?:\\?["'])?\s*[:=]\s*)(?:(?:bearer|basic|token)\s+)?(?:\\?"[^"\r\n]*"?|\\?'[^'\r\n]*'?|[^\s,;]+)/, '$1$2[redacted]')
-                    message = message.replaceAll(/(?i:\b(bearer|basic))(\s+)(?![a-z]+[.)\]"'!?:]*(?:[\s,;]|\z))[^\s,;]+/, '$1$2[redacted]')
+                    message = maskCredentials(message)
                     causes.add("${failure.class.simpleName}: ${message.take(1200)}")
                     failure = failure.cause
                 }
