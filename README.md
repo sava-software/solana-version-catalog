@@ -11,6 +11,9 @@ Both views are published under a single set of coordinates:
 software.sava:solana-version-catalog
 ```
 
+After publishing a release, use the [downstream propagation workflow](downstream/README.md)
+to preview, prepare, and validate BOM pin updates in affected Sava and GLAM consumers.
+
 The snippets below use `25.22.11` as a placeholder — check the Maven Central badge above or
 the [releases page](https://github.com/sava-software/solana-version-catalog/releases) for the latest version.
 

@@ -1,0 +1,307 @@
+import org.gradle.api.artifacts.VersionCatalogsExtension
+import org.gradle.api.artifacts.component.ModuleComponentIdentifier
+import org.gradle.api.artifacts.component.ModuleComponentSelector
+import org.gradle.api.artifacts.component.ProjectComponentIdentifier
+import org.gradle.api.artifacts.result.ResolvedDependencyResult
+import org.gradle.api.artifacts.result.UnresolvedDependencyResult
+import org.gradle.api.attributes.Category
+import org.gradle.api.tasks.SourceSetContainer
+import java.security.MessageDigest
+import java.util.concurrent.ConcurrentHashMap
+
+// Read-only dependency inspection. Run separately for every standalone build.
+// No task dependency is added: resolving a project artifact does not build it.
+// Configuration cache must be disabled by the caller.
+def settingsSnapshot = [:]
+def buildTree = gradle
+while (buildTree.parent != null) buildTree = buildTree.parent
+def directoryKey = '_catalogPropagationBuildDirectories'
+if (!buildTree.extensions.extraProperties.has(directoryKey)) {
+    buildTree.extensions.extraProperties.set(directoryKey, new ConcurrentHashMap<String, File>())
+}
+def buildDirectories = buildTree.extensions.extraProperties.get(directoryKey)
+gradle.settingsEvaluated { settings ->
+    settingsSnapshot.root = settings.settingsDir.canonicalFile
+    settingsSnapshot.localOverride = settings.providers.gradleProperty('savaBuildLocalRepo').orNull
+    settingsSnapshot.bomVersion = settings.providers.gradleProperty('solanaBOMVersion').orNull
+    settingsSnapshot.buildscript = settings.buildscript
+    buildDirectories.put(gradle.buildPath, settings.settingsDir.canonicalFile)
+    // Included plugin builds need not have repositories for the published catalog.
+    // Add one import per reserved catalog only in the build explicitly invoked.
+    // Gradle resolves a catalog import through settings repositories alone. A standalone
+    // build that declares its repositories in build scripts (the jmh and soak shape) has
+    // none, so it skips the import and says so: the published catalogs are the same for
+    // every build of a checkout, and the helper reads them from a build that can.
+    // This hook runs before any hook the settings script registers, so repositories that
+    // such a later callback adds arrive after the decision; the report then says "late".
+    if (gradle == buildTree) {
+        settingsSnapshot.repositories = settings.dependencyResolutionManagement.repositories
+        settingsSnapshot.catalogs = !settingsSnapshot.repositories.empty
+        ['current': 'catalogPropagationCurrent', 'target': 'catalogPropagationTarget'].each { role, propertyName ->
+            def version = settings.providers.gradleProperty(propertyName).orNull
+            if (!version) throw new GradleException("Required property: ${propertyName}")
+            def name = "catalogPropagation${role.capitalize()}Inspection"
+            def catalogs = settings.dependencyResolutionManagement.versionCatalogs
+            if (catalogs.findByName(name) != null) throw new GradleException("Reserved version catalog ${name} already exists")
+            if (settingsSnapshot.catalogs) {
+                catalogs.create(name) {
+                    from("software.sava:solana-version-catalog:${version}")
+                }
+            }
+        }
+    }
+}
+
+gradle.projectsEvaluated {
+    def root = gradle.rootProject
+    if (root.tasks.findByName('catalogPropagationReport') != null) {
+        throw new GradleException('Reserved task catalogPropagationReport already exists')
+    }
+    root.tasks.register('catalogPropagationReport') {
+        group = 'verification'
+        description = 'Inspects actual dependency usage for catalog propagation without changing the build.'
+        notCompatibleWithConfigurationCache('Inspects configured projects and dependency graphs')
+        doLast {
+            def property = { String name -> root.providers.gradleProperty(name).orNull }
+            def outputPath = property('catalogPropagationOutput')
+            def current = property('catalogPropagationCurrent')
+            def target = property('catalogPropagationTarget')
+            def checkoutRoot = property('catalogPropagationCheckoutRoot') ?
+                    new File(property('catalogPropagationCheckoutRoot')).canonicalFile : settingsSnapshot.root
+            if (!outputPath || !current || !target) {
+                throw new GradleException('Required properties: catalogPropagationOutput, catalogPropagationCurrent, catalogPropagationTarget')
+            }
+            def report = [schema_version: 2, current_pom: null, target_pom: null,
+                          current_catalog: null, target_catalog: null, modules: [],
+                          versions: [:], configurations: [], errors: [],
+                          skipped_configurations: [], included_builds: [], artifact_checks: [],
+                          project_substitutions: [],
+                          coverage: [projects: 'all projects in this build',
+                                     dependencies: 'non-constraint edges, including transitive dependencies and normal project dependencies',
+                                     configurations: 'all source-set compile/runtime/annotation-processor classpaths; other resolvable configurations with dependencies; settings/project buildscript classpaths',
+                                     exclusions: 'legacy default configuration, verification-category report/aggregation inputs, and other configurations with no declared dependencies (listed as skipped)',
+                                     settings_plugins: 'Gradle resolves settings plugins during configuration; their private graph is not exposed by this report',
+                                     included_builds: 'reported only; invoke this probe separately for standalone internal builds',
+                                     catalogs: 'read through the version-catalog API where this build declares settings repositories; skipped otherwise, and late where they were added after the settings hook of this probe']]
+            def error = { String message -> report.errors.add(message) }
+            def failureDetail = { Throwable failure ->
+                def causes = []
+                def seen = new HashSet()
+                while (failure != null && seen.add(failure) && causes.size() < 6) {
+                    def message = (failure.message ?: '').replaceAll(/[\r\n]+/, ' ')
+                    message = message.replaceAll(/https?:\/\/[^\s'"<>]+/) { address ->
+                        try {
+                            def uri = new URI(address)
+                            return new URI(uri.scheme, null, uri.host, uri.port, uri.path,
+                                    uri.query == null ? null : 'redacted', null).toString()
+                        } catch (Exception ignored) {
+                            return '[repository URL]'
+                        }
+                    }
+                    // The same two patterns as the helper's SECRET and SCHEME: a named secret, then a
+                    // credential after its scheme word alone (a plain lower-case word there is prose).
+                    message = message.replaceAll(/(?i)(password|token|authorization)((?:\\?["'])?\s*[:=]\s*)(?:(?:bearer|basic|token)\s+)?(?:\\?"[^"\r\n]*"?|\\?'[^'\r\n]*'?|[^\s,;]+)/, '$1$2[redacted]')
+                    message = message.replaceAll(/(?i:\b(bearer|basic))(\s+)(?![a-z]+[.)\]"'!?:]*(?:[\s,;]|\z))[^\s,;]+/, '$1$2[redacted]')
+                    causes.add("${failure.class.simpleName}: ${message.take(1200)}")
+                    failure = failure.cause
+                }
+                causes.join(' -> ')
+            }
+            if (gradle.startParameter.dependencyVerificationMode.toString() != 'STRICT') {
+                error('Strict dependency verification is required for published-resolution inspection')
+            }
+            if (settingsSnapshot.localOverride?.trim() || property('savaBuildLocalRepo')?.trim()) {
+                error('savaBuildLocalRepo is set: published plugin resolution cannot be certified')
+            }
+            def effectivePin = property('solanaBOMVersion') ?: settingsSnapshot.bomVersion
+            if (effectivePin && effectivePin != current) {
+                error("Effective solanaBOMVersion ${effectivePin} differs from requested current version ${current}")
+            }
+            gradle.includedBuilds.each { included ->
+                def directory = included.projectDir.canonicalFile
+                report.included_builds.add([name: included.name, directory: directory.path])
+                if (!directory.toPath().startsWith(checkoutRoot.toPath())) {
+                    error("External included build ${included.name}: published resolution cannot be certified")
+                }
+            }
+
+            def versions = new TreeMap<String, Set<String>>()
+            def inspectedProjects = new LinkedHashSet()
+            def inspect = { project, configuration, String scope ->
+                def label = "${project.path}:${scope}:${configuration.name}"
+                report.configurations.add(label)
+                try {
+                    def seen = new HashSet()
+                    def visit
+                    visit = { component ->
+                        if (seen.add(component.id)) {
+                            component.dependencies.each { edge ->
+                                // BOM constraints describe available versions, not actual use.
+                                if (!edge.constraint) {
+                                    if (edge instanceof UnresolvedDependencyResult) {
+                                        error("${label}: unresolved ${edge.attempted.displayName}")
+                                    } else if (edge instanceof ResolvedDependencyResult) {
+                                        def id = edge.selected.id
+                                        if (id instanceof ProjectComponentIdentifier && edge.requested instanceof ModuleComponentSelector) {
+                                            def owner = buildDirectories.get(id.build.buildPath)
+                                            def allowed = owner != null && owner.toPath().startsWith(checkoutRoot.toPath())
+                                            report.project_substitutions.add([configuration: label, module: edge.requested.displayName,
+                                                build_path: id.build.buildPath, project_path: id.projectPath,
+                                                directory: owner?.path, within_checkout: allowed])
+                                            if (!allowed) {
+                                                error("${label}: external module ${edge.requested.displayName} substituted by a project outside the known checkout builds")
+                                            }
+                                        }
+                                        if (id instanceof ModuleComponentIdentifier) {
+                                            if (scope == 'project') inspectedProjects.add(project)
+                                            def module = "${id.group}:${id.module}".toString()
+                                            if (!versions.containsKey(module)) versions[module] = new TreeSet<String>()
+                                            versions[module].add(id.version)
+                                            if (module == 'software.sava:solana-version-catalog' && id.version != current) {
+                                                error("${label}: resolved BOM ${id.version} differs from requested current version ${current}")
+                                            }
+                                        }
+                                        visit(edge.selected)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    visit(configuration.incoming.resolutionResult.rootComponent.get())
+                    // Graph-only resolution does not establish availability or artifact verification.
+                    configuration.incoming.artifactView {
+                        componentFilter { identifier -> identifier instanceof ModuleComponentIdentifier }
+                    }.files.files
+                } catch (Exception failure) {
+                    error("${label}: dependency/artifact resolution failed (${failureDetail(failure)})")
+                }
+            }
+
+            root.allprojects.sort { it.path }.each { project ->
+                def required = new LinkedHashSet<String>()
+                def sourceSets = project.extensions.findByType(SourceSetContainer)
+                sourceSets?.each { sourceSet ->
+                    required.add(sourceSet.compileClasspathConfigurationName)
+                    required.add(sourceSet.runtimeClasspathConfigurationName)
+                    required.add(sourceSet.annotationProcessorConfigurationName)
+                }
+                project.configurations.sort { it.name }.each { configuration ->
+                    if (configuration.canBeResolved) {
+                        def category = configuration.attributes.getAttribute(Category.CATEGORY_ATTRIBUTE)?.name
+                        def excluded = !required.contains(configuration.name) &&
+                                (configuration.name == 'default' || category == Category.VERIFICATION)
+                        if (excluded) {
+                            report.skipped_configurations.add("${project.path}:${configuration.name}")
+                        } else if (required.contains(configuration.name) || !configuration.allDependencies.empty) {
+                            inspect(project, configuration, 'project')
+                        } else {
+                            // Dependencies a plugin supplies only at resolution time are not visible here.
+                            report.skipped_configurations.add("${project.path}:${configuration.name} (no declared dependencies)")
+                        }
+                    }
+                }
+                project.buildscript.configurations.each {
+                    if (it.canBeResolved && !it.allDependencies.empty) inspect(project, it, 'buildscript')
+                }
+            }
+            settingsSnapshot.buildscript.configurations.each {
+                if (it.canBeResolved && !it.allDependencies.empty) inspect(root, it, 'settings-buildscript')
+            }
+
+            def catalogProperties = [:]
+            if (settingsSnapshot.catalogs) try {
+                def catalogs = root.extensions.getByType(VersionCatalogsExtension)
+                ['current', 'target'].each { role ->
+                    def catalog = catalogs.named("catalogPropagation${role.capitalize()}Inspection")
+                    catalog.libraryAliases.each { alias ->
+                        def library = catalog.findLibrary(alias).get().get()
+                        def module = "${library.module.group}:${library.module.name}".toString()
+                        def version = library.versionConstraint.toString()
+                        def key = "${role}.library.${module}".toString()
+                        if (catalogProperties.containsKey(key) && catalogProperties[key] != version) {
+                            error("${role} catalog aliases have different version constraints for ${module}")
+                        }
+                        catalogProperties[key] = version
+                        catalogProperties["${role}.shape.library.${alias}".toString()] = module
+                    }
+                    catalog.bundleAliases.each { alias ->
+                        def modules = catalog.findBundle(alias).get().get().collect { library ->
+                            "${library.module.group}:${library.module.name}".toString()
+                        }
+                        catalogProperties["${role}.shape.bundle.${alias}".toString()] = modules.join(',')
+                    }
+                    catalog.pluginAliases.each { alias ->
+                        def plugin = catalog.findPlugin(alias).get().get()
+                        catalogProperties["${role}.shape.plugin.${alias}".toString()] = "${plugin.pluginId}:${plugin.version}".toString()
+                    }
+                    catalog.versionAliases.each { alias ->
+                        catalogProperties["${role}.shape.versionAlias.${alias}".toString()] = catalog.findVersion(alias).get().toString()
+                    }
+                }
+            } catch (Exception failure) {
+                error("Cannot inspect published catalogs using Gradle's version-catalog API (${failureDetail(failure)})")
+            }
+
+            // Project repositories retain the build's credentials, filtering, and verification.
+            // Resolve in every project whose project graph reaches published modules. A root
+            // aggregator inspected only for its buildscript need not have project repositories.
+            // Empty builds use the root project.
+            if (inspectedProjects.empty) inspectedProjects.add(root)
+            def artifactDigests = [:]
+            inspectedProjects.each { project ->
+                ['current': current, 'target': target].each { role, version ->
+                    ['pom': 'pom', 'catalog': 'toml'].each { kind, extension ->
+                        try {
+                            def dependency = project.dependencies.create("software.sava:solana-version-catalog:${version}@${extension}")
+                            def configuration = project.configurations.detachedConfiguration(dependency)
+                            configuration.transitive = false
+                            def edges = configuration.incoming.resolutionResult.rootComponent.get().dependencies
+                            def selected = edges.size() == 1 && edges.first() instanceof ResolvedDependencyResult ? edges.first().selected.id : null
+                            if (!(selected instanceof ModuleComponentIdentifier) || selected.group != 'software.sava' ||
+                                    selected.module != 'solana-version-catalog' || selected.version != version) {
+                                throw new GradleException('Published artifact coordinate was unresolved or substituted')
+                            }
+                            def files = configuration.files
+                            if (files.size() != 1 || !files.first().isFile()) {
+                                throw new GradleException('Expected one published artifact')
+                            }
+                            def path = files.first().canonicalPath
+                            def key = "${role}_${kind}".toString()
+                            def digest = MessageDigest.getInstance('SHA-256').digest(files.first().bytes).encodeHex().toString()
+                            if (artifactDigests.containsKey(key) && artifactDigests[key] != digest) {
+                                error("${project.path}: ${role} ${kind} content differs between project repositories")
+                            }
+                            artifactDigests[key] = digest
+                            if (report[key] == null) report[key] = path
+                            report.artifact_checks.add([project: project.path, role: role, kind: kind, path: path, sha256: digest])
+                        } catch (Exception failure) {
+                            error("${project.path}: cannot resolve verified published ${role} ${kind} ${version} (${failureDetail(failure)})")
+                        }
+                    }
+                }
+            }
+            report.modules = versions.keySet().toList()
+            versions.each { module, values -> report.versions[module] = values.toList() }
+            report.errors = report.errors.unique().sort()
+            def output = new File(outputPath)
+            output.parentFile?.mkdirs()
+            def properties = new Properties()
+            ['schema_version', 'current_pom', 'target_pom', 'current_catalog', 'target_catalog'].each { key ->
+                properties.setProperty(key, report[key]?.toString() ?: '')
+            }
+            properties.setProperty('catalogs', settingsSnapshot.catalogs ? 'inspected' :
+                    settingsSnapshot.repositories == null || settingsSnapshot.repositories.empty ? 'skipped' : 'late')
+            ['modules', 'configurations', 'errors', 'skipped_configurations', 'included_builds',
+             'project_substitutions', 'artifact_checks'].each { key ->
+                properties.setProperty(key, report[key].collect { it.toString() }.join('\n'))
+            }
+            report.versions.each { module, values -> properties.setProperty("versions.${module}".toString(), values.join(',')) }
+            report.coverage.each { key, value -> properties.setProperty("coverage.${key}".toString(), value) }
+            catalogProperties.each { key, value -> properties.setProperty(key, value) }
+            output.withWriter('UTF-8') { writer -> properties.store(writer, 'Catalog propagation inspection') }
+            if (!report.errors.empty) {
+                throw new GradleException("Catalog propagation inspection incomplete: ${report.errors.size()} error(s); see ${output}")
+            }
+        }
+    }
+}
