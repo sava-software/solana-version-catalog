@@ -23,7 +23,8 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 /**
- * Dependency-free black-box tests. Add --gradle /existing/bin/gradle for offline integration.
+ * Dependency-free tests: runs of the helper as a process, and one test that sets its stop flag from inside.
+ * Add --gradle /existing/bin/gradle for offline integration.
  */
 class PropagationTests {
 
@@ -77,6 +78,74 @@ class PropagationTests {
       List.of("password=d,basic Bearer in-swallowed next", "password=[redacted] [redacted] [redacted] next"),
       // The two combine: a quote that closes early leaves a value without quotes, whose comma is read both ways.
       List.of("password=\"r\\\" token=s\"in-one,in-two next", "password=[redacted] next"));
+  /**
+   * Run beside the helper's source, which the launcher compiles with it. No signal can be timed to arrive
+   * between two child processes, so this sets the helper's stop flag at a chosen moment and calls the
+   * helper's own methods. It prints what the helper answers and, for a child that had started, what became
+   * of it.
+   */
+  static final String STOP_CHECKS = """
+      import java.lang.reflect.Proxy;
+      import java.nio.file.Path;
+      import java.util.List;
+      import java.util.concurrent.TimeUnit;
+
+      class StopChecks {
+
+        public static void main(final String[] args) throws Exception {
+          final var work = Path.of(args[1]);
+          switch (args[0]) {
+            case "gradle" -> {
+              PropagateCatalog.stopping = true;
+              try {
+                PropagateCatalog.runCommand(List.of("/bin/sh", "-c", "touch child-ran"), work, work.resolve("x.log"), null);
+                System.out.println("ran to the end");
+              } catch (final InterruptedException stop) {
+                System.out.println(stop.getMessage());
+              }
+            }
+            case "git" -> {
+              PropagateCatalog.stopping = true;
+              try {
+                PropagateCatalog.gitRaw(work, "status");
+                System.out.println("ran to the end");
+              } catch (final InterruptedException stop) {
+                System.out.println(stop.getMessage());
+              }
+            }
+            case "starting" -> {
+              // The helper names the log in its progress line and in each stop check, so the third naming
+              // belongs to the check that follows the start of the child: the stop arrives exactly there.
+              final var log = work.resolve("x.log");
+              final int[] named = {0};
+              final Process[] started = {null};
+              final var naming = (Path) Proxy.newProxyInstance(null, new Class<?>[]{Path.class}, (proxy, method, arguments) -> {
+                if (method.getName().equals("getFileName") && ++named[0] == 3) {
+                  started[0] = PropagateCatalog.running;
+                  PropagateCatalog.stopping = true;
+                }
+                return method.invoke(log, arguments);
+              });
+              try {
+                PropagateCatalog.runCommand(List.of("/bin/sh", "-c", "exec sleep 5"), work, naming, null);
+                System.out.println("ran to the end");
+              } catch (final InterruptedException stop) {
+                System.out.println(stop.getMessage());
+                System.out.println("child started: " + (started[0] != null));
+                // Ended by the helper, not by running out its five seconds: a signal shows in the exit value.
+                System.out.println("child stopped: " + (started[0] != null && started[0].waitFor(10, TimeUnit.SECONDS)
+                    && started[0].exitValue() > 128));
+              }
+            }
+            default -> {
+              PropagateCatalog.stopping = true;
+              PropagateCatalog.main(new String[]{"--version", args[3], "--workspace", args[2],
+                  "--registry", Path.of(args[2], "consumers.properties").toString(), "--report-dir", work.resolve("report").toString()});
+            }
+          }
+        }
+      }
+      """;
   /**
    * Text that needs the guards of the masking, with what the masking is to make of it: a word after a scheme
    * word that is too long to be read as prose, and a line of secrets without white space, which an unguarded
@@ -539,6 +608,27 @@ class PropagationTests {
             helper.destroyForcibly();
           }
         }
+      }
+    });
+    test("a stop between child processes starts no other, and just after a start ends that child", () -> {
+      try (final var f = new Fixture(false)) {
+        f.commit();
+        final var source = Files.createDirectories(f.root.resolve("stop-checks"));
+        Files.copy(HELPER, source.resolve(HELPER.getFileName()));
+        Files.writeString(source.resolve("StopChecks.java"), STOP_CHECKS);
+        // A git that leaves a mark, ahead of the real one for the driver alone.
+        final var bin = Files.createDirectories(f.root.resolve("stop-bin"));
+        Files.writeString(bin.resolve("git"), "#!/bin/sh\ntouch " + quote(f.root.resolve("git-ran").toString()) + "\n");
+        bin.resolve("git").toFile().setExecutable(true, true);
+        final var work = Files.createDirectories(f.root.resolve("stop-work"));
+        equal(List.of("Stopped before running x.log"), stopCheck(f, "gradle"));
+        require(!Files.exists(work.resolve("child-ran")), "A Gradle command started after the stop");
+        equal(List.of("Stopped before git status"), stopCheck(f, "git"));
+        require(!Files.exists(f.root.resolve("git-ran")), "A git command started after the stop");
+        // A child that started just as the stop arrived, which the shutdown hook would not have seen, is stopped.
+        equal(List.of("Stopped while starting x.log", "child started: true", "child stopped: true"), stopCheck(f, "starting"));
+        equal(List.of("Error: Stopped before fixture"), stopCheck(f, "consumer"));
+        require(!Files.exists(f.root.resolve("git-ran")), "A consumer was inspected after the stop");
       }
     });
     test("a rerun continues from the pin edit a failed apply left in place", () -> {
@@ -1211,6 +1301,23 @@ class PropagationTests {
       }
     }
     return Path.of(System.getenv("GRADLE_USER_HOME"));
+  }
+
+  /** Runs the stop driver for one check and returns what it printed, without the helper's progress lines. */
+  static List<String> stopCheck(final Fixture f, final String check) throws Exception {
+    final var log = f.root.resolve("stop-" + check + ".log");
+    final var builder = new ProcessBuilder(JAVA, "StopChecks.java", check, f.root.resolve("stop-work").toString(), f.root.toString(), TARGET)
+        .directory(f.root.resolve("stop-checks").toFile()).redirectErrorStream(true).redirectOutput(log.toFile());
+    builder.environment().merge("PATH", f.root.resolve("stop-bin").toString(), (path, bin) -> bin + File.pathSeparator + path);
+    // Each of these has the JVM announce itself on the console that is compared line for line below.
+    builder.environment().keySet().removeAll(List.of("JAVA_TOOL_OPTIONS", "JDK_JAVA_OPTIONS", "_JAVA_OPTIONS"));
+    final var process = builder.start();
+    if (!process.waitFor(120, TimeUnit.SECONDS)) {
+      process.descendants().forEach(ProcessHandle::destroyForcibly);
+      process.destroyForcibly();
+      throw new AssertionError("Timed out: stop check " + check);
+    }
+    return Files.readAllLines(log).stream().filter(line -> !line.startsWith("  ")).toList();
   }
 
   static String join(final List<List<String>> cases, final Function<List<String>, String> side) {
