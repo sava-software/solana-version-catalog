@@ -49,16 +49,19 @@ or failed consumer, and says whether the run had finished when it was written.
 A failed Gradle command's own reason and the probe's findings are quoted there.
 Where they quote Gradle's failure text, addresses lose user information and
 query strings and the credential forms the helper recognises are masked. That
-masking is best effort. Among what it leaves: a plain lower-case word after a
-bare `Bearer` or `Basic` is kept as prose, a credential after such a word ends
-at white space even inside quotes, and a named value without quotes ends at
-white space, a comma or a semicolon. In places it errs towards hiding: a
-backslash before a quote in a quoted value is read both as an escape and as the
-value's last character, and what either reading hides is hidden, so text after
-such a value can go with it; and a coordinate or task path with a segment that
-ends in `token`, `password` or `authorization` loses what follows its colon.
-The per-command logs keep Gradle's output as written: read a report before
-passing it on.
+masking is best effort. Among what it leaves: a plain lower-case word of
+ordinary length after a bare `Bearer` or `Basic` is kept as prose, and a
+credential after such a word ends at white space, a comma or a semicolon, even
+inside quotes. In places it errs towards hiding: a named value without quotes
+runs through commas and semicolons to white space, so the rest of a list
+written without spaces goes with it; a backslash before a quote in a quoted
+value is read both as an escape and as the value's last character, value by
+value, and what either reading hides is hidden, so text after such a value can
+go with it; a `Bearer` or `Basic` inside a quoted value takes with it what is
+glued to the value's closing quote; and a coordinate or task path with a
+segment that ends in `token`, `password` or `authorization` loses what follows
+its colon. The per-command logs keep Gradle's output as written: read a report
+before passing it on.
 
 ## Selection and validation
 

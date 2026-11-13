@@ -30,21 +30,28 @@ class PropagationTests {
   static final String OLD = "25.1.0";
   static final String TARGET = "25.1.1";
   /**
-   * Text that quotes a secret beside a backslash and a quote, each with what the masking is to make of it.
-   * A backslash before a quote reads two ways, as an escape that keeps the quote inside the value and as
-   * the value's last character, and what either reading hides stays hidden. The word after each value
-   * stays, so that hiding the rest of the line does not pass.
+   * Text that quotes a secret where its end is not plain, each with what the masking is to make of it. A
+   * backslash before a quote reads two ways, as an escape that keeps the quote inside the value and as the
+   * value's last character; so does a comma or a semicolon in a value without quotes, as its end and as
+   * part of it. Each value is read each way on its own, and what any reading hides stays hidden. The word
+   * after each value stays, so that hiding the rest of the line does not pass.
    */
-  static final List<List<String>> ESCAPES = List.of(
+  static final List<List<String>> MASKING = List.of(
       // A quote escaped inside a value stays inside it, in a plain value and in one quoted within a string.
       List.of("password=\"ab\\\"in-quote-tail\" kept", "password=[redacted] kept"),
       List.of("{\\\"password\\\":\\\"cd\\\\\\\"in-nested-tail\\\"} and", "{\\\"password\\\":[redacted]} and"),
+      // Each value on its own: the first ends in a backslash, which is no escape, and the second holds an escaped quote.
+      List.of("password=\"in-first\\\" and token=\"ab\\\"in-mixed-tail\" kept", "password=[redacted] kept"),
+      // The search for the next name goes on from the end the escape gives too: only from there is the last name one.
+      List.of("password=\"a\\\" token=\"b password=\"in-escape-end kept\" more", "password=[redacted] more"),
       // An escaped backslash does not hide the quote that closes the value, nor does an escaped opening one a plain close.
       List.of("password=\"in-backslash\\\\\" shown", "password=[redacted] shown"),
       List.of("{\\\"password\\\":\\\"in-plain-close\" kept", "{\\\"password\\\":[redacted] kept"),
       // Read the other way, the quote closes the value and a secret of its own follows, by name or after a scheme word.
       List.of("password=\"x\\\" and token=\"in-other-reading\" or", "password=[redacted] or"),
       List.of("password=\"p\\\" Bearer \"in-scheme-reading\" end", "password=[redacted] end"),
+      // What looks like prose after a scheme word is none where its end lies inside a value.
+      List.of("Bearer token\":\",in-prose-view\" last", "Bearer [redacted] last"),
       // A credential after a scheme word runs on through a masked value: where the readings agree, where only
       // the other reading takes the value for one, and where only the escape reading takes all of it.
       List.of("Bearer k=token=\"a b\"in-view-tail last", "Bearer [redacted] last"),
@@ -56,9 +63,30 @@ class PropagationTests {
       List.of("password=\"https://h.example/a\\b\\\"in-mid-tail\" after", "password=[redacted] after"),
       // A single quote opens a value as a double one does.
       List.of("password='in-single in-quoted' after", "password=[redacted] after"),
-      // A value without quotes ends at a comma, and a name without a value is no secret.
-      List.of("token=in-unquoted, then", "token=[redacted], then"),
-      List.of("token= , password=in-retry, done", "token= , password=[redacted], done"));
+      // A value without quotes runs on through commas and semicolons to white space.
+      List.of("token=in-unquoted, then", "token=[redacted] then"),
+      List.of("password=in-comma,in-rest;in-more next", "password=[redacted] next"),
+      // Read the other way, the comma or semicolon ends the value and a secret of its own follows, by name or
+      // after a scheme word, with or without a value before the comma.
+      List.of("password=b,token=\"in-after in-comma\" next", "password=[redacted] next"),
+      List.of("password=c;Bearer in-after-semicolon next", "password=[redacted] [redacted] next"),
+      // And the search goes on from the end at white space too: only from there is the last name one.
+      List.of("password=e,token=\"x password=\"in-space-end kept\" more", "password=[redacted] more"),
+      List.of("token= ,password=\"in-retry in-quoted\" done", "token= [redacted] done"),
+      // Read as part of the value, the comma takes a scheme word in with it and leaves the next one bare.
+      List.of("password=d,basic Bearer in-swallowed next", "password=[redacted] [redacted] [redacted] next"),
+      // The two combine: a quote that closes early leaves a value without quotes, whose comma is read both ways.
+      List.of("password=\"r\\\" token=s\"in-one,in-two next", "password=[redacted] next"));
+  /**
+   * Text that needs the guards of the masking, with what the masking is to make of it: a word after a scheme
+   * word that is too long to be read as prose, and a line of secrets without white space, which an unguarded
+   * search would read both ways at every comma, for minutes or far longer. The fake Gradle follows it with
+   * scheme words by the hundred thousand inside one value that never closes.
+   */
+  static final List<String> LONG = List.of("Bearer " + "x".repeat(300) + " kept " + "password=in-many,".repeat(2000) + " next",
+      "Bearer [redacted] kept password=[redacted] next");
+  /** How many of those cases one failure text holds: the summary quotes no more than 600 characters of a reason. */
+  static final int MASKING_AT_ONCE = 8;
   static final Path SOURCE = Path.of(System.getProperty("jdk.launcher.sourcefile", "scripts/PropagationTests.java")).toAbsolutePath();
   static final Path HELPER = SOURCE.resolveSibling("PropagateCatalog.java");
   static final String JAVA = Path.of(System.getProperty("java.home"), "bin/java").toString();
@@ -151,18 +179,37 @@ class PropagationTests {
         }
       }
     });
-    test("a secret quoted beside a backslash and a quote is masked whole", () -> {
+    test("a secret is masked through escaped quotes, commas and semicolons", () -> {
+      for (int from = 0; from < MASKING.size(); from += MASKING_AT_ONCE) {
+        final var cases = MASKING.subList(from, Math.min(from + MASKING_AT_ONCE, MASKING.size()));
+        try (final var f = new Fixture(false)) {
+          f.config.setProperty("validationFail", "masking");
+          f.config.setProperty("maskingFrom", Integer.toString(from));
+          f.saveConfig();
+          f.commit();
+          final var result = f.run("masking", true, TARGET);
+          expect(result, 1, "NEEDS REPAIR");
+          contains(result.summary, "Command exited 1: Execution failed for task ':check'. " + join(cases, List::getLast) + "; inspect ");
+          final var console = Files.readString(f.root.resolve("masking.log"));
+          for (final var secret : secrets(cases)) {
+            require(!result.summary.contains(secret) && !console.contains(secret),
+                secret + " reached the summary or the console:\n" + result.summary + console);
+          }
+        }
+      }
+    });
+    test("a long failure text is masked in good time", () -> {
       try (final var f = new Fixture(false)) {
-        f.config.setProperty("validationFail", "escapes");
+        f.config.setProperty("validationFail", "long");
         f.saveConfig();
         f.commit();
-        final var result = f.run("escapes", true, TARGET);
+        // Scheme words by the hundred thousand follow in a value that never closes: the run's time limit is the test.
+        final var result = f.run("long", true, TARGET);
         expect(result, 1, "NEEDS REPAIR");
-        contains(result.summary, "Command exited 1: Execution failed for task ':check'. " + join(ESCAPES, List::getLast) + "; inspect ");
-        final var console = Files.readString(f.root.resolve("escapes.log"));
-        for (final var secret : secrets(ESCAPES)) {
-          require(!result.summary.contains(secret) && !console.contains(secret),
-              secret + " reached the summary or the console:\n" + result.summary + console);
+        contains(result.summary, "Command exited 1: Execution failed for task ':check'. " + LONG.getLast() + " password=[redacted]; inspect ");
+        final var console = Files.readString(f.root.resolve("long.log"));
+        for (final var secret : List.of("in-many", "in-value")) {
+          require(!result.summary.contains(secret) && !console.contains(secret), secret + " reached the summary or the console");
         }
       }
     });
@@ -719,7 +766,7 @@ class PropagationTests {
       try (final var f = new Fixture(true)) {
         // Read from a file, so that no Groovy string literal stands between this text and the exception.
         Files.writeString(f.repo.resolve("message.txt"), "refused Bearer in-probe_1 with \"token\":\"in-json\" "
-            + join(ESCAPES, List::getFirst) + " at https://user:in-address@repo.example/x?key=in-query");
+            + join(MASKING, List::getFirst) + " " + LONG.getFirst() + " at https://user:in-address@repo.example/x?key=in-query");
         Files.writeString(f.repo.resolve("build.gradle"), "def refusal = file('message.txt').text\n"
             + "configurations.runtimeClasspath.incoming.beforeResolve {\n    throw new GradleException(refusal)\n}\n",
             StandardOpenOption.APPEND);
@@ -728,12 +775,12 @@ class PropagationTests {
         expect(result, 1, "BLOCKED");
         // The probe masks what it quotes from an exception, by the helper's rules; the helper relays that text as written.
         final var errors = load(f.root.resolve("masked/fixture/baseline-0.properties")).getProperty("errors");
-        final var masked = "refused Bearer [redacted] with \"token\":[redacted] " + join(ESCAPES, List::getLast)
-            + " at https://repo.example/x?redacted";
+        final var masked = "refused Bearer [redacted] with \"token\":[redacted] " + join(MASKING, List::getLast)
+            + " " + LONG.getLast() + " at https://repo.example/x?redacted";
         contains(errors, masked);
         contains(result.summary, masked);
-        final var secrets = new ArrayList<>(List.of("in-probe_1", "in-json", "in-address", "in-query"));
-        secrets.addAll(secrets(ESCAPES));
+        final var secrets = new ArrayList<>(List.of("in-probe_1", "in-json", "in-address", "in-query", "in-many"));
+        secrets.addAll(secrets(MASKING));
         for (final var secret : secrets) {
           require(!errors.contains(secret) && !result.summary.contains(secret), secret + " was not masked:\n" + errors);
         }
@@ -1081,9 +1128,16 @@ class PropagationTests {
         Files.move(written, root.resolve("validation.pid"), StandardCopyOption.ATOMIC_MOVE);
         Thread.sleep(TimeUnit.MINUTES.toMillis(3));
       }
-      if (config.getProperty("validationFail", "false").equals("escapes")) {
+      if (config.getProperty("validationFail", "false").equals("long")) {
         System.out.print("\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':check'.\n> "
-            + join(ESCAPES, List::getFirst) + "\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n");
+            + LONG.getFirst() + " password=\"" + "Bearer in-value ".repeat(300_000) + "\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n");
+        System.exit(1);
+      }
+      if (config.getProperty("validationFail", "false").equals("masking")) {
+        final int from = Integer.parseInt(config.getProperty("maskingFrom"));
+        final var cases = MASKING.subList(from, Math.min(from + MASKING_AT_ONCE, MASKING.size()));
+        System.out.print("\nFAILURE: Build failed with an exception.\n\n* What went wrong:\nExecution failed for task ':check'.\n> "
+            + join(cases, List::getFirst) + "\n\n* Try:\n> Run with --stacktrace option to get the stack trace.\n");
         System.exit(1);
       }
       if (Boolean.parseBoolean(config.getProperty("validationFail"))) {

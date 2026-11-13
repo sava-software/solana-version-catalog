@@ -15,8 +15,10 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.PosixFilePermission;
 import java.time.Instant;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.BitSet;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -56,6 +58,8 @@ public class PropagateCatalog {
   /** A credential after its scheme word alone; a plain lower-case word after it is prose and stays. */
   static final Pattern SCHEME = Pattern.compile(
       "(?i:\\b(bearer|basic))(\\s+)(?![a-z]+[.)\\]\"'!?:]*(?:[\\s,;]|\\z))[^\\s,;]+");
+  /** A scheme word and the white space after it: where a credential may follow, whatever does follow. */
+  static final Pattern SCHEME_WORD = Pattern.compile("(?i:\\b(bearer|basic))(\\s+)");
   static final String REGISTRY_FIELDS = "path|pin|enabled|builds|gradleArgs|coldResolve|branch|notes|validation\\.[0-9]+";
   /** The child process a shutdown must not leave running in a consumer checkout. */
   static volatile Process running;
@@ -648,61 +652,116 @@ public class PropagateCatalog {
 
   /**
    * Replaces the value of each named secret, with a scheme word before it, and each credential after a
-   * scheme word alone; the name, the separator and the lone scheme word stay. A backslash before a quote is
-   * read both ways, as an escape that keeps the quote inside the value and as a character of the value that
-   * the quote then closes: the text does not say which one its writer meant, so each reading is carried
-   * through and what either one hides is hidden.
+   * scheme word alone; the name, the separator and the lone scheme word stay. Two things the text does not
+   * settle are read both ways, value by value: a backslash before a quote, as an escape that keeps the quote
+   * inside the value or as the value's last character, and a comma or a semicolon in a value without quotes,
+   * as its end or as part of it. The search for the next name goes on from every end a value can have, so
+   * each value is read each way whatever the reading of the ones before it, and what any reading hides is
+   * hidden.
    */
   static String maskCredentials(final String text) {
+    // Where a value without quotes ends, with and without the comma and the semicolon: looked up, since a
+    // line without white space would otherwise be scanned again from every name on it.
+    final int[][] ends = {endsOfWords(text, " \t\n\u000B\f\r,;"), endsOfWords(text, " \t\n\u000B\f\r")};
     final var spans = new ArrayList<int[]>();
-    for (final boolean escapes : new boolean[]{true, false}) {
-      // What the scheme pattern is to see in place of a value: no word, no white space, no end of a sentence.
-      final var view = new StringBuilder(text);
-      final var secret = SECRET.matcher(text);
-      int search = 0;
-      while (search <= text.length() && secret.find(search)) {
-        int end = valueEnd(text, secret.end(), escapes);
-        if (end == secret.end()) {
-          // Nothing follows the scheme word, so that word is the value.
-          end = valueEnd(text, secret.end(2), escapes);
-        }
-        if (end == secret.end(2)) {
-          // A name and a separator with no value: not a secret, and another name may start inside it.
-          search = secret.start() + 1;
-        } else {
-          spans.add(new int[]{secret.end(2), end});
-          for (int i = secret.end(2); i < end; i++) {
-            view.setCharAt(i, '[');
-          }
-          search = end;
-        }
+    final var searched = new BitSet();
+    final var pending = new ArrayDeque<Integer>(List.of(0));
+    final var secret = SECRET.matcher(text);
+    while (!pending.isEmpty()) {
+      final int search = pending.remove();
+      if (search > text.length() || searched.get(search)) {
+        continue;
       }
-      final var scheme = SCHEME.matcher(view);
-      while (scheme.find()) {
-        spans.add(new int[]{scheme.end(2), scheme.end()});
+      searched.set(search);
+      if (!secret.find(search)) {
+        continue;
+      }
+      for (final boolean escapes : new boolean[]{true, false}) {
+        for (final var commas : ends) {
+          int end = valueEnd(text, secret.end(), escapes, commas);
+          if (end == secret.end()) {
+            // Nothing follows the scheme word, so that word is the value.
+            end = valueEnd(text, secret.end(2), escapes, commas);
+          }
+          if (end == secret.end(2)) {
+            // A name and a separator with no value: not a secret, and another name may start inside it.
+            pending.add(secret.start() + 1);
+          } else {
+            spans.add(new int[]{secret.end(2), end});
+            pending.add(end);
+          }
+        }
       }
     }
-    spans.sort(Comparator.comparingInt(span -> span[0]));
+    // What the scheme pattern is to see in place of whatever some reading took for a value: no word, no white
+    // space, no end of a sentence. Its credential runs on through that as through one word.
+    final var values = merged(spans);
+    final var view = new StringBuilder(text);
+    for (final var span : values) {
+      for (int i = span[0]; i < span[1]; i++) {
+        view.setCharAt(i, '[');
+      }
+    }
+    final var words = endsOfWords(view, " \t\n\u000B\f\r,;");
+    final var word = SCHEME_WORD.matcher(text);
+    while (word.find()) {
+      // Every scheme word in the text as written is tried, one inside a value or after another scheme word
+      // too, since some reading may leave it bare. The pattern sees the word as written, with the character
+      // before it, and then the view.
+      final int before = Math.max(word.start() - 1, 0);
+      final int value = word.end();
+      // Of what follows, the word and the character after it; of a longer word only a part, which then does
+      // not end, since no word of prose is that long.
+      final int shown = Math.min(words[value] + 1, text.length());
+      final var following = shown - value > 256 ? view.substring(value, value + 256) + "[" : view.substring(value, shown);
+      final var scheme = SCHEME.matcher(text.substring(before, value) + following);
+      if (scheme.find() && scheme.start() == word.start() - before) {
+        values.add(new int[]{value, words[value]});
+      }
+    }
     final var masked = new StringBuilder();
     int done = 0;
-    for (final var span : spans) {
-      if (span[0] >= done) {
-        masked.append(text, done, span[0]).append("[redacted]");
-      }
-      done = Math.max(done, span[1]);
+    for (final var span : merged(values)) {
+      masked.append(text, done, span[0]).append("[redacted]");
+      done = span[1];
     }
     return masked.append(text, done, text.length()).toString();
   }
 
+  /** For each index, where the run of characters from there that are none of {@code stops} ends. */
+  static int[] endsOfWords(final CharSequence text, final String stops) {
+    final var ends = new int[text.length() + 1];
+    ends[text.length()] = text.length();
+    for (int i = text.length() - 1; i >= 0; i--) {
+      ends[i] = stops.indexOf(text.charAt(i)) < 0 ? ends[i + 1] : i;
+    }
+    return ends;
+  }
+
+  /** The spans in order, with those that overlap joined; two that only touch stay apart. */
+  static List<int[]> merged(final List<int[]> spans) {
+    final var ordered = new ArrayList<>(spans);
+    ordered.sort(Comparator.comparingInt(span -> span[0]));
+    final var joined = new ArrayList<int[]>();
+    for (final var span : ordered) {
+      if (joined.isEmpty() || span[0] >= joined.getLast()[1]) {
+        joined.add(new int[]{span[0], span[1]});
+      } else {
+        joined.getLast()[1] = Math.max(joined.getLast()[1], span[1]);
+      }
+    }
+    return joined;
+  }
+
   /**
    * Where the value that starts at {@code start} ends. A quoted value runs through its closing quote, or to
-   * the end of the line without one; any other value runs to white space, a comma or a semicolon. With
-   * {@code escapes}, a backslash escapes: after a plain opening quote the closing one is the first quote
-   * with an even number of backslashes before it, and after an opening quote that is itself escaped once,
-   * as in a document quoted inside a string, it is the first quote escaped the same way, or a plain one.
-   * Without, the first quote of the opening kind closes the value.
+   * the end of the line without one. With {@code escapes}, a backslash escapes: after a plain opening quote
+   * the closing one is the first quote with an even number of backslashes before it, and after an opening
+   * quote that is itself escaped once, as in a document quoted inside a string, it is the first quote
+   * escaped the same way, or a plain one. Without, the first quote of the opening kind closes the value.
+   * Any other value ends where {@code ends} has it end.
    */
-  static int valueEnd(final String text, final int start, final boolean escapes) {
+  static int valueEnd(final String text, final int start, final boolean escapes, final int[] ends) {
     final boolean escaped = text.startsWith("\\", start);
     final int open = escaped ? start + 1 : start;
     if (open < text.length() && (text.charAt(open) == '"' || text.charAt(open) == '\'')) {
@@ -720,11 +779,7 @@ public class PropagateCatalog {
       }
       return text.length();
     }
-    int end = start;
-    while (end < text.length() && " \t\n\u000B\f\r,;".indexOf(text.charAt(end)) < 0) {
-      end++;
-    }
-    return end;
+    return ends[start];
   }
 
   /** Gradle's own statement of the failure, so that the summary says why without opening the log. */
