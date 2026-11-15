@@ -100,7 +100,11 @@ repositories are added by a `settingsEvaluated` callback of its own: the probe
 decides on the import before such a callback runs, and reports the catalogs as
 late. Register under `builds` only builds that apply
 the BOM: one that does not cannot resolve it and blocks the consumer, so keep
-such a build under validation alone.
+such a build under validation alone. A build that applies the BOM can be kept
+there too, when its graph should not decide the pin: sava's soak harness
+resolves ravina-solana, so probing it moved the base library's pin for every
+release of anything above it. Validation still builds it, warm and cold,
+whenever the pin does move.
 
 A changed used module makes a consumer affected. Catalog aliases, bundles,
 plugins, or explicit version aliases changing conservatively make all inspected
