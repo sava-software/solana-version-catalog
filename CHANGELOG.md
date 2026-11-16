@@ -1,5 +1,12 @@
 # Changelog
 
+## [25.30.64](https://github.com/sava-software/solana-version-catalog/compare/25.30.63...25.30.64) (2026-11-16)
+
+
+### Bug Fixes
+
+* **deps:** bump org.bouncycastle:bcprov-jdk18on from 1.86 to 1.87 ([#177](https://github.com/sava-software/solana-version-catalog/issues/177)) ([4e6371f](https://github.com/sava-software/solana-version-catalog/commit/4e6371fdf860f3336369c66ca60a4fd6c4fcd7f4))
+
 ## [25.30.63](https://github.com/sava-software/solana-version-catalog/compare/25.30.62...25.30.63) (2026-11-15)
 
 
