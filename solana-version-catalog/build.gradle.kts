@@ -29,7 +29,7 @@ val savaJsonIterator = "25.3.2"
 
 // https://mvnrepository.com/artifact/org.bouncycastle/bcprov-jdk18on
 // https://www.bouncycastle.org/download/bouncy-castle-java/#latest
-val bouncyCastle = "1.86"
+val bouncyCastle = "1.87"
 
 // https://central.sonatype.com/search?namespace=software.sava
 val sava = "25.13.4"
