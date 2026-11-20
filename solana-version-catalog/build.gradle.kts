@@ -54,7 +54,7 @@ val jetty = "12.1.15"
 val helidon = "4.5.6"
 // https://central.sonatype.com/artifact/io.netty/netty-codec-http
 // https://github.com/netty/netty/releases
-val netty = "4.2.20.Final"
+val netty = "4.2.21.Final"
 
 val httpServers = "25.4.4"
 
