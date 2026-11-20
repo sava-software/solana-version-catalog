@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.65](https://github.com/sava-software/solana-version-catalog/compare/25.30.64...25.30.65) (2026-11-20)
+
+
+### Bug Fixes
+
+* **deps:** bump netty from 4.2.20.Final to 4.2.21.Final ([#179](https://github.com/sava-software/solana-version-catalog/issues/179)) ([6835df3](https://github.com/sava-software/solana-version-catalog/commit/6835df386dc77b95c55b773fdb7cf4e5d02da1b1))
+* **deps:** bump sava-build to 21.8.9 ([247f5e9](https://github.com/sava-software/solana-version-catalog/commit/247f5e966bdc76100fe74c560dfae6300e6c3192))
+
 ## [25.30.64](https://github.com/sava-software/solana-version-catalog/compare/25.30.63...25.30.64) (2026-11-16)
 
 
