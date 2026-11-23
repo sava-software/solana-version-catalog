@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.66](https://github.com/sava-software/solana-version-catalog/compare/25.30.65...25.30.66) (2026-11-23)
+
+
+### Bug Fixes
+
+* **deps:** bump com.google.cloud:google-cloud-kms ([#183](https://github.com/sava-software/solana-version-catalog/issues/183)) ([a51cede](https://github.com/sava-software/solana-version-catalog/commit/a51cedecca8a2dda4f21a2c4ec116cfd493f98af))
+* **deps:** bump helidon from 4.5.6 to 4.5.7 ([#181](https://github.com/sava-software/solana-version-catalog/issues/181)) ([239423b](https://github.com/sava-software/solana-version-catalog/commit/239423b458228340de8b6de1a29ac236dde165f3))
+
 ## [25.30.65](https://github.com/sava-software/solana-version-catalog/compare/25.30.64...25.30.65) (2026-11-20)
 
 
