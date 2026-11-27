@@ -1,5 +1,13 @@
 # Changelog
 
+## [25.30.67](https://github.com/sava-software/solana-version-catalog/compare/25.30.66...25.30.67) (2026-11-27)
+
+
+### Bug Fixes
+
+* **deps:** bump gradle-wrapper from 9.9.1 to 9.9.2 ([#182](https://github.com/sava-software/solana-version-catalog/issues/182)) ([b2f7d70](https://github.com/sava-software/solana-version-catalog/commit/b2f7d706620988ce0d0c203c8cf98675097b4ee5))
+* **deps:** bump org.postgresql:postgresql from 42.7.14 to 42.7.15 ([#185](https://github.com/sava-software/solana-version-catalog/issues/185)) ([3b7181c](https://github.com/sava-software/solana-version-catalog/commit/3b7181c3316d71fe0de767c702c4ef5627633926))
+
 ## [25.30.66](https://github.com/sava-software/solana-version-catalog/compare/25.30.65...25.30.66) (2026-11-23)
 
 
